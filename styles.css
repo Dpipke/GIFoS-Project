@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.linea{
+    background-color: #572EE5;
+    height: 1vh;
+    width: 100vw;
+}
+
+.navegador input[type="checkbox"],.label-nav, .close, .burger{
+    position: absolute;  
+    box-sizing: border-box;
+    margin-right: 16px;
+    padding: 0;
+    right: 0;
+    top: 8%;
+}
+
+label{
+    width: 32px;
+    height: 32px;
+}
+.logomobile{
+    display: block;
+    position: relative;
+    width: 15%;
+    height: 15%;
+    left: 5%;
+    margin-top:8%;
+    margin-bottom: 5%;
+}
+
+
+.noc, .crear{
+    display: none;
+}
+
+.navegador input[type="checkbox"] {
+    opacity: 0; 
+  }
+
+.ul-nav{
+    background: rgba(87,46,229,0.90);
+    display: flex;
+    flex-direction: column ;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+   
+}
+.ul-nav li{
+    display: inline-block;
+    list-style: none;
+    margin-left: 8%;
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 15px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 60px;
+    text-decoration: none;
+    border-bottom:1px solid #FFFFFF; 
+    opacity: 0.5;
+  
+   
+}
+
+
+
+.navegador input:not(:checked)~ .ul-nav{
+    max-height: 0;
+    display: none;
+}
+
+.navegador input:checked~nav{
+     display: block;
+}
+
+.navegador input:checked~ul{
+    height: 100vh;
+    padding-bottom: 5%;
+}
+
+
+.navegador input[type="checkbox"]:checked ~label .burger {
+    display: none;
+
+   
+}
+   
+.navegador input[type="checkbox"]:not(:checked) ~label .close{
+    display: none;
+
+}
+
+.main{
+    position: absolute;
+    z-index: 1;
+}
+
+.imgppal{
+    width: 80%;
+}
+
+
+.title{
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 25px;
+    color: #572EE5;
+    text-align: center;
+    line-height: 33px;
+    width: 80%;
+  
+}
+
+.intro{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5%;
+    align-items: center;
+  
+}
+.search{
+    width: 95%; 
+    border: #572EE5 1px solid;
+    border-radius: 27px;
+    display: flex;
+    flex-direction: row;
+    padding: 2%;
+    
+}
+
+input[type= "search"]{
+    border: none;
+    padding:3% ;
+    margin-bottom: 1%;
+    width: 90%;
+
+
+}
+.trending{
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    color: #572EE5;
+    text-align: center;
+    line-height: 25px;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 65%;
+}
+
+.lasttrending{
+    background-color: #F3F5F8;
+}
+
+.trendingGifos{
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 20px;
+    color: #572EE5;
+    text-align: center;
+    line-height: 30px;
+}
+
+.comunidad{
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+    text-align: center;
+    line-height: 23px;
+    width: 60%;
+    margin-left: 20%
+}
+
+footer{
+    padding: 10%;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 16px;
+    color: #000000;
+    text-align: center;
+    line-height: 23px;
+
+}
+.compartir{
+    margin: 10%;
+
+}
+
+@media screen and (min-width: 730px){
+    .logomobile{
+        height: 10%;
+        width: auto;
+        left: 10%;
+        margin-top: 2%;
+        display: inline-block;
+    
+    }
+
+    .close, .burger, input[type="checkbox"]{
+        display: none;
+        opacity: 0;
+        max-height: 0;
+    }
+    .navegador input:not(:checked)~ .ul-nav{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: baseline;
+        width: 582px;
+        background: #FFFFFF 100%;
+        margin-top: 2%;
+        left: 50%;
+        top: 2%;
+
+    }
+
+    .navegador .ul-nav li{
+        font-size: 16px;
+        color: #060A24;
+        letter-spacing: 0;
+        line-height: 28px;
+        display: block;
+        height: auto;
+        margin-left: 3%;}
+        
+    .imgppal{
+        width: 60%;
+    }
+
+    .day{
+        right: 0%;
+        display: inline-block;
+        margin-top: 1%;
+        margin-left: 9%;
+    }
+    .title{
+        font-size: 35px;
+        text-align: center;
+        line-height: 50px;
+        width: 60%;
+    }
+    .imgppal{
+        width: 50%;
+    }
+    .search{
+        padding: 0;
+        width: ;
+    }
+   
+    .buscar{
+        width: 5%;
+    }
+    .trending{
+        font-size: 18px;
+    
+        text-align: center;
+        line-height: 25px;
+    }
+
+    footer{
+        flex-direction: row;
+        padding: 0;
+    }
+}   .final{
+        top:0;
+}
