@@ -6,6 +6,7 @@
     padding: 0;
 }
 
+
 .linea{
     background-color: #572EE5;
     height: 1vh;
@@ -203,6 +204,32 @@ footer{
 
 }
 
+.favoritos, .misgifos{
+    display: flex;
+    flex-direction: column;
+}
+.favtitle, .mgtitle{
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 20px;
+    color: #572EE5;
+    text-align: center;
+    line-height: 30px;
+}
+.dnone{
+    display: none;
+}
+
+.gallery{
+    display: flex;
+    flex-flow: row nowrap;
+
+}
+.mySlides{
+    margin: 10%;
+    width: 80%;
+    height: 70%;
+}
 @media screen and (min-width: 730px){
     .logomobile{
         height: 10%;

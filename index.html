@@ -25,18 +25,18 @@
             <ul class="ul-nav">
                 
                     <li class=""> <a href="#">Modo Nocturno</a></li>
-                    <li class=""> <a href="#">Favoritos</a></li>
+                    <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#">Mis GIFOS</a></li>
-                    <img class="crear day" src="images/button-crear-gifo.svg" alt="crear">
-                    <img class="crear" src="images/CTA-crear-gifo-hover.svg" alt="crear">
-                    <img class="crear" src="images/CTA-crear-gifo-active.svg" alt="crear">
+                    <li><img class="crear day" src="images/button-crear-gifo.svg" alt="crear"></li>
+                    <li><img class="crear" src="images/CTA-crear-gifo-hover.svg" alt="crear"></li>
+                    <li><img class="crear" src="images/CTA-crear-gifo-active.svg" alt="crear"></li>
 
 
             </ul>
         </nav>
     </header>
     <main>
-        <div class="intro">
+        <div class="intro" id="intro"> 
             <h1 class="title">Inspírate, busca, guarda, y crea los mejores <span class="title GIFOS">GIFOS</span></h1>
             <img class="imgppal" src="images/ilustra_header.svg" alt="">
             <div class="search">
@@ -46,15 +46,23 @@
             </div>
             <p class="trending"> <strong> Trending</strong>: <br> Reactions, Entertainment, Sports, Stickers, Artists</p>
         </div>  
-        <section class="favoritos">
+
+        <section class="favoritos dnone" id="favsec">
             <img src="images/icon-favoritos.svg" alt="favoritos">
-            <h2>Favoritos</h2>
-            <img src="images/CTA-ver-mas.svg" alt="">
+            <h2 class="favtitle">Favoritos</h2>
+            <img src="images/CTA-ver-mas.svg" alt="ver mas" id="vermas">
         </section>
+
+        <section class="dnone">
+            <img src="images/icon-mis-gifos.svg" alt="">
+            <h2 class="mgtitle">Mis GIFOS</h2>
+            <img src="images/CTA-ver-mas.svg" alt="ver mas">
+        </section>
+
         <section class="lasttrending">
             <h2 class="trendingGifos">Trending GIFOS</h2>
             <p class="comunidad">Mira los ultimos GIFOS de nuestra comunidad</p>
-            <div class="galery">
+            <div class="gallery" id="gallery">
 
             </div>
         </section>
@@ -77,4 +85,82 @@
         </footer>
     </main>
 </body>
+<script>
+    const favoritos = document.getElementById("favoritos")
+    const favsec = document.getElementById("favsec")
+    const intro = document.getElementById("intro")
+    const gallery = document.getElementById("gallery")
+    favoritos.addEventListener("click", activarFavoritos)
+
+    function activarFavoritos(){
+        favsec.classList.toggle("dnone");
+        intro.classList.toggle("dnone");
+
+    }
+    
+    const trending = galery => {
+        return `http://api.giphy.com/v1/gifs/trending?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;
+    }
+
+    async function showResult() {
+        // event.preventDefault();
+        const response = await fetch(trending());
+        const results = await response.json();
+        gallery.innerHTML = ""
+        console.log(results);
+        results.data.forEach(renderResult);
+
+    }
+
+    function renderResult(results) {
+        
+        const figure = document.createElement('figure');
+        const img = document.createElement('img');
+
+        img.src = results.images.original.url;
+        img.alt = results.title;
+        img.className = "gallery"
+        img.className = "mySlides"
+
+
+        gallery.appendChild(img);
+    }
+
+    showResult()
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+    showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+    showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+ 
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+   
+    slides[slideIndex-1].style.display = "block";
+
+
+  
+
+    
+    // const busqueda = "cat";
+    // const url = `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}`
+    // fetch(url)
+    // .then(response => response.json())
+    // .then(data => console.log(data));
+</script>
 </html>
