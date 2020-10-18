@@ -40,7 +40,7 @@
             <h1 class="title">Inspírate, busca, guarda, y crea los mejores <span class="title GIFOS">GIFOS</span></h1>
             <img class="imgppal" src="images/ilustra_header.svg" alt="">
             <div class="search">
-                <input type="search">
+                <input type="search" placeholder="Buscá GIFOS y más...">
                 <img class="buscar" src="images/icon-search.svg" alt="buscar">
                 <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
             </div>
@@ -120,14 +120,12 @@
 
         img.src = results.images.original.url;
         img.alt = results.title;
-        img.className = "gallery"
         img.className = "mySlides"
-
-
+ 
         gallery.appendChild(img);
-    }
-
-    showResult()
+    
+        scroll = mySlides.addEventListener("scroll", plusSlides)
+    
 
     var slideIndex = 1;
     showSlides(slideIndex);
@@ -154,8 +152,9 @@
    
     slides[slideIndex-1].style.display = "block";}
 
-
-  
+    }
+    showResult()
+    
 
     
     // const busqueda = "cat";
