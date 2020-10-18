@@ -63,7 +63,7 @@
             <h2 class="trendingGifos">Trending GIFOS</h2>
             <p class="comunidad">Mira los ultimos GIFOS de nuestra comunidad</p>
             <div class="gallery" id="gallery">
-
+             
             </div>
         </section>
         <footer>
@@ -103,6 +103,8 @@
         return `http://api.giphy.com/v1/gifs/trending?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;
     }
 
+    
+    
     async function showResult() {
         // event.preventDefault();
         const response = await fetch(trending());
@@ -111,11 +113,23 @@
         console.log(results);
         results.data.forEach(renderResult);
         showSlides()
+        results.data.forEach(img.id = results.data[i])
+        
+        const prev = document.createElement("a")
+        prev.className = "prev"
+        const next = document.createElement("a")
+        next.className = "next"
 
-        const mySlides= document.getElementsByClassName("mySlides")
-        scroll = mySlides.addEventListener("scroll", plusSlides)
+        gallery.appendChild(prev)
+        gallery.appendChild(next)
+        
+        prev.addEventListener("click", plusSlides(-1))
+        next.addEventListener("click", plusSlides(1))
+        
 
     }
+
+    const mySlides= document.getElementsByClassName("mySlides")
 
     function renderResult(results) {
         
@@ -125,11 +139,15 @@
         img.src = results.images.original.url;
         img.alt = results.title;
         img.className = "mySlides"
-       
-
+        
+        
         gallery.appendChild(img);
+        img.addEventListener("click", ampliar)
+        
     }
     showResult()
+
+
 
     
 
@@ -158,7 +176,12 @@
    
     slides[slideIndex-1].style.display = "block";}
 
-    showResult()
+   
+
+    function ampliar(){
+        mySlides.className = "expandir"
+    }
+
     
 
     
