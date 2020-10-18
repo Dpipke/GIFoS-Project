@@ -123,8 +123,8 @@
         gallery.appendChild(prev)
         gallery.appendChild(next)
         
-        prev.addEventListener("click", plusSlides(-1))
-        next.addEventListener("click", plusSlides(1))
+        prev.addEventListener("click", () => plusSlides(-1))
+        next.addEventListener("click", () => plusSlides(1))
         
 
     }
@@ -152,7 +152,6 @@
     
 
     var slideIndex = 1;
-    showSlides(slideIndex);
 
     // Next/previous controls
     function plusSlides(n) {
