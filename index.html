@@ -110,6 +110,10 @@
         gallery.innerHTML = ""
         console.log(results);
         results.data.forEach(renderResult);
+        showSlides()
+
+        const mySlides= document.getElementsByClassName("mySlides")
+        scroll = mySlides.addEventListener("scroll", plusSlides)
 
     }
 
@@ -121,10 +125,12 @@
         img.src = results.images.original.url;
         img.alt = results.title;
         img.className = "mySlides"
- 
+       
+
         gallery.appendChild(img);
-    
-        scroll = mySlides.addEventListener("scroll", plusSlides)
+    }
+    showResult()
+
     
 
     var slideIndex = 1;
@@ -152,7 +158,6 @@
    
     slides[slideIndex-1].style.display = "block";}
 
-    }
     showResult()
     
 
