@@ -100,7 +100,7 @@
 
     
     const trending = galery => {
-        return `http://api.giphy.com/v1/gifs/trending?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;
+        return `https://api.giphy.com/v1/gifs/trending?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;
     }
 
     
@@ -113,8 +113,7 @@
         console.log(results);
         results.data.forEach(renderResult);
         showSlides()
-        results.data.forEach(img.id = results.data[i])
-        
+
         const prev = document.createElement("a")
         prev.className = "prev"
         const next = document.createElement("a")
