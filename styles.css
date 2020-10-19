@@ -162,6 +162,7 @@ input[type= "search"]{
 
 .lasttrending{
     background-color: #F3F5F8;
+
 }
 
 .trendingGifos{
@@ -228,15 +229,16 @@ footer{
 }
 .mySlides{
     margin: 10%;
-    width: 80%;
-    max-height: 70%;
+    max-width: 45%;
+    height: auto;
+  
 }
 
 .prev, .next {
     cursor: pointer;
     position: absolute;
-    top: 50%;
     width: auto;
+    height: 100%;
     margin-top: -22px;
     padding: 16px;
     color: white;
@@ -247,7 +249,6 @@ footer{
     user-select: none;
   }
   
-  /* Position the "next button" to the right */
   .next {
     right: 0;
     border-radius: 3px 0 0 3px;
@@ -255,7 +256,16 @@ footer{
 
 .modal{
     position: fixed;
-    width: 90%;
+    width: 100vw;
+    top: 10%;
+    left: 0;
+    background: #FFFFFF 80%;
+    height: 60%;
+}
+
+.modal img{
+    margin: 20%;
+
 }
 @media screen and (min-width: 730px){
     .logomobile{

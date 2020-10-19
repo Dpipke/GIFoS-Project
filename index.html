@@ -59,9 +59,6 @@
             <img src="images/CTA-ver-mas.svg" alt="ver mas">
         </section>
 
-        <div class="modal">
-
-        </div>
 
         <section class="lasttrending">
             <h2 class="trendingGifos">Trending GIFOS</h2>
@@ -178,10 +175,14 @@
    
     slides[slideIndex-1].style.display = "block";}
 
-   
+    
+
 
     function ampliar(){
         gallery.classList.toggle("modal")
+        const cruz = gallery.createElement("img")
+        cruz.src= "images/close.svg"
+
     }
 
     
