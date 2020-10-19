@@ -140,6 +140,10 @@ label{
     
 }
 
+/* .submit{
+    opacity: 0;
+} */
+
 input[type= "search"]{
     border: none;
     padding:3% ;

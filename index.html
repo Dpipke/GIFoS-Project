@@ -40,9 +40,12 @@
             <h1 class="title">Inspírate, busca, guarda, y crea los mejores <span class="title GIFOS">GIFOS</span></h1>
             <img class="imgppal" src="images/ilustra_header.svg" alt="">
             <div class="search">
-                <input type="search" placeholder="Buscá GIFOS y más...">
-                <img class="buscar" src="images/icon-search.svg" alt="buscar">
-                <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
+                <input type="search" placeholder="Buscá GIFOS y más..." id="busqueda">
+                <input type="submit" id="submit" class="submit">
+                <label for="submit">
+                    <img class="buscar" src="images/icon-search.svg" alt="buscar">
+                    <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
+                </label>
             </div>
             <p class="trending"> <strong> Trending</strong>: <br> Reactions, Entertainment, Sports, Stickers, Artists</p>
         </div>  
@@ -199,6 +202,27 @@
 
 
     }
+
+    const key = document.getElementById("busqueda")
+    const submit = document.getElementById("submit")
+
+    const getUrl = busqueda => {
+            return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}` ;
+        }
+
+    submit.addEventListener("submit", resultadosBusqueda)
+
+    async function resultadosBusqueda(event) {
+            event.preventDefault();
+            const url = getUrl(key.value);
+            const response = await fetch(url);
+            const results = await response.json();
+            console.log(results);
+            if(results.Response === 'True')
+                results.Search.forEach(renderResult);
+            else alert('not found');
+        }
+
 
     
 
