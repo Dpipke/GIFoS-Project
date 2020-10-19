@@ -180,8 +180,10 @@
 
     function ampliar(){
         gallery.classList.toggle("modal")
-        const cruz = gallery.createElement("img")
+        const cruz = document.createElement("img")
+        gallery.appendChild(cruz)
         cruz.src= "images/close.svg"
+        cruz.className = "cruz"
 
     }
 
