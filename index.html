@@ -184,6 +184,15 @@
         gallery.appendChild(cruz)
         cruz.src= "images/close.svg"
         cruz.className = "cruz"
+        const like = document.createElement("img")
+        gallery.appendChild(like)
+        like.src="images/icon-fav-active.svg"
+        const download = document.createElement("img")
+        like.className = "like"
+        gallery.appendChild(download)
+        download.src = "images/icon-download.svg"
+        download.className = "download"
+
 
     }
 
