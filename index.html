@@ -125,6 +125,19 @@
         
         prev.addEventListener("click", () => plusSlides(-1))
         next.addEventListener("click", () => plusSlides(1))
+
+        const cruz = document.createElement("img")
+        gallery.appendChild(cruz)
+        cruz.src= "images/close.svg"
+        cruz.className = "dnone"
+        const like = document.createElement("img")
+        gallery.appendChild(like)
+        like.src="images/icon-fav-active.svg"
+        const download = document.createElement("img")
+        like.className = "dnone"
+        gallery.appendChild(download)
+        download.src = "images/icon-download.svg"
+        download.className = "dnone"
         
 
     }
@@ -180,18 +193,9 @@
 
     function ampliar(){
         gallery.classList.toggle("modal")
-        const cruz = document.createElement("img")
-        gallery.appendChild(cruz)
-        cruz.src= "images/close.svg"
-        cruz.className = "cruz"
-        const like = document.createElement("img")
-        gallery.appendChild(like)
-        like.src="images/icon-fav-active.svg"
-        const download = document.createElement("img")
-        like.className = "like"
-        gallery.appendChild(download)
-        download.src = "images/icon-download.svg"
-        download.className = "download"
+        cruz.classList.toggle("cruz")
+        like.classList.toggle("like")
+        download.classList.toggle("download")
 
 
     }
