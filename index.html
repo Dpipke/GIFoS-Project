@@ -158,6 +158,9 @@
         
         container.appendChild(img);
         img.addEventListener("click", event => ampliar(event, img)) })
+
+        const fav = document.getElementById("like")
+        fav.addEventListener("click", agregarFavoritos)
         
         
     }
@@ -203,8 +206,6 @@
         const modal = document.getElementById("modal")
         event.stopPropagation()
         modal.className = "modal"
-        // like.classList.toggle("like")
-        // download.classList.toggle("download")
         modal.appendChild(ampliado)
         const like = document.createElement("img")
         modal.appendChild(like)
@@ -236,12 +237,11 @@
         modal.className = "dnone"
     }
 
-    const fav = document.getElementById("like")
-    fav.addEventListener("click", agregarFavoritos)
+    
 
-    function agregarFavoritos(){
-        const url = this.getAttribute("src")
-        console.log(url)
+    function agregarFavoritos(ampliado){
+        favoritos.appendChild(ampliado)
+        localStorage.setItem(ampliado)
     }
 
     const key = document.getElementById("busqueda")
