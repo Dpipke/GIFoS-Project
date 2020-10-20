@@ -40,14 +40,15 @@
             <h1 class="title">Inspírate, busca, guarda, y crea los mejores <span class="title GIFOS">GIFOS</span></h1>
             <img class="imgppal" src="images/ilustra_header.svg" alt="">
             <div class="search">
-                <input type="search" placeholder="Buscá GIFOS y más..." id="busqueda">
-                <input type="submit" id="submit" class="submit">
-                <label for="submit">
-                    <img class="buscar" src="images/icon-search.svg" alt="buscar">
-                    <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
+                <form action="">
+                    <input type="search" placeholder="Buscá GIFOS y más..." id="busqueda">
+                    <label for="submit">
+                        <img class="buscar" src="images/icon-search.svg" alt="buscar">
+                        <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
                 </label>
+                </form>
             </div>
-            <p class="trending"> <strong> Trending</strong>: <br> Reactions, Entertainment, Sports, Stickers, Artists</p>
+            <h3 class="trending"> Trending: </h3>
         </div>  
 
         <section class="favoritos dnone" id="favsec">
@@ -62,6 +63,9 @@
             <img src="images/CTA-ver-mas.svg" alt="ver mas">
         </section>
 
+        <div class="resultados" id="resultados">
+
+        </div>
 
         <section class="lasttrending">
             <h2 class="trendingGifos">Trending GIFOS</h2>
@@ -109,13 +113,14 @@
 
     
     
+    // section trending
     async function showResult() {
         // event.preventDefault();
         const response = await fetch(trending());
         const results = await response.json();
         gallery.innerHTML = ""
         console.log(results);
-        results.data.forEach(renderResult);
+        renderResult(results.data, gallery, "slider", "mySlides");
         showSlides()
 
         const prev = document.createElement("a")
@@ -147,18 +152,20 @@
 
     const mySlides= document.getElementsByClassName("mySlides")
 
-    function renderResult(results) {
-        
+    function renderResult(results, container, clasecontainer, claseitem) {
+        results.forEach(item =>{
         const figure = document.createElement('figure');
         const img = document.createElement('img');
 
-        img.src = results.images.original.url;
-        img.alt = results.title;
-        img.className = "mySlides"
+        img.src = item.images.original.url;
+        img.alt = item.title;
+        img.className = claseitem;
+        container.classList.toggle(clasecontainer);
         
         
-        gallery.appendChild(img);
-        img.addEventListener("click", ampliar)
+        container.appendChild(img);
+        img.addEventListener("click", ampliar) })
+        
         
     }
     showResult()
@@ -183,49 +190,73 @@
     var i;
     var slides = document.getElementsByClassName("mySlides");
  
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
+    // if (n > slides.length) {slideIndex = 1}
+    // if (n < 1) {slideIndex = slides.length}
+
+    // for (i = 0; i < slides.length; i++) {
+    //     slides[i].style.display = "none";
+    // }
    
-    slides[slideIndex-1].style.display = "block";}
-
+    // slides[slideIndex-1].style.display = "block";}
+// reemplazar por scroll. mover slider a posicion
+    gallery.scroll({
+        left: 100,
+        behavior: "smooth",
+    })
     
+    }
 
-
-    function ampliar(){
+    function ampliar(event){
+        event.stopPropagation()
         gallery.classList.toggle("modal")
         cruz.classList.toggle("cruz")
         like.classList.toggle("like")
         download.classList.toggle("download")
-
+        
 
     }
 
     const key = document.getElementById("busqueda")
-    const submit = document.getElementById("submit")
+    const buscar = document.querySelector(".buscar")
 
     const getUrl = busqueda => {
             return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}` ;
         }
 
-    submit.addEventListener("submit", resultadosBusqueda)
+    buscar.addEventListener("click", resultadosBusqueda)
 
+    const resultados = document.getElementById("resultados")
     async function resultadosBusqueda(event) {
             event.preventDefault();
             const url = getUrl(key.value);
             const response = await fetch(url);
             const results = await response.json();
-            console.log(results);
-            if(results.Response === 'True')
-                results.Search.forEach(renderResult);
+            const buscado = document.createElement("h2")
+            buscado.innerText = key.value
+            buscado.className = "buscadotitle"
+            resultados.appendChild(buscado)
+            if(response.status === 200)
+                renderResult(results.data, resultados, "resultados", "imgresultados" );
             else alert('not found');
         }
 
+        // escuchar en el form, submit, no click
 
     
+       
+        async function palabrasTendencia(){
+            const tendencias = "http://api.giphy.com/v1/trending/searches?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM"
+            const tendenciasResponse = await fetch(tendencias);
+            const tendenciasResults = await tendenciasResponse.json();
+            const tendenciasMasFuertes = tendenciasResults.data.splice(0,5)
+            console.log(tendenciasMasFuertes)
+            const tendenciasActuales = document.createElement("p")
+            tendenciasActuales.innerText = tendenciasMasFuertes
+            tendenciasActuales.className = "tendenciasActuales"
+            intro.appendChild(tendenciasActuales)
+        }
 
+        palabrasTendencia()
     
     // const busqueda = "cat";
     // const url = `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}`
