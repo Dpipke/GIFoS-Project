@@ -253,6 +253,7 @@ footer{
 .mySlides{
     width: 50vw;
     margin: 5%;
+    height: 30vh;
 }
 
 .prev, .next {
@@ -278,34 +279,54 @@ footer{
 .modal{
     position: fixed;
     width: 100vw;
-    top: 10%;
+    top: 0%;
     left: 0;
-    background: #FFFFFF 80%;
-    height: 60%;
+    background: rgba(255,255,255,0.90);
+    opacity: 80%;
+    height: 100vh;
 }
 
 .modal img{
-    max-width: 60%;  
-
+   width: 90vw;  
+   height: 60vh;
+   
 }
-.cruz{
-    top:5%;
+.modal .cruz{
+    margin-left: 90%;
+    top:15%;
     right: 10%;
-    margin-top: 10%;
-    margin-left: 0;
     height: 3.5%;
+    margin-top: 10%;
+    width: 3.5%;
 
 }
 
-.like{
+.modal .like{
     height: 5%;
     bottom: 5%;
+    width: 5%;
+    right: 20%;
+    position: absolute;
+    margin-top: 5%;
 }
-.download{
+.modal .download{
     height: 7%;
     bottom: 5%;
+    width: 7%;
+    right: 10%;
+    position: absolute;
+    margin-top: 5%;
 }
 
+.giftitle{
+    margin-left: 5%;
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 16px;
+    color: #000000;
+    text-align: center;
+    width: 60%;
+}
 .resultados{
     display: flex;
     flex-flow: row wrap;

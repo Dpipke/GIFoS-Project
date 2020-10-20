@@ -73,6 +73,10 @@
             <div class="gallery" id="gallery">
              
             </div>
+            <div class="dnone" id="modal">
+                <img class="cruz" src="images/close.svg" alt="cerrar" id="cruz">
+
+            </div>
         </section>
         <footer>
             <p>Compartir en:</p>
@@ -134,18 +138,6 @@
         prev.addEventListener("click", () => plusSlides(-1))
         next.addEventListener("click", () => plusSlides(1))
 
-        cruz = document.createElement("img")
-        gallery.appendChild(cruz)
-        cruz.src= "images/close.svg"
-        cruz.className = "dnone"
-        like = document.createElement("img")
-        gallery.appendChild(like)
-        like.src="images/icon-fav-active.svg"
-        download = document.createElement("img")
-        like.className = "dnone"
-        gallery.appendChild(download)
-        download.src = "images/icon-download.svg"
-        download.className = "dnone"
         
 
     }
@@ -159,32 +151,33 @@
 
         img.src = item.images.original.url;
         img.alt = item.title;
+        img.p= item.user                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         img.className = claseitem;
         container.classList.toggle(clasecontainer);
         
         
         container.appendChild(img);
-        img.addEventListener("click", ampliar(event, img)) })
+        img.addEventListener("click", event => ampliar(event, img)) })
         
         
     }
     showResult()
 
 
-
+    
     
 
     var slideIndex = 1;
 
     // Next/previous controls
-    function plusSlides(n) {
-    showSlides(slideIndex += n);
-    }
+    // function plusSlides(n) {
+    // showSlides(slideIndex += n);
+    // }
 
-    // Thumbnail image controls
-    function currentSlide(n) {
-    showSlides(slideIndex = n);
-    }
+    // // Thumbnail image controls
+    // function currentSlide(n) {
+    // showSlides(slideIndex = n);
+    // }
 
     function showSlides(n) {
     var i;
@@ -207,13 +200,48 @@
     }
 
     function ampliar(event, ampliado){
+        const modal = document.getElementById("modal")
         event.stopPropagation()
-        ampliado.classList.toggle("modal")
-        cruz.classList.toggle("cruz")
-        like.classList.toggle("like")
-        download.classList.toggle("download")
-        
+        modal.className = "modal"
+        // like.classList.toggle("like")
+        // download.classList.toggle("download")
+        modal.appendChild(ampliado)
+        const like = document.createElement("img")
+        modal.appendChild(like)
+        like.src="images/icon-fav-active.svg"
+        like.id = "like"
+        download = document.createElement("img")
+        like.className = "like"
+        modal.appendChild(download)
+        download.src = "images/icon-download.svg"
+        download.className = "download"
+        const user = document.createElement("p")
+        // if( user.innerText == "undefined"){
+        //     return ""
+        // }else{
+        user.innerText = ampliado.user
+        user.className = ""
+        modal.appendChild(user)
+        title = document.createElement("figcaption")
+        title.innerText = ampliado.alt
+        title.className = "giftitle"
+        modal.appendChild(title)         
 
+    }
+
+    const cruz = document.getElementById("cruz")
+    cruz.addEventListener("click", cerrar)
+
+    function cerrar(){
+        modal.className = "dnone"
+    }
+
+    const fav = document.getElementById("like")
+    fav.addEventListener("click", agregarFavoritos)
+
+    function agregarFavoritos(){
+        const url = this.getAttribute("src")
+        console.log(url)
     }
 
     const key = document.getElementById("busqueda")
@@ -258,10 +286,6 @@
 
         palabrasTendencia()
     
-    
-    function agregarFavoritos(){
-
-    }
 
 
     // const busqueda = "cat";
