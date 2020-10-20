@@ -134,14 +134,14 @@
         prev.addEventListener("click", () => plusSlides(-1))
         next.addEventListener("click", () => plusSlides(1))
 
-        const cruz = document.createElement("img")
+        cruz = document.createElement("img")
         gallery.appendChild(cruz)
         cruz.src= "images/close.svg"
         cruz.className = "dnone"
-        const like = document.createElement("img")
+        like = document.createElement("img")
         gallery.appendChild(like)
         like.src="images/icon-fav-active.svg"
-        const download = document.createElement("img")
+        download = document.createElement("img")
         like.className = "dnone"
         gallery.appendChild(download)
         download.src = "images/icon-download.svg"
@@ -164,7 +164,7 @@
         
         
         container.appendChild(img);
-        img.addEventListener("click", ampliar) })
+        img.addEventListener("click", ampliar(event, img)) })
         
         
     }
@@ -206,9 +206,9 @@
     
     }
 
-    function ampliar(event){
+    function ampliar(event, ampliado){
         event.stopPropagation()
-        gallery.classList.toggle("modal")
+        ampliado.classList.toggle("modal")
         cruz.classList.toggle("cruz")
         like.classList.toggle("like")
         download.classList.toggle("download")
@@ -258,6 +258,12 @@
 
         palabrasTendencia()
     
+    
+    function agregarFavoritos(){
+
+    }
+
+
     // const busqueda = "cat";
     // const url = `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}`
     // fetch(url)
