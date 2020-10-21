@@ -273,7 +273,7 @@
 
     async function sugerencias(){
         const term = key.value
-        const apiSugerencias = `http://api.giphy.com/v1/tags/related/api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&term=${term}`
+        const apiSugerencias = `http://api.giphy.com/v1/tags/related/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&term=${term}`
         const sugerenciasResponse = await fetch(apiSugerencias);
         const sugerenciasResults = await sugerenciasResponse.json();
         console.log(sugerenciasResults)
