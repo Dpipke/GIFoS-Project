@@ -39,14 +39,17 @@
         <div class="intro" id="intro"> 
             <h1 class="title">Inspírate, busca, guarda, y crea los mejores <span class="title GIFOS">GIFOS</span></h1>
             <img class="imgppal" src="images/ilustra_header.svg" alt="">
-            <div class="search">
+            <div class="search" id="search">
                 <form action="">
                     <input type="search" placeholder="Buscá GIFOS y más..." id="busqueda">
                     <label for="submit">
-                        <img class="buscar" src="images/icon-search.svg" alt="buscar">
+                        <img class="lupita" src="images/icon-search.svg" alt="buscar" id="lupita">
                         <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
                 </label>
                 </form>
+                <div class="sugerenciascontainer" id="sugerenciascontainer">
+                    
+                </div>
             </div>
             <h3 class="trending"> Trending: </h3>
         </div>  
@@ -125,7 +128,6 @@
         const response = await fetch(trending());
         const results = await response.json();
         gallery.innerHTML = ""
-        console.log(results);
         renderResult(results.data, gallery, "slider", "mySlides");
         showSlides()
 
@@ -239,20 +241,63 @@
     }
 
     const key = document.getElementById("busqueda")
-    const buscar = document.querySelector(".buscar")
+    const buscar = document.querySelector(".lupita")
+    const search = document.getElementById("search")
 
     const getUrl = (busqueda, limit) => {
             return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}&limit=${limit}` ;
         }
-
+    
+    key.addEventListener("keyup", sugerir)
     buscar.addEventListener("click", resultadosBusqueda)
+
+    
+    // async function sugerencias(){
+    //     const q = key.value
+    //     const apiSugerencias = `http://api.giphy.com/v1/gifs/search/tags?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}`
+    //     const sugerenciasResponse = await fetch(apiSugerencias);
+    //     const sugerenciasResults = await sugerenciasResponse.json();
+    //     const sugerenciasData = sugerenciasResults.data
+    //     console.log(sugerenciasData)
+
+    // }
+    
+    async function sugerir(){
+        const q = key.value
+        const apiSugerencias = `http://api.giphy.com/v1/gifs/search/tags?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}`
+        const sugerenciasResponse = await fetch(apiSugerencias);
+        const sugerenciasResults = await sugerenciasResponse.json();
+        const sugerenciasData = sugerenciasResults.data
+        console.log(sugerenciasData)
+
+        search.innerHTML = '';
+        const suggestions = sugerenciasData.filter(function(item) {
+        return item.name.toLowerCase().startsWith(q);
+        });
+        const sugerenciasContainer = document.getElementById("sugerenciascontainer")
+        const sugerenciasUl  = document.createElement("ul")
+        sugerenciasContainer.appendChild(sugerenciasUl)
+        suggestions.forEach(function(suggested) {
+            const sugerencia = document.createElement('li');
+            sugerencia.innerHTML = suggested.name;
+            sugerencia.className = "sugerencia"
+            lupaHover = document.createElement("img")
+            lupaHover.src = "images/icon-search-modo-noct.svg"
+            lupaHover.className = "lupahover"
+            sugerenciasUl.appendChild(sugerencia);
+        });
+        if (q === '') {
+            search.innerHTML = '';  
+        }
+
+
+    }
 
     const contador = 12
     const resultados = document.getElementById("resultados")
     async function resultadosBusqueda(event) {
             event.preventDefault();
             const url = getUrl(key.value, contador);
-            console.log(url)
             const response = await fetch(url);
             const results = await response.json();
             const buscado = document.createElement("h2")
@@ -267,19 +312,12 @@
                 resultados.appendChild(verMas);
                 verMas.addEventListener("click", cargarMas)}
             else alert('not found');
+
         }
 
         // escuchar en el form, submit, no click
-
-    async function sugerencias(){
-        const term = key.value
-        const apiSugerencias = `http://api.giphy.com/v1/tags/related/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&term=${term}`
-        const sugerenciasResponse = await fetch(apiSugerencias);
-        const sugerenciasResults = await sugerenciasResponse.json();
-        const sugerenciasData = sugerenciasResults.data
-        console.log(sugerenciasData)
-    }
-    sugerencias()
+    
+  
     
     function cargarMas(){
         const url = getUrl(key.value, contador+=12);
@@ -292,7 +330,6 @@
         const tendenciasResponse = await fetch(tendencias);
         const tendenciasResults = await tendenciasResponse.json();
         const tendenciasMasFuertes = tendenciasResults.data.splice(0,5)
-        console.log(tendenciasMasFuertes)
         const tendenciasActuales = document.createElement("p")
         tendenciasActuales.innerText = tendenciasMasFuertes
         tendenciasActuales.className = "tendenciasActuales"
