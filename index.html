@@ -276,7 +276,8 @@
         const apiSugerencias = `http://api.giphy.com/v1/tags/related/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&term=${term}`
         const sugerenciasResponse = await fetch(apiSugerencias);
         const sugerenciasResults = await sugerenciasResponse.json();
-        console.log(sugerenciasResults)
+        const sugerenciasData = sugerenciasResults.data
+        console.log(sugerenciasData)
     }
     sugerencias()
     
@@ -290,7 +291,7 @@
         const tendencias = "http://api.giphy.com/v1/trending/searches?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM"
         const tendenciasResponse = await fetch(tendencias);
         const tendenciasResults = await tendenciasResponse.json();
-        const tendenciasMasFuertes = tendenciasResults.data.splice(0,4)
+        const tendenciasMasFuertes = tendenciasResults.data.splice(0,5)
         console.log(tendenciasMasFuertes)
         const tendenciasActuales = document.createElement("p")
         tendenciasActuales.innerText = tendenciasMasFuertes
