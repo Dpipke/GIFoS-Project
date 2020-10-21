@@ -75,6 +75,8 @@
             </div>
             <div class="dnone" id="modal">
                 <img class="cruz" src="images/close.svg" alt="cerrar" id="cruz">
+                <img class="like" src="images/icon-fav-active.svg" alt="" id="like">
+                <img class= "download" src="images/icon-download.svg" alt="" id="download">
 
             </div>
         </section>
@@ -160,7 +162,7 @@
         img.addEventListener("click", event => ampliar(event, img)) })
 
         const fav = document.getElementById("like")
-        fav.addEventListener("click", agregarFavoritos)
+        fav.addEventListener("click", img=> agregarFavoritos(img))
         
         
     }
@@ -203,19 +205,11 @@
     }
 
     function ampliar(event, ampliado){
-        const modal = document.getElementById("modal")
         event.stopPropagation()
+        const modal = document.getElementById("modal")
+        
         modal.className = "modal"
         modal.appendChild(ampliado)
-        const like = document.createElement("img")
-        modal.appendChild(like)
-        like.src="images/icon-fav-active.svg"
-        like.id = "like"
-        download = document.createElement("img")
-        like.className = "like"
-        modal.appendChild(download)
-        download.src = "images/icon-download.svg"
-        download.className = "download"
         const user = document.createElement("p")
         // if( user.innerText == "undefined"){
         //     return ""
@@ -247,44 +241,64 @@
     const key = document.getElementById("busqueda")
     const buscar = document.querySelector(".buscar")
 
-    const getUrl = busqueda => {
-            return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}` ;
+    const getUrl = (busqueda, limit) => {
+            return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}&limit=${limit}` ;
         }
 
     buscar.addEventListener("click", resultadosBusqueda)
 
+    const contador = 12
     const resultados = document.getElementById("resultados")
     async function resultadosBusqueda(event) {
             event.preventDefault();
-            const url = getUrl(key.value);
+            const url = getUrl(key.value, contador);
+            console.log(url)
             const response = await fetch(url);
             const results = await response.json();
             const buscado = document.createElement("h2")
             buscado.innerText = key.value
             buscado.className = "buscadotitle"
             resultados.appendChild(buscado)
-            if(response.status === 200)
+            const verMas = document.createElement("img")
+            verMas.src = "images/CTA-ver-mas.svg"
+            verMas.className = "vermas"
+            if(response.status === 200){
                 renderResult(results.data, resultados, "resultados", "imgresultados" );
+                resultados.appendChild(verMas);
+                verMas.addEventListener("click", cargarMas)}
             else alert('not found');
         }
 
         // escuchar en el form, submit, no click
 
+    async function sugerencias(){
+        const term = key.value
+        const apiSugerencias = `http://api.giphy.com/v1/tags/related/api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&term=${term}`
+        const sugerenciasResponse = await fetch(apiSugerencias);
+        const sugerenciasResults = await sugerenciasResponse.json();
+        console.log(sugerenciasResults)
+    }
+    sugerencias()
+    
+    function cargarMas(){
+        const url = getUrl(key.value, contador+=12);
+    }    
+
     
        
-        async function palabrasTendencia(){
-            const tendencias = "http://api.giphy.com/v1/trending/searches?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM"
-            const tendenciasResponse = await fetch(tendencias);
-            const tendenciasResults = await tendenciasResponse.json();
-            const tendenciasMasFuertes = tendenciasResults.data.splice(0,5)
-            console.log(tendenciasMasFuertes)
-            const tendenciasActuales = document.createElement("p")
-            tendenciasActuales.innerText = tendenciasMasFuertes
-            tendenciasActuales.className = "tendenciasActuales"
-            intro.appendChild(tendenciasActuales)
-        }
+    async function palabrasTendencia(){
+        const tendencias = "http://api.giphy.com/v1/trending/searches?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM"
+        const tendenciasResponse = await fetch(tendencias);
+        const tendenciasResults = await tendenciasResponse.json();
+        const tendenciasMasFuertes = tendenciasResults.data.splice(0,4)
+        console.log(tendenciasMasFuertes)
+        const tendenciasActuales = document.createElement("p")
+        tendenciasActuales.innerText = tendenciasMasFuertes
+        tendenciasActuales.className = "tendenciasActuales"
+        intro.appendChild(tendenciasActuales)
+    }
 
-        palabrasTendencia()
+    palabrasTendencia()
     
 
 
