@@ -40,6 +40,7 @@
             <h1 class="title">Inspírate, busca, guarda, y crea los mejores <span class="title GIFOS">GIFOS</span></h1>
             <img class="imgppal" src="images/ilustra_header.svg" alt="">
             <div class="search" id="search">
+                <img class = "dnone" src="images/icon-search-modo-noct.svg" id="lupabuscador">
                 <form action="">
                     <input type="search" placeholder="Buscá GIFOS y más..." id="busqueda">
                     <label for="submit">
@@ -242,6 +243,7 @@
     const buscar = document.querySelector(".lupita")
     const search = document.getElementById("search")
     const cerrarBusqueda = document.getElementById("cerrar")
+    const lupabuscador = document.getElementById("lupabuscador")
 
     const getUrl = (busqueda, limit) => {
             return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}&limit=${limit}` ;
@@ -262,7 +264,7 @@
 
         
         const sugerenciasContainer = document.getElementById("sugerenciascontainer")
-        search.innerHTML.add(`<img class = "eachlupa" src="images/icon-search-modo-noct.svg">`)
+        lupabuscador.className = "eachlupa"
         const suggestions = sugerenciasData.filter(function(item) {
         return item.name.toLowerCase().startsWith(q);
         });
