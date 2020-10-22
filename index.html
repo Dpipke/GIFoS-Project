@@ -45,11 +45,12 @@
                     <label for="submit">
                         <img class="lupita" src="images/icon-search.svg" alt="buscar" id="lupita">
                         <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
+                        <img class="dnone" src="images/close.svg" alt="cerrar" id="cerrar">
                 </label>
                 </form>
-                <div class="sugerenciascontainer" id="sugerenciascontainer">
+                <ul class="sugerenciascontainer" id="sugerenciascontainer">
                     
-                </div>
+                </ul>
             </div>
             <h3 class="trending"> Trending: </h3>
         </div>  
@@ -73,7 +74,10 @@
         <section class="lasttrending">
             <h2 class="trendingGifos">Trending GIFOS</h2>
             <p class="comunidad">Mira los ultimos GIFOS de nuestra comunidad</p>
+            
             <div class="gallery" id="gallery">
+                <img class="prev" src="images/button-slider-left.svg" alt="" id="prev">
+                <img class="next" src="images/Button-Slider-right.svg" alt="" id="next">
              
             </div>
             <div class="dnone" id="modal">
@@ -131,17 +135,11 @@
         renderResult(results.data, gallery, "slider", "mySlides");
         showSlides()
 
-        const prev = document.createElement("a")
-        prev.className = "prev"
-        const next = document.createElement("a")
-        next.className = "next"
-
-        gallery.appendChild(prev)
-        gallery.appendChild(next)
+        // const prev = document.getElementById("prev")
+        // const next = document.createElement("next")
         
-        prev.addEventListener("click", () => plusSlides(-1))
-        next.addEventListener("click", () => plusSlides(1))
-
+        // prev.addEventListener("click", () => plusSlides(-1))
+        // next.addEventListener("click", () => plusSlides(1))
         
 
     }
@@ -206,10 +204,10 @@
     
     }
 
+    const modal = document.getElementById("modal")
+
     function ampliar(event, ampliado){
-        event.stopPropagation()
-        const modal = document.getElementById("modal")
-        
+        event.stopPropagation()  
         modal.className = "modal"
         modal.appendChild(ampliado)
         const user = document.createElement("p")
@@ -227,10 +225,10 @@
     }
 
     const cruz = document.getElementById("cruz")
-    cruz.addEventListener("click", cerrar)
+    cruz.addEventListener("click", ()=> cerrar(modal))
 
-    function cerrar(){
-        modal.className = "dnone"
+    function cerrar(elemento){
+        elemento.classList.add("dnone")
     }
 
     
@@ -243,6 +241,7 @@
     const key = document.getElementById("busqueda")
     const buscar = document.querySelector(".lupita")
     const search = document.getElementById("search")
+    const cerrarBusqueda = document.getElementById("cerrar")
 
     const getUrl = (busqueda, limit) => {
             return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}&limit=${limit}` ;
@@ -251,16 +250,7 @@
     key.addEventListener("keyup", sugerir)
     buscar.addEventListener("click", resultadosBusqueda)
 
-    
-    // async function sugerencias(){
-    //     const q = key.value
-    //     const apiSugerencias = `http://api.giphy.com/v1/gifs/search/tags?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}`
-    //     const sugerenciasResponse = await fetch(apiSugerencias);
-    //     const sugerenciasResults = await sugerenciasResponse.json();
-    //     const sugerenciasData = sugerenciasResults.data
-    //     console.log(sugerenciasData)
 
-    // }
     
     async function sugerir(){
         const q = key.value
@@ -270,28 +260,40 @@
         const sugerenciasData = sugerenciasResults.data
         console.log(sugerenciasData)
 
-        search.innerHTML = '';
+        
+        const sugerenciasContainer = document.getElementById("sugerenciascontainer")
+        search.innerHTML.add(`<img class = "eachlupa" src="images/icon-search-modo-noct.svg">`)
         const suggestions = sugerenciasData.filter(function(item) {
         return item.name.toLowerCase().startsWith(q);
         });
-        const sugerenciasContainer = document.getElementById("sugerenciascontainer")
-        const sugerenciasUl  = document.createElement("ul")
-        sugerenciasContainer.appendChild(sugerenciasUl)
+       
+        sugerenciasContainer.innerHTML = ""
+
         suggestions.forEach(function(suggested) {
             const sugerencia = document.createElement('li');
-            sugerencia.innerHTML = suggested.name;
+            sugerencia.innerHTML = `<img class = "eachlupa" src="images/icon-search-modo-noct.svg">${suggested.name}`
             sugerencia.className = "sugerencia"
-            lupaHover = document.createElement("img")
-            lupaHover.src = "images/icon-search-modo-noct.svg"
-            lupaHover.className = "lupahover"
-            sugerenciasUl.appendChild(sugerencia);
+            const lupaHover = document.createElement("img")
+            sugerenciasContainer.appendChild(sugerencia);
+            sugerencia.addEventListener("click", autocompletar)
+            
+            // add event listener con input.value. funcion q tome suggested.name y lo asigne al input.value 
+            // esa fx ponerla como listener para sugenreical
+       
         });
-        if (q === '') {
-            search.innerHTML = '';  
+
+        buscar.className = "dnone"
+        cerrarBusqueda.className = "cerrarbusqueda"
+
+        function autocompletar(suggested){
+            suggested.name = q
+            resultadosBusqueda()
         }
 
-
     }
+
+    cerrarBusqueda.addEventListener("click", ()=> cerrar(cerrarBusqueda))
+
 
     const contador = 12
     const resultados = document.getElementById("resultados")
