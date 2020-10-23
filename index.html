@@ -76,9 +76,11 @@
             <h2 class="trendingGifos">Trending GIFOS</h2>
             <p class="comunidad">Mira los ultimos GIFOS de nuestra comunidad</p>
             
+            <img class="prev" src="images/button-slider-left.svg" alt="" id="prev">
+            <img class="next" src="images/Button-Slider-right.svg" alt="" id="next">
+
             <div class="gallery" id="gallery">
-                <img class="prev" src="images/button-slider-left.svg" alt="" id="prev">
-                <img class="next" src="images/Button-Slider-right.svg" alt="" id="next">
+                
              
             </div>
             <div class="dnone" id="modal">
@@ -136,11 +138,11 @@
         renderResult(results.data, gallery, "slider", "mySlides");
         showSlides()
 
-        // const prev = document.getElementById("prev")
-        // const next = document.createElement("next")
+        const prev = document.getElementById("prev")
+        const next = document.getElementById("next")
         
-        // prev.addEventListener("click", () => plusSlides(-1))
-        // next.addEventListener("click", () => plusSlides(1))
+        prev.addEventListener("click", () => plusSlides(-1))
+        next.addEventListener("click", () => plusSlides(1))
         
 
     }
@@ -176,34 +178,35 @@
     var slideIndex = 1;
 
     // Next/previous controls
-    // function plusSlides(n) {
-    // showSlides(slideIndex += n);
-    // }
+    function plusSlides(n) {
+    showSlides(slideIndex += n);
+    }
 
     // // Thumbnail image controls
-    // function currentSlide(n) {
-    // showSlides(slideIndex = n);
-    // }
+    function currentSlide(n) {
+    showSlides(slideIndex = n);
+    }
 
     function showSlides(n) {
     var i;
     var slides = document.getElementsByClassName("mySlides");
  
-    // if (n > slides.length) {slideIndex = 1}
-    // if (n < 1) {slideIndex = slides.length}
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
 
-    // for (i = 0; i < slides.length; i++) {
-    //     slides[i].style.display = "none";
-    // }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
    
-    // slides[slideIndex-1].style.display = "block";}
+    slides[slideIndex-1].style.display = "block";}
+    
 // reemplazar por scroll. mover slider a posicion
     gallery.scroll({
         left: 100,
         behavior: "smooth",
     })
     
-    }
+    
 
     const modal = document.getElementById("modal")
 
@@ -239,7 +242,7 @@
         localStorage.setItem(ampliado)
     }
 
-    const key = document.getElementById("busqueda")
+    const input = document.getElementById("busqueda")
     const buscar = document.querySelector(".lupita")
     const search = document.getElementById("search")
     const cerrarBusqueda = document.getElementById("cerrar")
@@ -249,13 +252,13 @@
             return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}&limit=${limit}` ;
         }
     
-    key.addEventListener("keyup", sugerir)
-    buscar.addEventListener("click", resultadosBusqueda)
+    input.addEventListener("keyup", sugerir)
+    buscar.addEventListener("submit", resultadosBusqueda)
 
 
     
     async function sugerir(){
-        const q = key.value
+        const q = input.value
         const apiSugerencias = `http://api.giphy.com/v1/gifs/search/tags?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}`
         const sugerenciasResponse = await fetch(apiSugerencias);
         const sugerenciasResults = await sugerenciasResponse.json();
@@ -287,25 +290,25 @@
         buscar.className = "dnone"
         cerrarBusqueda.className = "cerrarbusqueda"
 
-        function autocompletar(suggested){
-            suggested.name = q
+        function autocompletar(event){
+            input.value = event.target.textContent
             resultadosBusqueda()
         }
 
     }
 
-    cerrarBusqueda.addEventListener("click", ()=> cerrar(cerrarBusqueda)&(key.innerText = ""))
+    cerrarBusqueda.addEventListener("click", ()=> {cerrar(cerrarBusqueda)&(input.value = "")})
 
 
     const contador = 12
     const resultados = document.getElementById("resultados")
     async function resultadosBusqueda(event) {
             event.preventDefault();
-            const url = getUrl(key.value, contador);
+            const url = getUrl(input.value, contador);
             const response = await fetch(url);
             const results = await response.json();
             const buscado = document.createElement("h2")
-            buscado.innerText = key.value
+            buscado.innerText = input.value
             buscado.className = "buscadotitle"
             resultados.appendChild(buscado)
             const verMas = document.createElement("img")
@@ -317,6 +320,8 @@
                 verMas.addEventListener("click", cargarMas)}
             else alert('not found');
 
+
+
         }
 
         // escuchar en el form, submit, no click
@@ -324,7 +329,7 @@
   
     
     function cargarMas(){
-        const url = getUrl(key.value, contador+=12);
+        const url = getUrl(input.value, contador+=12);
     }    
 
     
