@@ -147,6 +147,15 @@ label{
     
 }
 
+.otra{
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 22px;
+    color: #50E3C2;
+    text-align: center;
+    line-height: 25px;
+}
+
 /* .lupahover{
     fill: #9CAFC3;
     position: relative;
@@ -421,9 +430,7 @@ footer{
         width: 60%;
     }
 
-    .gallery{
-        overflow: hidden;
-    }
+
     .prev, .next {
         display: block;
         cursor: pointer;
@@ -439,7 +446,7 @@ footer{
         border-radius: 0 3px 3px 0;
         user-select: none;
         z-index: 1;
-        
+        transform: translateY(200%);
     } 
 
     .prev{
@@ -465,7 +472,17 @@ footer{
     .search{
         padding: 0;
     }
-   
+    
+    .gallery{
+        width: 80vw;  
+        margin-left: 10%; 
+    }
+
+    .mySlides{
+        height: 50vh;
+        width: 23vw;
+        margin: 2%;
+    }
     .lupita{
         width: 5%;
     }

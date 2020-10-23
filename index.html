@@ -141,8 +141,11 @@
         const prev = document.getElementById("prev")
         const next = document.getElementById("next")
         
-        prev.addEventListener("click", () => plusSlides(-1))
-        next.addEventListener("click", () => plusSlides(1))
+        prev.addEventListener("click", scrollear)
+        next.addEventListener("click", scrollear)
+        
+        // prev.addEventListener("click", () => plusSlides(-1))
+        // next.addEventListener("click", () => plusSlides(1))
         
 
     }
@@ -178,33 +181,34 @@
     var slideIndex = 1;
 
     // Next/previous controls
-    function plusSlides(n) {
-    showSlides(slideIndex += n);
-    }
+    // function plusSlides(n) {
+    // showSlides(slideIndex += n);
+    // }
 
-    // // Thumbnail image controls
-    function currentSlide(n) {
-    showSlides(slideIndex = n);
-    }
+    // // // Thumbnail image controls
+    // function currentSlide(n) {
+    // showSlides(slideIndex = n);
+    // }
 
-    function showSlides(n) {
-    var i;
-    var slides = document.getElementsByClassName("mySlides");
+    // function showSlides(n) {
+    // var i;
+    // var slides = document.getElementsByClassName("mySlides");
  
-    if (n > slides.length) {slideIndex = 1}
-    if (n < 1) {slideIndex = slides.length}
+    // if (n > slides.length) {slideIndex = 1}
+    // if (n < 1) {slideIndex = slides.length}
 
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
+    // for (i = 0; i < slides.length; i++) {
+    //     slides[i].style.display = "none";
+    // }
    
-    slides[slideIndex-1].style.display = "block";}
+    // slides[slideIndex-1].style.display = "block";}
 
 // reemplazar por scroll. mover slider a posicion
+    function scrollear(){
     gallery.scroll({
         left: 100,
         behavior: "smooth",
-    })
+    })}
     
     
 
@@ -321,7 +325,14 @@
                 renderResult(results.data, resultados, "resultados", "imgresultados" );
                 resultados.appendChild(verMas);
                 verMas.addEventListener("click", cargarMas)}
-            else alert('not found');
+            else{
+                const ouch = document.createElement("img")
+                const otra = document.createElement("figcaption")
+
+                ouch.src = "images/icon-busqueda-sin-resultado.svg"
+                otra.innerText = "Intenta con otra búsqueda"
+                otra.className = "otra"
+            }
 
 
 
