@@ -199,7 +199,7 @@
     }
    
     slides[slideIndex-1].style.display = "block";}
-    
+
 // reemplazar por scroll. mover slider a posicion
     gallery.scroll({
         left: 100,
@@ -290,9 +290,12 @@
         buscar.className = "dnone"
         cerrarBusqueda.className = "cerrarbusqueda"
 
-        function autocompletar(event){
+        function autocompletar(event, sugerencia){
             input.value = event.target.textContent
-            resultadosBusqueda()
+            resultadosBusqueda(event) 
+            sugerenciasContainer.className = "dnone"
+            
+            
         }
 
     }
