@@ -136,19 +136,21 @@
         const results = await response.json();
         gallery.innerHTML = ""
         renderResult(results.data, gallery, "slider", "mySlides");
-        showSlides()
+        // showSlides()
 
-        const prev = document.getElementById("prev")
-        const next = document.getElementById("next")
-        
-        prev.addEventListener("click", scrollear)
-        next.addEventListener("click", scrollear)
+        prev.addEventListener("click", scrollIzq)
+        next.addEventListener("click", scrollDer)
         
         // prev.addEventListener("click", () => plusSlides(-1))
         // next.addEventListener("click", () => plusSlides(1))
         
 
     }
+
+    const prev = document.getElementById("prev")
+    const next = document.getElementById("next")
+        
+
 
     const mySlides= document.getElementsByClassName("mySlides")
 
@@ -204,9 +206,15 @@
     // slides[slideIndex-1].style.display = "block";}
 
 // reemplazar por scroll. mover slider a posicion
-    function scrollear(){
-    gallery.scroll({
+    function scrollDer(){
+        gallery.scroll({
         left: 100,
+        behavior: "smooth",
+    })}
+
+    function scrollIzq(){
+        gallery.scroll({
+        right: 100,
         behavior: "smooth",
     })}
     

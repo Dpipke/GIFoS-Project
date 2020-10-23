@@ -446,7 +446,7 @@ footer{
         border-radius: 0 3px 3px 0;
         user-select: none;
         z-index: 1;
-        transform: translateY(200%);
+        transform: translateY(170%);
     } 
 
     .prev{
