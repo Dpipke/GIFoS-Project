@@ -131,6 +131,10 @@
     const prev = document.getElementById("prev")
     const next = document.getElementById("next")
 
+    prev.addEventListener("click", scrollIzq)
+    next.addEventListener("click", scrollDer)
+ 
+
     // section trending
     async function showResult() {
         // event.preventDefault();
@@ -140,8 +144,6 @@
         renderResult(results.data, gallery, "slider", "mySlides");
         // showSlides()
 
-        prev.addEventListener("click", scrollIzq)
-        next.addEventListener("click", scrollDer)
         
         // prev.addEventListener("click", () => plusSlides(-1))
         // next.addEventListener("click", () => plusSlides(1))
@@ -174,7 +176,8 @@
     }
     showResult()
 
-
+    const medidasGallery =gallery.getBoundingClientRect()
+    const desplazar = medidasGallery.width/3- medidasGallery.width*0.02 
     
     
 
@@ -203,16 +206,17 @@
    
     // slides[slideIndex-1].style.display = "block";}
 
-// reemplazar por scroll. mover slider a posicion
+    
+  
     function scrollDer(){
         gallery.scroll({
-        left: 100,
+        left: desplazar,
         behavior: "smooth",
     })}
 
     function scrollIzq(){
         gallery.scroll({
-        right: 100,
+        right: desplazar,
         behavior: "smooth",
     })}
     
@@ -258,8 +262,8 @@
     const cerrarBusqueda = document.getElementById("cerrar")
     const lupabuscador = document.getElementById("lupabuscador")
 
-    const getUrl = (busqueda, limit) => {
-            return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}&limit=${limit}` ;
+    const getUrl = (q, limit, offset) => {
+            return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}&limit=${limit}&offset=${offset}` ;
         }
     
     input.addEventListener("keyup", sugerir)
@@ -268,7 +272,7 @@
 
     
     async function sugerir(){
-        const q = input.value
+        const q = input.value 
         const apiSugerencias = `http://api.giphy.com/v1/gifs/search/tags?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}`
         const sugerenciasResponse = await fetch(apiSugerencias);
         const sugerenciasResults = await sugerenciasResponse.json();
@@ -313,11 +317,14 @@
     cerrarBusqueda.addEventListener("click", ()=> {cerrar(cerrarBusqueda)&(input.value = "")})
 
 
-    const contador = 12
+    let offset = 0
+    const limit = 12
+
     const resultados = document.getElementById("resultados")
     async function resultadosBusqueda(event) {
             event.preventDefault();
-            const url = getUrl(input.value, contador);
+            const q = input.value.split(" ").join("-")
+            const url = getUrl(q, limit, offset);
             const response = await fetch(url);
             const results = await response.json();
             const buscado = document.createElement("h2")
@@ -338,6 +345,9 @@
                 ouch.src = "images/icon-busqueda-sin-resultado.svg"
                 otra.innerText = "Intenta con otra búsqueda"
                 otra.className = "otra"
+
+                resultados.appendChild(ouch)
+                resultados.appendChild(otra)
             }
 
 
@@ -348,8 +358,20 @@
     
   
     
-    function cargarMas(){
-        const url = getUrl(input.value, contador+=12);
+    async function cargarMas(){
+        verMas.classList = "dnone"
+        const q = input.value.split(" ").join("-")
+        const url = getUrl(q, limit, offset+=12);
+        console.log(url)
+        const response = await fetch(url);
+        const results = await response.json();
+        renderResult(results.data, resultados, "resultados", "imgresultados" )
+        const verMas = document.createElement("img")
+        verMas.src = "images/CTA-ver-mas.svg"
+        verMas.className = "vermas"
+        resultados.appendChild(verMas);
+
+
     }    
 
     
