@@ -380,15 +380,18 @@ footer{
     font-size: 25px;
     color: #572EE5;
     line-height: 40px;
-    margin: 15%;
     margin-left: 38%;
+    align-self: center;
+
 
 }
 
 .vermas{
+    order: 1;
     margin: 10%;
-    align-self: center;
+    z-index: 1;
 }
+
 @media screen and (min-width: 730px){
     .logomobile{
         height: 10%;

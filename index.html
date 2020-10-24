@@ -69,7 +69,7 @@
         </section>
 
         <div class="resultados" id="resultados">
-
+            <img class="dnone" src="images/CTA-ver-mas.svg" alt="" id="vermasresultados">
         </div>
 
         <section class="lasttrending">
@@ -177,7 +177,7 @@
     showResult()
 
     const medidasGallery =gallery.getBoundingClientRect()
-    const desplazar = medidasGallery.width/3- medidasGallery.width*0.02 
+    const desplazar = medidasGallery.width/3
     
     
 
@@ -208,17 +208,16 @@
 
     
   
-    function scrollDer(){
-        gallery.scroll({
-        left: desplazar,
-        behavior: "smooth",
-    })}
+    function scrollDer(event){
+        gallery.scrollLeft += desplazar;
+        event.preventDefault()
+    }
 
-    function scrollIzq(){
-        gallery.scroll({
-        right: desplazar,
-        behavior: "smooth",
-    })}
+    function scrollIzq(event){
+        gallery.scrollLeft -= desplazar;
+        event.preventDefault()
+
+    }
     
     
 
@@ -331,12 +330,10 @@
             buscado.innerText = input.value
             buscado.className = "buscadotitle"
             resultados.appendChild(buscado)
-            const verMas = document.createElement("img")
-            verMas.src = "images/CTA-ver-mas.svg"
-            verMas.className = "vermas"
+            const verMas = document.getElementById("vermasresultados")
+            verMas.className ="vermas"
             if(response.status === 200){
                 renderResult(results.data, resultados, "resultados", "imgresultados" );
-                resultados.appendChild(verMas);
                 verMas.addEventListener("click", cargarMas)}
             else{
                 const ouch = document.createElement("img")
@@ -359,17 +356,13 @@
   
     
     async function cargarMas(){
-        verMas.classList = "dnone"
         const q = input.value.split(" ").join("-")
         const url = getUrl(q, limit, offset+=12);
         console.log(url)
         const response = await fetch(url);
         const results = await response.json();
         renderResult(results.data, resultados, "resultados", "imgresultados" )
-        const verMas = document.createElement("img")
-        verMas.src = "images/CTA-ver-mas.svg"
-        verMas.className = "vermas"
-        resultados.appendChild(verMas);
+    
 
 
     }    
