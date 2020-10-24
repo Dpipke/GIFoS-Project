@@ -143,7 +143,7 @@
         gallery.innerHTML = ""
         renderResult(results.data, gallery, "slider", "mySlides");
         // showSlides()
-
+        console.log(results)
         
         // prev.addEventListener("click", () => plusSlides(-1))
         // next.addEventListener("click", () => plusSlides(1))
@@ -161,20 +161,21 @@
 
         img.src = item.images.original.url;
         img.alt = item.title;
-        img.p= item.user                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+        img.p= item.username                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         img.className = claseitem;
+        img.setAttribute("id", item.id)
         container.classList.toggle(clasecontainer);
         
         
         container.appendChild(img);
         img.addEventListener("click", event => ampliar(event, img)) })
-
-        const fav = document.getElementById("like")
-        fav.addEventListener("click", img=> agregarFavoritos(img))
-        
+    
         
     }
     showResult()
+
+    const fav = document.getElementById("like")
+    fav.addEventListener("click", agregarFavoritos)
 
     const medidasGallery =gallery.getBoundingClientRect()
     const desplazar = medidasGallery.width/3
@@ -226,13 +227,20 @@
     function ampliar(event, ampliado){
         event.stopPropagation()  
         modal.className = "modal"
+        const imgs = modal.querySelectorAll(".mySlides")
+        const titles = modal.querySelectorAll(".giftitle")
+        const users = modal.querySelectorAll(".user")
+        if (imgs.length > 0){
+            imgs.forEach(item => item.parentNode.removeChild(item))
+            titles.forEach(item => item.parentNode.removeChild(item))
+            users.forEach(item => item.parentNode.removeChild(item))
+        }
+
         modal.appendChild(ampliado)
         const user = document.createElement("p")
-        // if( user.innerText == "undefined"){
-        //     return ""
-        // }else{
-        user.innerText = ampliado.user
-        user.className = ""
+
+        user.innerText = ampliado.username 
+        user.className = "user"
         modal.appendChild(user)
         title = document.createElement("figcaption")
         title.innerText = ampliado.alt
@@ -251,9 +259,18 @@
     
 
     function agregarFavoritos(ampliado){
-        favoritos.appendChild(ampliado)
-        localStorage.setItem(ampliado)
+
+        // favoritos.appendChild(ampliado)
+        // localStorage.setItem(ampliado)
+        // el local storage no guarda un objeto puro, debe ser json stringy. strigify conveirrte a un objeto en string para guardarlo en loclastorae
+        console.log(this.parentElement)
+        const algo = this.parentElement.querySelector(".mySlides").getAttribute("id")
+        console.log(algo)
+        
     }
+
+
+    
 
     const input = document.getElementById("busqueda")
     const buscar = document.querySelector(".lupita")
@@ -360,7 +377,7 @@
         const url = getUrl(q, limit, offset+=12);
         console.log(url)
         const response = await fetch(url);
-        const results = await response.json();
+        const results = await response.json();  
         renderResult(results.data, resultados, "resultados", "imgresultados" )
     
 
@@ -378,6 +395,7 @@
         tendenciasActuales.innerText = tendenciasMasFuertes
         tendenciasActuales.className = "tendenciasActuales"
         intro.appendChild(tendenciasActuales)
+       
     }
 
     palabrasTendencia()
