@@ -85,7 +85,8 @@
             </div>
             <div class="dnone" id="modal">
                 <img class="cruz" src="images/close.svg" alt="cerrar" id="cruz">
-                <img class="like" src="images/icon-fav-active.svg" alt="" id="like">
+                <img class="like" src="images/icon-fav-hover.svg" alt="" id="like">
+                <img class="dnone" src="images/icon-fav-active.svg" alt="" id="likehover">
                 <img class= "download" src="images/icon-download.svg" alt="" id="download">
 
             </div>
@@ -175,6 +176,7 @@
     showResult()
 
     const fav = document.getElementById("like")
+    const favhover = document.getElementById("likehover")
     fav.addEventListener("click", agregarFavoritos)
 
     const medidasGallery =gallery.getBoundingClientRect()
@@ -230,10 +232,12 @@
         const imgs = modal.querySelectorAll(".mySlides")
         const titles = modal.querySelectorAll(".giftitle")
         const users = modal.querySelectorAll(".user")
+
         if (imgs.length > 0){
             imgs.forEach(item => item.parentNode.removeChild(item))
             titles.forEach(item => item.parentNode.removeChild(item))
             users.forEach(item => item.parentNode.removeChild(item))
+           
         }
 
         modal.appendChild(ampliado)
@@ -257,17 +261,37 @@
     }
 
     
-
-    function agregarFavoritos(ampliado){
+    const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+    
+    async function agregarFavoritos(ampliado){
 
         // favoritos.appendChild(ampliado)
         // localStorage.setItem(ampliado)
         // el local storage no guarda un objeto puro, debe ser json stringy. strigify conveirrte a un objeto en string para guardarlo en loclastorae
-        console.log(this.parentElement)
-        const algo = this.parentElement.querySelector(".mySlides").getAttribute("id")
-        console.log(algo)
-        
+        const idGifo = this.parentElement.querySelector(".mySlides").getAttribute("id")
+        const titleGifo = this.parentElement.querySelector(".mySlides").getAttribute("alt")
+        const userGifo = this.parentElement.querySelector(".mySlides").getAttribute("p") 
+        const urlGifo = this.parentElement.querySelector(".mySlides").getAttribute("src") 
+        fav.className = "dnone"
+        favhover.className = "like"
+        this.removeEventListener("click", agregarFavoritos);
+        // this.addEventListener("click", removerFavoritos);
+
+        localStorageFavorites.push({
+        id: idGifo,
+        title: titleGifo,
+        username: userGifo,
+        images: { original: { url: urlGifo } },
+        });
+        localStorage.setItem(
+        "listFavorites",
+        JSON.stringify(localStorageFavorites)
+        );
+
+        console.log(localStorageFavorites)
     }
+        
+    
 
 
     

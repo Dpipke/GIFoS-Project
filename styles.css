@@ -317,7 +317,6 @@ footer{
     top: 0%;
     left: 0;
     background: rgba(255,255,255,0.90);
-    opacity: 80%;
     height: 100vh;
 }
 
@@ -337,13 +336,15 @@ footer{
 }
 
 .modal .like{
-    height: 5%;
+    height: 7%;
     bottom: 5%;
-    width: 5%;
+    width: 7%;
     right: 20%;
     position: absolute;
     margin-top: 5%;
+
 }
+
 .modal .download{
     height: 7%;
     bottom: 5%;
@@ -351,6 +352,8 @@ footer{
     right: 10%;
     position: absolute;
     margin-top: 5%;
+    border: #572EE5 1px solid;
+    border-radius: 6px;
 }
 
 .giftitle{
@@ -501,6 +504,11 @@ footer{
         flex-direction: row;
         padding: 0;
     }
-}   .final{
+    .final{
         top:0;
-}
+    }
+    .modal .like{
+        border: #572EE5 1px solid;
+        border-radius: 6px;
+    }
+    }
