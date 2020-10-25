@@ -179,7 +179,7 @@
 
     const fav = document.getElementById("like")
     const favhover = document.getElementById("likehover")
-    fav.addEventListener("click", agregarFavoritos)
+
 
     const medidasGallery =gallery.getBoundingClientRect()
     const desplazar = medidasGallery.width/3
@@ -251,9 +251,28 @@
         title = document.createElement("figcaption")
         title.innerText = ampliado.alt
         title.className = "giftitle"
-        modal.appendChild(title)         
+        modal.appendChild(title)
 
-    }
+        const idGifo = modal.querySelector(".mySlides").getAttribute("id");
+        console.log(idGifo);
+        const validate = localStorageFavorites.findIndex(
+            (item) => item.id === idGifo
+        );
+        console.log(validate);
+        if (validate !== -1) {
+            fav.className = "dnone";
+            favhover.className = "like";
+            this.removeEventListener("click", agregarFavoritos);
+         // this.addEventListener("click", eliminarFavoritos);
+        } else {
+            fav.className = "like";
+            favhover.className = "dnone";
+            // this.removeEventListener("click", eliminarFavoritos);
+            this.addEventListener("click", agregarFavoritos);
+        }
+        }   
+
+    
 
     const cruz = document.getElementById("cruz")
     cruz.addEventListener("click", ()=> cerrar(modal))
@@ -301,54 +320,30 @@
 
     const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
     
-    async function agregarFavoritos(ampliado){
+    async function agregarFavoritos(ampliado) {
+        const idGifo = this.parentElement.querySelector(".mySlides").getAttribute("id");
+        const titleGifo = this.parentElement.querySelector(".mySlides").getAttribute("alt");
+        const userGifo = this.parentElement.querySelector(".mySlides").getAttribute("p"); 
+        const urlGifo = this.parentElement.querySelector(".mySlides").getAttribute("src"); 
 
-        const idGifo = this.parentElement.querySelector(".mySlides").getAttribute("id")
-        const titleGifo = this.parentElement.querySelector(".mySlides").getAttribute("alt")
-        const userGifo = this.parentElement.querySelector(".mySlides").getAttribute("p") 
-        const urlGifo = this.parentElement.querySelector(".mySlides").getAttribute("src") 
+      fav.className = "dnone";
+      favhover.className = "like";
 
-        fav.className = "dnone"
-        favhover.className = "like"
-        const validar = localStorageFavorites.findIndex(
-            item => {item.id === idGifo;
-            console.log(idGifo)
-            console.log(item.id)}
-        )
-
-        if (validar ==! -1){
-            fav.className = "like"
-            favhover.className = "dnone"
-
-        }
-
-        
-        this.removeEventListener("click", agregarFavoritos);
-        // this.addEventListener("click", eliminarFavoritos);
-
-        localStorageFavorites.push({
+      localStorageFavorites.push({
         id: idGifo,
         title: titleGifo,
         username: userGifo,
         images: { original: { url: urlGifo } },
-        });
-        localStorage.setItem(
+      });
+      localStorage.setItem(
         "listFavorites",
         JSON.stringify(localStorageFavorites)
-        );
-
-        console.log(localStorageFavorites)
-
-       
-        console.log(idGifo)
-        console.log(validar)
+      );
     }
-        
     // async function eliminarFavoritos(){
 
     // }
 
-        // favsec.appendChild(localStorageFavorites)
     
 
     const input = document.getElementById("busqueda")
