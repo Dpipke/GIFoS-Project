@@ -169,8 +169,10 @@
         
         
         container.appendChild(img);
-        img.addEventListener("click", event => ampliar(event, img)) })
-    
+        img.addEventListener("click", event => ampliar(event, img)) 
+        img.addEventListener("mouseover", hoverImg) 
+        })
+        
         
     }
     showResult()
@@ -260,22 +262,69 @@
         elemento.classList.add("dnone")
     }
 
+    function hoverImg(){
+        const violet = document.createElement("div")
+        const violetFav = document.createElement("img")
+        const violetFavHover = document.createElement("img")
+        const violetFavActive = document.createElement("img")
+        const violetDownload = document.createElement("img")
+        const violetDownloadHover = document.createElement("img")
+        const violetExpand = document.createElement("img")
+        const violetExpandHover = document.createElement("img")
+        
+        violetFav.src = "images/icon-fav.svg"
+        violetFavHover.src = "images/icon-fav-hover.svg"
+        violetFavActive.src = "images/icon-fav-active.svg"
+        violetDownload.src = "images/icon-download.svg"
+        violetDownloadHover.src = "images/icon-download-hover.svg"
+        violetExpand.src = "images/icon-max-normal.svg"
+        violet.src = "images/icon-max-hover.svg"
+
+        violet.className = "hoverviolet"
+        violetFav.className = "violeticons"
+        violetDownload.className = "violeticons"
+        violetExpand.className = "violeticons"
+        // a quien le hago el append child?
+
+        violet.appendChild(violetFav)
+        violet.appendChild(violetFavHover)
+        violet.appendChild(violetFavActive)
+        violet.appendChild(violetDownload)
+        violet.appendChild(violetDownloadHover)
+        violet.appendChild(violetExpand)
+        violet.appendChild(violetExpandHover)
+
+        gallery.appendChild(violet)
+    }
+
     
+
     const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
     
     async function agregarFavoritos(ampliado){
 
-        // favoritos.appendChild(ampliado)
-        // localStorage.setItem(ampliado)
-        // el local storage no guarda un objeto puro, debe ser json stringy. strigify conveirrte a un objeto en string para guardarlo en loclastorae
         const idGifo = this.parentElement.querySelector(".mySlides").getAttribute("id")
         const titleGifo = this.parentElement.querySelector(".mySlides").getAttribute("alt")
         const userGifo = this.parentElement.querySelector(".mySlides").getAttribute("p") 
         const urlGifo = this.parentElement.querySelector(".mySlides").getAttribute("src") 
+
         fav.className = "dnone"
         favhover.className = "like"
+        const validar = localStorageFavorites.findIndex(
+            item => {item.id === idGifo;
+            console.log(idGifo)
+            console.log(item.id)}
+        )
+
+        if (validar ==! -1){
+            fav.className = "like"
+            favhover.className = "dnone"
+
+        }
+
+        
         this.removeEventListener("click", agregarFavoritos);
-        // this.addEventListener("click", removerFavoritos);
+        // this.addEventListener("click", eliminarFavoritos);
 
         localStorageFavorites.push({
         id: idGifo,
@@ -289,11 +338,17 @@
         );
 
         console.log(localStorageFavorites)
+
+       
+        console.log(idGifo)
+        console.log(validar)
     }
         
-    
+    // async function eliminarFavoritos(){
 
+    // }
 
+        // favsec.appendChild(localStorageFavorites)
     
 
     const input = document.getElementById("busqueda")
