@@ -519,13 +519,13 @@ footer{
         border-radius: 6px;
     }
 
-    .hoverviolet{
+    /* .hoverviolet{
         background-color: transparent;
         transition: background-color .1s;
         width: 50vw;  
         height: 30vh;
-    }
-    .hoverviolet:hover{
+    } */
+    .gifcontainer .mySlides:hover + .hoverviolet{
         width: 23vw;  
         height: 50vh;
         opacity: 0.6;
@@ -535,13 +535,13 @@ footer{
         display: block;
         margin: 2%;
     }
-
+/* 
     .gifcontainer .mySlides:hover{
         width: 23vw;  
         height: 50vh;
         margin: 2%;
 
-    }
+    } */
 
     .violeticons{
         opacity: 0.7;
