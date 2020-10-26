@@ -174,9 +174,8 @@
         gifContainer.appendChild(img)
         img.addEventListener("click", event => ampliar(event, img)) 
         const overlay = imgHoverComponentFactory(img)
-        container.appendChild(overlay)
+        gifContainer.appendChild(overlay)
         container.appendChild(gifContainer);
-        console.log(overlay)
         
     
     })
@@ -235,7 +234,7 @@
 
     function ampliar(event, ampliado){
         event.stopPropagation()  
-        modal.className = "modal"
+        gifContainer.className = "modal"
         const imgs = modal.querySelectorAll(".mySlides")
         const titles = modal.querySelectorAll(".giftitle")
         const users = modal.querySelectorAll(".user")
