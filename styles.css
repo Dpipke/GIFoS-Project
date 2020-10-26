@@ -296,10 +296,14 @@ footer{
 
   
 }
-.mySlides{
+.gifcontainer, .mySlides{
     width: 50vw;
     margin: 5%;
     height: 30vh;
+}
+
+.mySlides{
+    margin: 5%
 }
 
 .prev, .next {
@@ -512,13 +516,15 @@ footer{
         border-radius: 6px;
     }
 
-    
-    .hoverviolet:hover{
-        width: 90vw;  
-        height: 60vh;
+    .hoverviolet{
+        display: block;
+    }
+    .gifcontainer .mySlides:hover, .hoverviolet:hover{
+        /* width: 90vw;  
+        height: 60vh; */
         opacity: 0.6;
-        background: #572EE5;
-        z-index: 1;
+        background-color: #572EE5;
+        /* z-index: 1; */
         position: absolute;
         display: block;
     }
