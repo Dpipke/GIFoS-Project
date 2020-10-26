@@ -41,7 +41,7 @@
             <img class="imgppal" src="images/ilustra_header.svg" alt="">
             <div class="search" id="search">
                 <img class = "dnone" src="images/icon-search-modo-noct.svg" id="lupabuscador">
-                <form action="">
+                <form action="" id="form">
                     <input type="search" placeholder="Buscá GIFOS y más..." id="busqueda">
                     <label for="submit">
                         <img class="lupita" src="images/icon-search.svg" alt="buscar" id="lupita">
@@ -165,17 +165,17 @@
         img.p= item.username                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         img.className = claseitem;
         img.setAttribute("id", item.id)
-        container.classList.toggle(clasecontainer);
+        container.classList.add(clasecontainer);
         
         
         container.appendChild(img);
         img.addEventListener("click", event => ampliar(event, img)) 
-        img.addEventListener("mouseover", hoverImg) 
-        })
+        const overlay = imgHoverComponentFactory(img)
         
         
+    
+    showResult()})
     }
-    showResult()
 
     const fav = document.getElementById("like")
     const favhover = document.getElementById("likehover")
@@ -281,7 +281,7 @@
         elemento.classList.add("dnone")
     }
 
-    function hoverImg(){
+    function imgHoverComponentFactory(){
         const violet = document.createElement("div")
         const violetFav = document.createElement("img")
         const violetFavHover = document.createElement("img")
@@ -313,7 +313,7 @@
         violet.appendChild(violetExpand)
         violet.appendChild(violetExpandHover)
 
-        gallery.appendChild(violet)
+        return violet
     }
 
     
@@ -345,7 +345,7 @@
     // }
 
     
-
+    const form = document.getElementById("form")
     const input = document.getElementById("busqueda")
     const buscar = document.querySelector(".lupita")
     const search = document.getElementById("search")
@@ -353,17 +353,17 @@
     const lupabuscador = document.getElementById("lupabuscador")
 
     const getUrl = (q, limit, offset) => {
-            return `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}&limit=${limit}&offset=${offset}` ;
+            return `https://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}&limit=${limit}&offset=${offset}` ;
         }
     
     input.addEventListener("keyup", sugerir)
-    buscar.addEventListener("submit", resultadosBusqueda)
+    form.addEventListener("submit", resultadosBusqueda)
 
 
     
     async function sugerir(){
         const q = input.value 
-        const apiSugerencias = `http://api.giphy.com/v1/gifs/search/tags?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}`
+        const apiSugerencias = `https://api.giphy.com/v1/gifs/search/tags?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}`
         const sugerenciasResponse = await fetch(apiSugerencias);
         const sugerenciasResults = await sugerenciasResponse.json();
         const sugerenciasData = sugerenciasResults.data
@@ -461,7 +461,7 @@
     
        
     async function palabrasTendencia(){
-        const tendencias = "http://api.giphy.com/v1/trending/searches?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM"
+        const tendencias = "https://api.giphy.com/v1/trending/searches?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM"
         const tendenciasResponse = await fetch(tendencias);
         const tendenciasResults = await tendenciasResponse.json();
         const tendenciasMasFuertes = tendenciasResults.data.splice(0,5)
