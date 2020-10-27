@@ -336,6 +336,10 @@
         violetFavHover.addEventListener("click", setearFavoritos)
         setearFavoritos()
 
+        const descargar = () => downloadIconGifo(img, downloadIcon)
+
+        // violetDownloadHover.addEventListener("click", )
+
         return violet
     }
 
@@ -345,13 +349,11 @@
     
     async function agregarFavoritos(ampliado) {
 
-        const idGifo = ampliado.getAttribute("id");
-        const titleGifo = ampliado.getAttribute("alt");
-        const userGifo = ampliado.getAttribute("p");
-        const urlGifo = ampliado.getAttribute("src");
+        const idGifo = ampliado.id;
+        const titleGifo = ampliado.alt;
+        const userGifo = ampliado.p;
+        const urlGifo = ampliado.src;
 
-        ampliado.removeEventListener("click", agregarFavoritos);
-        ampliado.addEventListener("click", eliminarFavoritos);
 
         localStorageFavorites.push({
             id: idGifo,
@@ -365,10 +367,8 @@
         );
     }
         async function eliminarFavoritos(ampliado){
-            const idGifo = ampliado.getAttribute("id");
-            ampliado.removeEventListener("click", eliminarFavoritos);
-            ampliado.addEventListener("click", agregarFavoritos);
-
+            const idGifo = ampliado.id;
+        
             const validateF = localStorageFavorites.findIndex((item) => {
             item.id === idGifo;
             });
@@ -480,8 +480,18 @@
 
         }
 
-        // escuchar en el form, submit, no click
-    
+        // async function downloadIconGifo(item, downloadIcon) {
+        //     const a = document.createElement("a");
+        //     let response = await fetch(item.images.original.url);
+        //     let file = await response.blob();
+        //     a.download = item.title;
+        //     a.href = window.URL.createObjectURL(file);
+        //     a.dataset.downloadurl = ["application/octet-stream", a.download, a.href].join(
+        //         ":"
+        //     );
+        //     a.appendChild(downloadIcon);
+        //     return a;
+        // }
   
     
     async function cargarMas(){
