@@ -171,11 +171,17 @@
         container.classList.add(clasecontainer);
         
         
-        gifContainer.appendChild(img)
-        img.addEventListener("click", event => ampliar(event, img)) 
-        const overlay = imgHoverComponentFactory(img)
+
+        const addToFavorites = () => agregarFavorito(img)
+        const expand = () => ampliar(event, img, gifContainer)
+        const overlay = imgHoverComponentFactory(img, expand)
         gifContainer.appendChild(overlay)
+
+        gifContainer.appendChild(img)
+
         container.appendChild(gifContainer);
+
+
         
     
     })
@@ -232,12 +238,12 @@
 
     const modal = document.getElementById("modal")
 
-    function ampliar(event, ampliado){
+    function ampliar(event, ampliado, gifContainer){
         event.stopPropagation()  
         gifContainer.className = "modal"
-        const imgs = modal.querySelectorAll(".mySlides")
-        const titles = modal.querySelectorAll(".giftitle")
-        const users = modal.querySelectorAll(".user")
+        const imgs = gifContainer.querySelectorAll(".mySlides")
+        const titles = gifContainer.querySelectorAll(".giftitle")
+        const users = gifContainer.querySelectorAll(".user")
 
         if (imgs.length > 0){
             imgs.forEach(item => item.parentNode.removeChild(item))
@@ -246,18 +252,20 @@
            
         }
 
-        modal.appendChild(ampliado)
+        gifContainer.appendChild(ampliado)
         const user = document.createElement("p")
 
         user.innerText = ampliado.username 
         user.className = "user"
-        modal.appendChild(user)
+        gifContainer.appendChild(user)
         title = document.createElement("figcaption")
         title.innerText = ampliado.alt
         title.className = "giftitle"
-        modal.appendChild(title)
+        gifContainer.appendChild(title)
+        gifContainer.appendChild(cruz)
 
-        const idGifo = modal.querySelector(".mySlides").getAttribute("id");
+
+        const idGifo = gifContainer.querySelector(".mySlides").getAttribute("id");
         console.log(idGifo);
         const validate = localStorageFavorites.findIndex(
             (item) => item.id === idGifo
@@ -277,7 +285,6 @@
         }   
 
     
-
     const cruz = document.getElementById("cruz")
     cruz.addEventListener("click", ()=> cerrar(modal))
 
@@ -285,7 +292,7 @@
         elemento.classList.add("dnone")
     }
 
-    function imgHoverComponentFactory(item){
+    function imgHoverComponentFactory(item, fexpandir){
         const violet = document.createElement("div")
         const violetFav = document.createElement("img")
         const violetFavHover = document.createElement("img")
@@ -304,10 +311,10 @@
         violet.src = "images/icon-max-hover.svg"
 
         violet.className = "hoverviolet"
-        violetFav.className = "violeticons"
+        violetFav.className = "violeticons favicon"
         violetDownload.className = "violeticons"
         violetExpand.className = "violeticons"
-        violetFavHover.className = "violeticonshover"
+        violetFavHover.className = "violeticonshover favh"
         violetDownloadHover.className = "violeticonshover"
         violetFavActive.className = "violetfavactive"
 
@@ -318,6 +325,8 @@
         violet.appendChild(violetDownloadHover)
         violet.appendChild(violetExpand)
         violet.appendChild(violetExpandHover)
+
+        item.addEventListener("click", fexpandir) 
 
         return violet
     }
