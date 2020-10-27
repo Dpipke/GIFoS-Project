@@ -403,6 +403,9 @@ footer{
     z-index: 1;
 }
 
+.hoverviolet{ 
+    display: none;
+}
 @media screen and (min-width: 730px){
     .logomobile{
         height: 10%;
@@ -561,10 +564,14 @@ footer{
         margin: 3%;
     }
 
-    .violetfavactive{
+    .violetfavinactive{
         display: none;
     }
 
+    .violetfactive{
+        display: inline-block;
+        height: 7%;
+    }
 
     .gifcontainer{
         margin: 2%;
