@@ -338,13 +338,13 @@
             if (validate !== -1) {
                 violetFavHover.className = "dnone";
                 violetFavActive.className = "violeticonshover";
-                ampliado.removeEventListener("click", agregarFavoritos);
-                ampliado.addEventListener("click", eliminarFavoritos);
+                violetFavHover.removeEventListener("click", agregarFavoritos);
+                violetFavActive.addEventListener("click", eliminarFavoritos);
             } else {
                 violetFavHover.className = "violeticonshover";
                 violetFavActive.className = "violetfavinactive";
-                ampliado.removeEventListener("click", eliminarFavoritos);
-                ampliado.addEventListener("click", agregarFavoritos);
+                violetFavActive.removeEventListener("click", eliminarFavoritos);
+                violetFavHover.addEventListener("click", agregarFavoritos);
             }
 
         }
