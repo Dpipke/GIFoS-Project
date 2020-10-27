@@ -266,22 +266,6 @@
         gifContainer.appendChild(cruz)
 
 
-        
-        // // const validate = localStorageFavorites.findIndex(
-        //     (item) => item.id === idGifo
-        // );
-        // console.log(validate);
-        // if (validate !== -1) {
-        //     fav.className = "dnone";
-        //     favhover.className = "like";
-        //     this.removeEventListener("click", agregarFavoritos);
-        //  // this.addEventListener("click", eliminarFavoritos);
-        // } else {
-        //     fav.className = "like";
-        //     favhover.className = "dnone";
-        //     // this.removeEventListener("click", eliminarFavoritos);
-        //     this.addEventListener("click", agregarFavoritos);
-        // }
         }   
 
     
@@ -350,7 +334,7 @@
         }
         violetExpandHover.addEventListener("click", fexpandir) 
         violetFavHover.addEventListener("click", setearFavoritos)
- 
+        setearFavoritos()
 
         return violet
     }
@@ -360,10 +344,6 @@
     const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
     
     async function agregarFavoritos(ampliado) {
-        // const idGifo = this.parentElement.querySelector(".mySlides").getAttribute("id");
-        // const titleGifo = this.parentElement.querySelector(".mySlides").getAttribute("alt");
-        // const userGifo = this.parentElement.querySelector(".mySlides").getAttribute("p"); 
-        // const urlGifo = this.parentElement.querySelector(".mySlides").getAttribute("src"); 
 
         const idGifo = ampliado.getAttribute("id");
         const titleGifo = ampliado.getAttribute("alt");
