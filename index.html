@@ -346,17 +346,17 @@
 
     
 
-    const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
     
     async function agregarFavoritos(ampliado) {
+    const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
 
         const idGifo = ampliado.id;
         const titleGifo = ampliado.alt;
         const userGifo = ampliado.p;
         const urlGifo = ampliado.src;
 
-        const validateF = localStorageFavorites.findIndex((e) => {
-        e.url === urlGifo;
+        const validateF = localStorageFavorites.some((e) => {
+        e.id == idGifo;
         });
         console.log(validateF)
         
