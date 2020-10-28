@@ -581,7 +581,8 @@ footer{
 
     }
 
-    .exph:hover, .dlh:hover, .favh:hover{
+
+    .violeticonshover:hover{
         opacity: 1;
     }
 
@@ -606,10 +607,7 @@ footer{
         left: 5%;
         margin: 2%;
     }
-/*  
-    .hovervioleta:hover+ .violeticons:hover{
-        display: block;
-    } */
+
 
 
     }

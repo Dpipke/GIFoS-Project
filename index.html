@@ -277,7 +277,7 @@
         elemento.classList.add("dnone")
     }
 
-    function imgHoverComponentFactory(item, title, user, fexpandir, fxfavoritos, fxeliminar, idGifo){
+    function imgHoverComponentFactory(item, title, user, fexpandir, fxfavoritos, fxeliminar, idGifo, results){
         const violet = document.createElement("div")
         const violetFavHover = document.createElement("img")
         const violetFavActive = document.createElement("img")
@@ -317,6 +317,7 @@
             return element.id === idGifo;
             });
 
+            violetFavHover.addEventListener("click", agregarFavoritos)
             if (validateF === true){
                 violetFavHover.className = "dnone";
                 violetFavActive.className = "violeticonshover";
@@ -335,12 +336,12 @@
 
  
         violetExpandHover.addEventListener("click", fexpandir) 
-        violetFavHover.addEventListener("click", fxfavoritos)
+        violetFavHover.addEventListener("click", setearFavoritos)
+        violetFavActive.addEventListener("click", setearFavoritos)
         setearFavoritos()
 
-        // const descargar = () => downloadIconGifo(img, downloadIcon)
-
-        // violetDownloadHover.addEventListener("click", )
+        // const descargar = () =>downloadIconGifo(item, violetDownloadHover)
+        // violetDownloadHover.addEventListener("click", descargar )
 
         return violet
     }
@@ -488,7 +489,7 @@
 
         // async function downloadIconGifo(item, downloadIcon) {
         //     const a = document.createElement("a");
-        //     let response = await fetch(item.images.original.url);
+        //     let response = await fetch(item.src);
         //     let file = await response.blob();
         //     a.download = item.title;
         //     a.href = window.URL.createObjectURL(file);
@@ -497,6 +498,7 @@
         //     );
         //     a.appendChild(downloadIcon);
         //     return a;
+        //     console.log(a)
         // }
   
     
