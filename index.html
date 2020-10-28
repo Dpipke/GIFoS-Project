@@ -167,7 +167,8 @@
         container.classList.toggle(clasecontainer)
         gifContainer.className = classItemContainer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         img.className = claseitem;
-        img.setAttribute("id", item.id)
+        // img.setAttribute("id", item.id)
+        img.id = item.id
         container.classList.add(clasecontainer);
         
         
@@ -309,32 +310,32 @@
         violet.appendChild(violetDownloadHover)
         violet.appendChild(violetExpandHover)
 
-        function setearFavoritos(){
-            fxfavoritos();
-            fxeliminar();
-            violetFavHover.className = "dnone";
-            violetFavActive.className = "violeticonshover";
+        // function setearFavoritos(){
+        //     fxfavoritos();
+        //     fxeliminar();
+        //     violetFavHover.className = "dnone";
+        //     violetFavActive.className = "violeticonshover";
 
-            const validate = localStorageFavorites.findIndex(
-                (item) => item.id === idGifo
-            );
-            console.log(validate);
-            if (validate !== -1) {
-                violetFavHover.className = "dnone";
-                violetFavActive.className = "violeticonshover";
-                violetFavHover.removeEventListener("click", agregarFavoritos);
-                violetFavActive.addEventListener("click", eliminarFavoritos);
-            } else {
-                violetFavHover.className = "violeticonshover";
-                violetFavActive.className = "violetfavinactive";
-                violetFavActive.removeEventListener("click", eliminarFavoritos);
-                violetFavHover.addEventListener("click", agregarFavoritos);
-            }
+        //     const validate = localStorageFavorites.findIndex(
+        //         (item) => item.id === idGifo
+        //     );
+        //     console.log(validate);
+        //     // if (validate !== -1) {
+        //     //     violetFavHover.className = "dnone";
+            //     violetFavActive.className = "violeticonshover";
+            //     violetFavHover.removeEventListener("click", agregarFavoritos);
+            //     violetFavActive.addEventListener("click", eliminarFavoritos);
+            // } else {
+            //     violetFavHover.className = "violeticonshover";
+            //     violetFavActive.className = "violetfavinactive";
+            //     violetFavActive.removeEventListener("click", eliminarFavoritos);
+            //     violetFavHover.addEventListener("click", agregarFavoritos);
+            // }
 
-        }
+        // }
         violetExpandHover.addEventListener("click", fexpandir) 
-        violetFavHover.addEventListener("click", setearFavoritos)
-        setearFavoritos()
+        violetFavHover.addEventListener("click", fxfavoritos)
+        // setearFavoritos()
 
         const descargar = () => downloadIconGifo(img, downloadIcon)
 
@@ -354,7 +355,11 @@
         const userGifo = ampliado.p;
         const urlGifo = ampliado.src;
 
-
+        const validateF = localStorageFavorites.findIndex((e) => {
+        e.url === urlGifo;
+        });
+        console.log(validateF)
+        
         localStorageFavorites.push({
             id: idGifo,
             title: titleGifo,
@@ -366,21 +371,18 @@
             JSON.stringify(localStorageFavorites)
         );
     }
-        async function eliminarFavoritos(ampliado){
-            const idGifo = ampliado.id;
-        
-            const validateF = localStorageFavorites.findIndex((item) => {
-            item.id === idGifo;
-            });
-            if (validateF ==! -1) {
-                localStorageFavorites.splice(validateF, 1);
-                localStorage.removeItem(
-                "listFavorites",
-                JSON.stringify(localStorageFavorites)
-                );
-            }
 
+    async function eliminarFavoritos(ampliado){
+        const idGifo = ampliado.id;
+        const validateF = localStorageFavorites.findIndex((item) => {
+        item.id === idGifo;
+        });
+
+        if (validateF ==! -1) {
+            localStorage.removeItem( ampliado, JSON.stringify(localStorageFavorites));
         }
+
+    }
 
     
     const form = document.getElementById("form")
