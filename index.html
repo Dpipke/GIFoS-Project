@@ -310,34 +310,35 @@
         violet.appendChild(violetDownloadHover)
         violet.appendChild(violetExpandHover)
 
-        // function setearFavoritos(){
-        //     fxfavoritos();
-        //     fxeliminar();
-        //     violetFavHover.className = "dnone";
-        //     violetFavActive.className = "violeticonshover";
+        function setearFavoritos(){
+            const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+            const idGifo = item.id;
+            const validateF = localStorageFavorites.some((element) => {
+            return element.id === idGifo;
+            });
 
-        //     const validate = localStorageFavorites.findIndex(
-        //         (item) => item.id === idGifo
-        //     );
-        //     console.log(validate);
-        //     // if (validate !== -1) {
-        //     //     violetFavHover.className = "dnone";
-            //     violetFavActive.className = "violeticonshover";
-            //     violetFavHover.removeEventListener("click", agregarFavoritos);
-            //     violetFavActive.addEventListener("click", eliminarFavoritos);
-            // } else {
-            //     violetFavHover.className = "violeticonshover";
-            //     violetFavActive.className = "violetfavinactive";
-            //     violetFavActive.removeEventListener("click", eliminarFavoritos);
-            //     violetFavHover.addEventListener("click", agregarFavoritos);
-            // }
+            if (validateF === true){
+                violetFavHover.className = "dnone";
+                violetFavActive.className = "violeticonshover";
+                violetFavHover.removeEventListener("click", agregarFavoritos);
+                violetFavActive.addEventListener("click", eliminarFavoritos);
 
-        // }
+            }else{
+                violetFavHover.className = "violeticonshover";
+                violetFavActive.className = "violetfavinactive";
+                violetFavActive.removeEventListener("click", eliminarFavoritos);
+                violetFavHover.addEventListener("click", agregarFavoritos);
+            }
+
+        }
+           
+
+ 
         violetExpandHover.addEventListener("click", fexpandir) 
         violetFavHover.addEventListener("click", fxfavoritos)
-        // setearFavoritos()
+        setearFavoritos()
 
-        const descargar = () => downloadIconGifo(img, downloadIcon)
+        // const descargar = () => downloadIconGifo(img, downloadIcon)
 
         // violetDownloadHover.addEventListener("click", )
 
@@ -347,19 +348,20 @@
     
 
     
-    async function agregarFavoritos(ampliado) {
-    const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+    async function agregarFavoritos(item) {
+        const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
 
-        const idGifo = ampliado.id;
-        const titleGifo = ampliado.alt;
-        const userGifo = ampliado.p;
-        const urlGifo = ampliado.src;
+        const idGifo = item.id;
+        const titleGifo = item.alt;
+        const userGifo = item.p;
+        const urlGifo = item.src;
 
-        const validateF = localStorageFavorites.some((e) => {
-        e.id == idGifo;
+        const validateF = localStorageFavorites.some((element) => {
+        return element.id === idGifo;
         });
-        console.log(validateF)
         
+
+        if(validateF === false){   
         localStorageFavorites.push({
             id: idGifo,
             title: titleGifo,
@@ -369,17 +371,19 @@
         localStorage.setItem(
             "listFavorites",
             JSON.stringify(localStorageFavorites)
-        );
+        );}
     }
 
-    async function eliminarFavoritos(ampliado){
-        const idGifo = ampliado.id;
-        const validateF = localStorageFavorites.findIndex((item) => {
-        item.id === idGifo;
-        });
+    async function eliminarFavoritos(item){
+    const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
 
-        if (validateF ==! -1) {
-            localStorage.removeItem( ampliado, JSON.stringify(localStorageFavorites));
+        const idGifo = item.id;
+        const validateF = localStorageFavorites.some((element) => {
+        return element.id === idGifo;
+        });
+      
+        if(validateF === true){  
+            localStorage.removeItem(item, JSON.stringify(localStorageFavorites));
         }
 
     }
