@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIFOS</title>
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
     <header>
         <div class="linea">
-
+            
         </div>
         <img class="logomobile" src="images/logo-mobile.svg" alt="logo">
         <img class="logomobilenoct noc" src="images/logo-mobile-modo-noct.svg" alt="">
@@ -28,11 +29,11 @@
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#">Mis GIFOS</a></li>
                     <li><img class="crear day" src="images/button-crear-gifo.svg" alt="crear"></li>
-                    <li><img class="crear" src="images/CTA-crear-gifo-hover.svg" alt="crear"></li>
+                    <li><img class="crear createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear"></li>
                     <li><img class="crear" src="images/CTA-crear-gifo-active.svg" alt="crear"></li>
 
-
-            </ul>
+                    
+                </ul>
         </nav>
     </header>
     <main>
@@ -48,7 +49,7 @@
                         <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
                         <img class="dnone" src="images/close.svg" alt="cerrar" id="cerrar">
                 </label>
-                </form>
+            </form>
                 <ul class="sugerenciascontainer" id="sugerenciascontainer">
                     
                 </ul>
@@ -69,6 +70,27 @@
             <img src="images/CTA-ver-mas.svg" alt="ver mas">
         </section>
 
+        <section class="crearGifo">
+            <img class="camara" src="images/camara.svg" alt="camara">
+            <img class="luzcamara" src="images/element-luz-camara.svg" alt="">
+            <div class="containerCreacionGifos">
+                <h2 class="titleCrear" id="titleCrear">Aquí podrás crear tus propios GIFOS </h2>
+                <h2 class="dnone" id="acceso">¿Nos das acceso a tu cámara?</h2>
+                <p class="dnone" id="pAcceso">El acceso a tu camara será válido sólo por el tiempo en el que estés creando el GIFO.</p>
+                    <p class="pCreacionGifos" id="pCreacionGifos">¡Crea tu GIFO en sólo 3 pasos!</p> 
+                    <p class="pCreacionAclaracion" id="pCreacionAclaracion">(sólo necesitas una cámara para grabar un video)</p>
+                <video src="" id="video"></video>
+            </div>
+            <ul class="numbers">
+                <li class="number" id="1erpaso">1</li>
+                <li class="number" id="2dopaso">2</li>
+                <li class="number" id="3erpaso">3</li>
+            </ul>
+            
+            <img class="cinta" src="images/pelicula.svg" alt="">
+            <p class="comenzar" id="comenzar">Comenzar</p>
+        </section>
+
         <div class="resultados" id="resultados">
             <img class="dnone" src="images/CTA-ver-mas.svg" alt="" id="vermasresultados">
         </div>
@@ -79,7 +101,7 @@
             
             <img class="prev" src="images/button-slider-left.svg" alt="" id="prev">
             <img class="next" src="images/Button-Slider-right.svg" alt="" id="next">
-
+            
             <div class="gallery" id="gallery">
                 
              
@@ -89,7 +111,7 @@
                 <img class="like" src="images/icon-fav-hover.svg" alt="" id="like">
                 <img class="dnone" src="images/icon-fav-active.svg" alt="" id="likehover">
                 <img class= "download" src="images/icon-download.svg" alt="" id="download">
-
+                
             </div>
         </section>
         <footer>
@@ -106,7 +128,7 @@
             </div>
             <p>GIFOS 2020 All Rights Reserved.</p>
             <div class="linea final">
-
+                
             </div>
         </footer>
     </main>
@@ -145,7 +167,6 @@
         gallery.innerHTML = ""
         renderResult(results.data, gallery, "slider", "mySlides", "gifcontainer");
         // showSlides()
-        console.log(results)
         
         // prev.addEventListener("click", () => plusSlides(-1))
         // next.addEventListener("click", () => plusSlides(1))
@@ -185,8 +206,6 @@
         const expand = () => ampliar(event, item, gifContainer)
         const overlay = imgHoverComponentFactory(item, expand, addToFavorites, removeFromFavorites)
         gifContainer.appendChild(overlay)
-        
-        console.log(item)
 
         gifContainer.appendChild(img)
         container.appendChild(gifContainer);
@@ -378,7 +397,7 @@
     const lupabuscador = document.getElementById("lupabuscador")
 
     const getUrl = (q, limit, offset) => {
-            return `https://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}&limit=${limit}&offset=${offset}` ;
+        return `https://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}&limit=${limit}&offset=${offset}` ;
         }
     
     input.addEventListener("keyup", sugerir)
@@ -392,7 +411,6 @@
         const sugerenciasResponse = await fetch(apiSugerencias);
         const sugerenciasResults = await sugerenciasResponse.json();
         const sugerenciasData = sugerenciasResults.data
-        console.log(sugerenciasData)
 
         
         const sugerenciasContainer = document.getElementById("sugerenciascontainer")
@@ -489,7 +507,6 @@
     async function cargarMas(){
         const q = input.value.split(" ").join("-")
         const url = getUrl(q, limit, offset+=12);
-        console.log(url)
         const response = await fetch(url);
         const results = await response.json();  
         renderResult(results.data, resultados, "resultados", "imgresultados" )
@@ -527,5 +544,54 @@
     // fetch(url)
     // .then(response => response.json())
     // .then(data => console.log(data));
+
+    const comenzar = document.getElementById("comenzar")
+    comenzar.addEventListener("click", solicitudPermiso)
+
+    const acceso = document.getElementById("acceso")
+    const pAcceso = document.getElementById("pAcceso")
+    const titleCrear = document.getElementById("titleCrear")
+    const pCreacionGifos = document.getElementById("pCreacionGifos")
+    const pCreacionAclaracion = document.getElementById("pCreacionAclaracion")
+    const primerPaso = document.getElementById("1erpaso")
+    const video = document.getElementById("video")
+
+    function solicitudPermiso(){
+        comenzar.className = "dnone"
+        acceso.className = "titleCrear"
+        pAcceso.className = "pCreacionGifos"
+        titleCrear.className ="dnone"
+        pCreacionGifos.className ="dnone"
+        pCreacionAclaracion.className ="dnone"
+        primerPaso.className= "pasosHover"
+        a
+        getStreamAndRecord()
+    }
+    
+    async function getStreamAndRecord () { 
+        stream = await navigator.mediaDevices.getUserMedia({
+        audio: false,
+        video: {
+            height: { max: 480 }
+        }
+        })
+        .then(function(stream) {
+        video.srcObject = stream;
+        video.play()
+        })}
+
+    recorder = RecordRTC(stream, {
+            type: 'gif',
+            frameRate: 1,
+            quality: 10,
+            width: 360,
+            hidden: 240,
+            onGifRecordingStarted: function() {
+            console.log('started')
+            },
+        });
+    
+    
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.6/RecordRTC.js"></script>
 </html>

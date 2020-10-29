@@ -214,6 +214,7 @@ input[type= "search"]{
 .lasttrending{
     background-color: #F3F5F8;
     height: auto;
+    margin-top: 15%;
 
 }
 
@@ -477,6 +478,15 @@ footer{
         margin-top: 1%;
         margin-left: 9%;
     }
+    .day:hover{
+        display: none;
+    }
+    .day:hover .createhover{
+        right: 0%;
+        display: inline-block;
+        margin-top: 1%;
+        margin-left: 9%;
+    }
     .title{
         font-size: 35px;
         text-align: center;
@@ -636,5 +646,97 @@ footer{
     }
     .searchresults .imgresultados:hover, .hoverviolet:hover ~ .imgresultados{
         opacity: 0.6;
+    }
+
+    .crearGifo{
+        position: relative;
+        margin-bottom: 50%;
+    }
+
+    .camara{
+        position: absolute;
+        left: 3%;
+        top: 150%;
+    }
+    .luzcamara{
+        position: absolute;
+        left: 12.1%;
+        top:185%
+    }
+    .cinta{
+        position: absolute;
+        bottom: -1000%;
+        right: 0%;
+    }
+    .containerCreacionGifos{
+        border: 1px solid #572EE5;
+        width: 40vw;
+        padding: 10%;
+        left: 20%;
+        position: absolute;
+    }
+    .titleCrear{
+        font-family: "Montserrat";
+        font-weight: bold;
+        font-size: 25px;
+        color: #572EE5;
+        text-align: center;
+        line-height: 35px;
+    }
+
+    .pCreacionGifos, .pCreacionAclaracion{
+        font-family: "Roboto";
+        font-weight: 300;
+        font-size: 16px;
+        color: #000000;
+        text-align: center;
+        line-height: 29px;
+
+    }
+    .numbers{
+        position: absolute;
+        bottom: -1000%;
+        left: 50%;
+        display: flex;        
+    }
+    .number{
+        border: 1px solid #572EE5;
+        border-radius: 50%;
+        padding: 10%;
+        font-family: "Roboto";
+        font-weight: 300;
+        font-size: 18px;
+        color: #572EE5;
+        text-align: center;
+        display: inline-block;
+        margin: 15%;
+    }
+
+    .comenzar{
+        border: 1px solid #572EE5;
+        border-radius: 25px;
+        border-radius: 25px;
+        font-family: "Montserrat";
+        font-weight: bold;
+        font-size: 13px;
+        color: #572EE5;
+        letter-spacing: 0;
+        text-align: center;
+        display: inline-block;
+        padding: 1%;
+    }
+
+    .pasosHover{
+        background: #572EE5;
+        border: 1px solid #572EE5;
+        font-family: "Roboto";
+        font-weight: 300;
+        font-size: 18px;
+        color: #FFFFFF;
+        text-align: center;
+        display: inline-block;
+        margin: 15%;
+        border-radius: 50%;
+        padding: 10%;
     }
     }
