@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIFOS</title>
-    <link rel="stylesheet" href="styles.css">
-    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GIFOS</title>
+        <link rel="stylesheet" href="styles.css">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.6/RecordRTC.js"></script>
 </head>
 <body>
     <header>
@@ -71,24 +72,29 @@
         </section>
 
         <section class="crearGifo">
-            <img class="camara" src="images/camara.svg" alt="camara">
-            <img class="luzcamara" src="images/element-luz-camara.svg" alt="">
-            <div class="containerCreacionGifos">
-                <h2 class="titleCrear" id="titleCrear">Aquí podrás crear tus propios GIFOS </h2>
-                <h2 class="dnone" id="acceso">¿Nos das acceso a tu cámara?</h2>
-                <p class="dnone" id="pAcceso">El acceso a tu camara será válido sólo por el tiempo en el que estés creando el GIFO.</p>
-                    <p class="pCreacionGifos" id="pCreacionGifos">¡Crea tu GIFO en sólo 3 pasos!</p> 
-                    <p class="pCreacionAclaracion" id="pCreacionAclaracion">(sólo necesitas una cámara para grabar un video)</p>
-                <video src="" id="video"></video>
+            <div class="containerCamara">
+                <img class="camara" src="images/camara.svg" alt="camara">
+                <img class="luzcamara" src="images/element-luz-camara.svg" alt="">
+                <div class="containerCreacionGifos">
+                    <h2 class="titleCrear" id="titleCrear">Aquí podrás crear tus propios GIFOS </h2>
+                    <h2 class="dnone" id="acceso">¿Nos das acceso a tu cámara?</h2>
+                    <p class="dnone" id="pAcceso">El acceso a tu camara será válido sólo por el tiempo en el que estés creando el GIFO.</p>
+                        <p class="pCreacionGifos" id="pCreacionGifos">¡Crea tu GIFO en sólo 3 pasos!</p> 
+                        <p class="pCreacionAclaracion" id="pCreacionAclaracion">(sólo necesitas una cámara para grabar un video)</p>
+                    <video src="" id="video"></video>
+                </div>
+                <img class="cinta" src="images/pelicula.svg" alt="">
             </div>
-            <ul class="numbers">
-                <li class="number" id="1erpaso">1</li>
-                <li class="number" id="2dopaso">2</li>
-                <li class="number" id="3erpaso">3</li>
-            </ul>
-            
-            <img class="cinta" src="images/pelicula.svg" alt="">
-            <p class="comenzar" id="comenzar">Comenzar</p>
+            <div class="containerBotones">
+                <ul class="numbers">
+                    <li class="number" id="1erpaso">1</li>
+                    <li class="number" id="2dopaso">2</li>
+                    <li class="number" id="3erpaso">3</li>
+                </ul>
+                <div class="linea grabarmg"></div>
+                <p class="comenzar" id="comenzar">Comenzar</p>
+                <p class="dnone" id="grabar">Grabar</p>
+            </div>
         </section>
 
         <div class="resultados" id="resultados">
@@ -554,7 +560,9 @@
     const pCreacionGifos = document.getElementById("pCreacionGifos")
     const pCreacionAclaracion = document.getElementById("pCreacionAclaracion")
     const primerPaso = document.getElementById("1erpaso")
+    const segundoPaso = document.getElementById("2dopaso")
     const video = document.getElementById("video")
+    const grabar = document.getElementById("grabar")
 
     function solicitudPermiso(){
         comenzar.className = "dnone"
@@ -571,15 +579,20 @@
         stream = await navigator.mediaDevices.getUserMedia({
         audio: false,
         video: {
-            height: { max: 480 }
+            height: { max: 450 }
         }
         })
         .then(function(stream) {
         video.srcObject = stream;
         video.play()
+        acceso.className = "dnone"
+        pAcceso.className = "dnone"
+        primerPaso.className= "number"
+        segundoPaso.className = "pasosHover"
+        grabar.className ="comenzar"
         })}
 
-    recorder = RecordRTC(stream, {
+    const recorder = RecordRTC(stream, {
             type: 'gif',
             frameRate: 1,
             quality: 10,
@@ -590,7 +603,7 @@
             },
         });
     
+    grabar.addEventListener("click", recorder)
     
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.6/RecordRTC.js"></script>
 </html>

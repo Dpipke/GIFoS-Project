@@ -648,32 +648,48 @@ footer{
         opacity: 0.6;
     }
 
+    
+    .containerCamara{
+        display: flex;
+        height: 50vh;
+        justify-content: center;
+    }
+    .containerBotones{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 10%;
+    }
     .crearGifo{
-        position: relative;
-        margin-bottom: 50%;
+        margin-bottom: 10%;
     }
 
     .camara{
-        position: absolute;
-        left: 3%;
-        top: 150%;
+        align-self: center ;
     }
     .luzcamara{
-        position: absolute;
-        left: 12.1%;
-        top:185%
+        align-self: center ;
     }
     .cinta{
-        position: absolute;
-        bottom: -1000%;
-        right: 0%;
+        margin-left: 10%;
+        align-self: flex-end;
+        
+     
+    }
+    .grabarmg{
+        max-width: 70vw;
+        margin-top:5%;
+        
     }
     .containerCreacionGifos{
         border: 1px solid #572EE5;
         width: 40vw;
-        padding: 10%;
-        left: 20%;
-        position: absolute;
+        height: 35vh;
+        padding: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+ 
     }
     .titleCrear{
         font-family: "Montserrat";
@@ -694,22 +710,21 @@ footer{
 
     }
     .numbers{
-        position: absolute;
-        bottom: -1000%;
-        left: 50%;
-        display: flex;        
+        display: flex;  
+        width: 20vw;      
+        justify-content: center;
     }
     .number{
         border: 1px solid #572EE5;
         border-radius: 50%;
-        padding: 10%;
+        padding: 5%;
         font-family: "Roboto";
         font-weight: 300;
         font-size: 18px;
         color: #572EE5;
         text-align: center;
         display: inline-block;
-        margin: 15%;
+        margin: 5%;
     }
 
     .comenzar{
@@ -724,6 +739,8 @@ footer{
         text-align: center;
         display: inline-block;
         padding: 1%;
+        width: 10%;
+        margin-top: 5%;
     }
 
     .pasosHover{
