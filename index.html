@@ -42,7 +42,7 @@
             <div class="search" id="search">
                 <img class = "dnone" src="images/icon-search-modo-noct.svg" id="lupabuscador">
                 <form action="" id="form">
-                    <input type="search" placeholder="Buscá GIFOS y más..." id="busqueda">
+                    <input type="search" placeholder="Buscá GIFOS y más..." id="busqueda" autocomplete="off">
                     <label for="submit">
                         <img class="lupita" src="images/icon-search.svg" alt="buscar" id="lupita">
                         <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
@@ -59,6 +59,7 @@
         <section class="favoritos dnone" id="favsec">
             <img src="images/icon-favoritos.svg" alt="favoritos">
             <h2 class="favtitle">Favoritos</h2>
+            <div class="favoritegallery" id="favoritegallery"></div>
             <img src="images/CTA-ver-mas.svg" alt="ver mas" id="vermas">
         </section>
 
@@ -437,6 +438,7 @@
     const resultados = document.getElementById("resultados")
     async function resultadosBusqueda(event) {
             event.preventDefault();
+            limpiarBusqueda()
             const q = input.value.split(" ").join("-")
             const url = getUrl(q, limit, offset);
             const response = await fetch(url);
@@ -447,7 +449,7 @@
             resultados.appendChild(buscado)
             const verMas = document.getElementById("vermasresultados")
             verMas.className ="vermas"
-            if(response.status === 200){
+            if (results.data.length){
                 renderResult(results.data, resultados, "resultados", "imgresultados", "gifcontainer");
                 verMas.addEventListener("click", cargarMas)}
             else{
@@ -466,6 +468,9 @@
 
         }
 
+        function limpiarBusqueda(){
+            resultados.innerHTML =""
+        }
         async function downloadIconGifo(item, contenedor) {
             const a = document.createElement("a");
             let response = await fetch(item.images.original.url);
@@ -509,7 +514,13 @@
 
     palabrasTendencia()
     
-
+    const favoritegallery = document.getElementById("favoritegallery")
+    function misFavoritos(){
+        const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+        renderResult(localStorageFavorites, favoritegallery, "resultados", "imgresultados", "searchresults")
+        // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
+    }
+    misFavoritos()
 
     // const busqueda = "cat";
     // const url = `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}`

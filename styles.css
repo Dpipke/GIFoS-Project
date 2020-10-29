@@ -554,7 +554,7 @@ footer{
     }
 
 
-    .gifcontainer .hoverviolet .violeticonshover{
+    .gifcontainer .violeticonshover{
         opacity: 0.7;
         background: #FFFFFF;
         border-radius: 6px;
@@ -575,7 +575,7 @@ footer{
         background: #FFFFFF;
         border-radius: 6px;
         margin: 3%;
-        padding: 1%;
+        padding: 3%;
 
     }
 
@@ -612,11 +612,29 @@ footer{
         font-size: 15px;
         color: #FFFFFF;
         position: absolute;
-        bottom: 23%;
+        bottom: 28%;
         left: 5%;
         margin: 2%;
     }
 
+    .imgresultados{
+        width: 20vw;
+    }
 
-
+    .favoritegallery{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .searchresults{
+        margin:2%
+    }
+    .searchresults:hover .hoverviolet{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    .searchresults .imgresultados:hover, .hoverviolet:hover ~ .imgresultados{
+        opacity: 0.6;
+    }
     }
