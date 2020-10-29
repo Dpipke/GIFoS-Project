@@ -554,7 +554,7 @@ footer{
     }
 
 
-    .hoverviolet .violeticonshover{
+    .gifcontainer .hoverviolet .violeticonshover{
         opacity: 0.7;
         background: #FFFFFF;
         border-radius: 6px;
@@ -568,9 +568,15 @@ footer{
         display: none;
     }
 
-    .violetfactive{
+    .gifcontainer.favorite .violetfavinactive{
         display: inline-block;
         height: 7%;
+        opacity: 0.7;
+        background: #FFFFFF;
+        border-radius: 6px;
+        margin: 3%;
+        padding: 1%;
+
     }
 
     .gifcontainer{
@@ -581,6 +587,9 @@ footer{
 
     }
 
+    .gifcontainer.favorite .violeticonshover.favh{
+        display: none;
+    }
 
     .violeticonshover:hover{
         opacity: 1;

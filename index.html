@@ -164,21 +164,28 @@
         img.src = item.images.original.url;
         img.alt = item.title;
         img.p= item.username
-        container.classList.toggle(clasecontainer)
         gifContainer.className = classItemContainer                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
         img.className = claseitem;
-        // img.setAttribute("id", item.id)
         img.id = item.id
         container.classList.add(clasecontainer);
+        if (existeFavorito(item)){
+            gifContainer.classList.add("favorite")
+        }
         
         
-
-        const addToFavorites = () => agregarFavoritos(img)
-        const removeFromFavorites = () => eliminarFavoritos(img)
-        const expand = () => ampliar(event, img, gifContainer)
-        const overlay = imgHoverComponentFactory(img, img.alt, img.p, expand, addToFavorites, removeFromFavorites, img.id)
+        const addToFavorites = () => {
+            agregarFavoritos(item)
+            gifContainer.classList.add("favorite")
+        }
+        const removeFromFavorites = () => {
+            eliminarFavoritos(item)
+            gifContainer.classList.remove("favorite")
+        }
+        const expand = () => ampliar(event, item, gifContainer)
+        const overlay = imgHoverComponentFactory(item, expand, addToFavorites, removeFromFavorites)
         gifContainer.appendChild(overlay)
-
+        
+        console.log(item)
 
         gifContainer.appendChild(img)
         container.appendChild(gifContainer);
@@ -277,7 +284,7 @@
         elemento.classList.add("dnone")
     }
 
-    function imgHoverComponentFactory(item, title, user, fexpandir, fxfavoritos, fxeliminar, idGifo, results){
+    function imgHoverComponentFactory(item, expandir, agregarFavoritos, eliminarFavoritos){
         const violet = document.createElement("div")
         const violetFavHover = document.createElement("img")
         const violetFavActive = document.createElement("img")
@@ -298,9 +305,9 @@
 
         title = document.createElement("figcaption")
         user = document.createElement("p")
-        user.innerText = item.p
+        user.innerText = item.username
         user.className = "violetuser"
-        title.innerText = item.alt
+        title.innerText = item.title
         title.className = "violettitle"
         violet.appendChild(title)
         violet.appendChild(user)
@@ -309,83 +316,55 @@
         violet.appendChild(violetFavActive)
         violet.appendChild(violetDownloadHover)
         violet.appendChild(violetExpandHover)
+    
+        violetExpandHover.addEventListener("click", expandir) 
+        violetFavHover.addEventListener("click", agregarFavoritos)
+        violetFavActive.addEventListener("click", eliminarFavoritos)
 
-        function setearFavoritos(){
-            const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
-            const idGifo = item.id;
-            const validateF = localStorageFavorites.some((element) => {
-            return element.id === idGifo;
-            });
-
-            violetFavHover.addEventListener("click", agregarFavoritos)
-            if (validateF === true){
-                violetFavHover.className = "dnone";
-                violetFavActive.className = "violeticonshover";
-                violetFavHover.removeEventListener("click", agregarFavoritos);
-                violetFavActive.addEventListener("click", eliminarFavoritos);
-
-            }else{
-                violetFavHover.className = "violeticonshover";
-                violetFavActive.className = "violetfavinactive";
-                violetFavActive.removeEventListener("click", eliminarFavoritos);
-                violetFavHover.addEventListener("click", agregarFavoritos);
-            }
-
-        }
-           
-
- 
-        violetExpandHover.addEventListener("click", fexpandir) 
-        violetFavHover.addEventListener("click", setearFavoritos)
-        violetFavActive.addEventListener("click", setearFavoritos)
-        setearFavoritos()
-
-        // const descargar = () =>downloadIconGifo(item, violetDownloadHover)
-        // violetDownloadHover.addEventListener("click", descargar )
+        violetDownloadHover.addEventListener("click", () =>downloadIconGifo(item, violet))
 
         return violet
     }
 
-    
+    function existeFavorito(item){
+        const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+        const idGifo = item.id;
+        return localStorageFavorites.some((element) => {
+                return element.id === idGifo;
+        });
+        
+    }
 
     
-    async function agregarFavoritos(item) {
+    function agregarFavoritos(item) {
         const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
 
         const idGifo = item.id;
-        const titleGifo = item.alt;
-        const userGifo = item.p;
-        const urlGifo = item.src;
+        const titleGifo = item.title;
+        const userGifo = item.username;
+        const urlGifo = item.images.original.url;
 
-        const validateF = localStorageFavorites.some((element) => {
-        return element.id === idGifo;
+        const isFavorite = localStorageFavorites.some((element) => {
+            return element.id === idGifo;
         });
         
-
-        if(validateF === false){   
-        localStorageFavorites.push({
-            id: idGifo,
-            title: titleGifo,
-            username: userGifo,
-            images: { original: { url: urlGifo } },
-        });
-        localStorage.setItem(
-            "listFavorites",
-            JSON.stringify(localStorageFavorites)
-        );}
+        if(!isFavorite){   
+            localStorageFavorites.push({
+                id: idGifo,
+                title: titleGifo,
+                username: userGifo,
+                images: { original: { url: urlGifo } },
+            });
+            localStorage.setItem(
+                "listFavorites",
+                JSON.stringify(localStorageFavorites)
+            );
+        }
     }
 
-    async function eliminarFavoritos(item){
-    const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
-
-        const idGifo = item.id;
-        const validateF = localStorageFavorites.some((element) => {
-        return element.id === idGifo;
-        });
-      
-        if(validateF === true){  
-            localStorage.removeItem(item, JSON.stringify(localStorageFavorites));
-        }
+    function eliminarFavoritos(item){
+        const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+        localStorage.setItem("listFavorites", JSON.stringify(localStorageFavorites.filter(favorite => favorite.id !== item.id)));
 
     }
 
@@ -487,19 +466,19 @@
 
         }
 
-        // async function downloadIconGifo(item, downloadIcon) {
-        //     const a = document.createElement("a");
-        //     let response = await fetch(item.src);
-        //     let file = await response.blob();
-        //     a.download = item.title;
-        //     a.href = window.URL.createObjectURL(file);
-        //     a.dataset.downloadurl = ["application/octet-stream", a.download, a.href].join(
-        //         ":"
-        //     );
-        //     a.appendChild(downloadIcon);
-        //     return a;
-        //     console.log(a)
-        // }
+        async function downloadIconGifo(item, contenedor) {
+            const a = document.createElement("a");
+            let response = await fetch(item.images.original.url);
+            let file = await response.blob();
+            a.download = item.title;
+            a.href = window.URL.createObjectURL(file);
+            a.dataset.downloadurl = ["application/octet-stream", a.download, a.href].join(
+                ":"
+            );
+            contenedor.appendChild(a);
+            a.click()
+            return a;
+        }
   
     
     async function cargarMas(){
