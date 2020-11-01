@@ -629,6 +629,7 @@ footer{
 
     .imgresultados{
         width: 20vw;
+        height: 30vh;
     }
 
     .favoritegallery{
@@ -637,7 +638,11 @@ footer{
         justify-content: flex-start;
     }
     .searchresults{
-        margin:2%
+        margin:2%;
+        height: 50vh;
+        position: relative;
+        background-color: rgb(87, 46, 229);
+   
     }
     .searchresults:hover .hoverviolet{
         display: flex;
@@ -755,5 +760,15 @@ footer{
         margin: 15%;
         border-radius: 50%;
         padding: 10%;
+    }
+
+    .counter{
+        font-family: "Montserrat";
+        font-weight: bold;
+        font-size: 15px;
+        color: #572EE5;
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 22px;
     }
     }

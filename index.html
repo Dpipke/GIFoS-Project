@@ -90,10 +90,13 @@
                     <li class="number" id="1erpaso">1</li>
                     <li class="number" id="2dopaso">2</li>
                     <li class="number" id="3erpaso">3</li>
+                    <p class="dnone" id="counter">00:00:00</p>
                 </ul>
                 <div class="linea grabarmg"></div>
-                <p class="comenzar" id="comenzar">Comenzar</p>
-                <p class="dnone" id="grabar">Grabar</p>
+                <p class="comenzar" id="comenzar">COMENZAR</p>
+                <p class="dnone" id="grabar">GRABAR</p>
+                <p class="dnone" id="finalizar">FINALIZAR</p>
+                <p class="dnone" id="subir">SUBIR GIFO</p>
             </div>
         </section>
 
@@ -575,6 +578,7 @@
         getStreamAndRecord()
     }
     
+    
     let stream
     let recorder
     async function getStreamAndRecord () { 
@@ -584,7 +588,7 @@
             height: { max: 450 }
         }
         })
-        (function(stream) {
+        if (stream.active === true) {
         video.srcObject = stream;
         video.play()
         acceso.className = "dnone"
@@ -592,23 +596,66 @@
         primerPaso.className= "number"
         segundoPaso.className = "pasosHover"
         grabar.className ="comenzar"
-        })}
-
         recorder = RecordRTC(stream, {
             type: 'gif',
             frameRate: 1,
             quality: 10,
             width: 360,
             hidden: 240,
-            onGifRecordingStarted(recorder)})
+        })
+        onGifRecordingStarted(recorder)
+        }}
 
     grabar.addEventListener("click", recorder)
 
     function onGifRecordingStarted(recorder) {
         recorder.startRecording();
-        // timer();
+        timer();
     }   
 
+    const counter = document.getElementById("counter")
+    const finalizar = document.getElementById("finalizar")
+    const subir = document.getElementById("subir")
+
+    function timer() {
+        let sec = 0;
+        let min = 0;
+        let hour = 0;
+        countdown = setInterval(function () {
+            counter.className = "counter"
+            finalizar.className = "comenzar"
+            grabar.className = "dnone"
+            counter.innerHTML = `${hour}:${min}:${sec}`;
+            sec++;
+            if (sec == 60) {
+            sec = 00;
+            min++;
+            if (min == 60) { 
+                min = 00;
+                hour++;
+            }
+            }
+        }, 1000);
+    }
+
+    finalizar.addEventListener("click", detenerGrabacion)
     
+    function detenerGrabacion(){
+        recorder.startRecording()
+        clearInterval(countdown);
+        counter.innerHTML = "REPETIR CAPTURA";
+        subir.className = "comenzar"
+        finalizar.className = "dnone"
+        const blob = recorder.getBlob();
+        console.log(blob)
+        // let urlCreator = window.URL || window.webkitURL;
+        // imageUrl = urlCreator.createObjectURL(blob);
+        // previewImg.src = imageUrl;
+        // video.style.display = "none";
+        // previewImg.style.display = "block";
+        // buttonFinalizar.style.display = "none";
+        // buttonUpload.style.display = "block";
+        // counter.addEventListener("click", repeatCapture);
+    }
 </script>
 </html>
