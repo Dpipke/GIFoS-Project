@@ -82,7 +82,7 @@
                         <p class="pCreacionGifos" id="pCreacionGifos">¡Crea tu GIFO en sólo 3 pasos!</p> 
                         <p class="pCreacionAclaracion" id="pCreacionAclaracion">(sólo necesitas una cámara para grabar un video)</p>
                     <video src="" id="video"></video>
-                    <img class="dnone" id= "previewImgGif" src="images/check.svg" alt="Preview Gif"/>
+                    <img class="dnone" id= "previewImgGif" src="" alt="Preview Gif"/>
                 </div>
                 <img class="cinta" src="images/pelicula.svg" alt="">
             </div>
@@ -640,18 +640,18 @@
 
     finalizar.addEventListener("click", detenerGrabacion)
     
-    const previewImg = document.getElementById("previewImg")
+    let previewImg = document.getElementById("previewImgGif")
     function detenerGrabacion(){
         recorder.startRecording()
         clearInterval(countdown);
         counter.innerHTML = "REPETIR CAPTURA";
         subir.className = "comenzar"
         finalizar.className = "dnone"
-        const blob = recorder.getBlob();
-        console.log(blob)
-
-        let urlCreator = window.URL || window.webkitURL;
-        imageUrl = urlCreator.createObjectURL(blob);
+        let blob
+        window.URL.createObjectURL = function() {};
+        blob = recorder.getBlob();
+        imageUrl = URL.createObjectURL(blob)
+        console.log(imageUrl)
         previewImg.src = imageUrl;
         video.style.display = "none";
         previewImg.style.display = "block";
@@ -659,5 +659,6 @@
         // buttonUpload.style.display = "block";
         // counter.addEventListener("click", repeatCapture);
     }
+
 </script>
 </html>

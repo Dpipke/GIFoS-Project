@@ -564,7 +564,7 @@ footer{
     }
 
 
-    .gifcontainer .violeticonshover{
+    .gifcontainer .violeticonshover, .searchresults .violeticonshover{
         opacity: 0.7;
         background: #FFFFFF;
         border-radius: 6px;
@@ -771,5 +771,8 @@ footer{
         letter-spacing: 0;
         text-align: center;
         line-height: 22px;
+    }
+    .modal .imgresultados, .modal .mySlides{
+        width: 50vw;
     }
     }
