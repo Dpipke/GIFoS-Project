@@ -630,6 +630,7 @@ footer{
     .imgresultados{
         width: 20vw;
         height: 30vh;
+        margin: 0;
     }
 
     .favoritegallery{
@@ -639,7 +640,7 @@ footer{
     }
     .searchresults{
         margin:2%;
-        height: 50vh;
+        height: 30vh;
         position: relative;
         background-color: rgb(87, 46, 229);
    

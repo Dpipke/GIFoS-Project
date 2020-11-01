@@ -82,6 +82,7 @@
                         <p class="pCreacionGifos" id="pCreacionGifos">¡Crea tu GIFO en sólo 3 pasos!</p> 
                         <p class="pCreacionAclaracion" id="pCreacionAclaracion">(sólo necesitas una cámara para grabar un video)</p>
                     <video src="" id="video"></video>
+                    <img class="dnone" id= "previewImgGif" src="images/check.svg" alt="Preview Gif"/>
                 </div>
                 <img class="cinta" src="images/pelicula.svg" alt="">
             </div>
@@ -603,14 +604,16 @@
             width: 360,
             hidden: 240,
         })
-        onGifRecordingStarted(recorder)
+        grabar.addEventListener("click", () => onGifRecordingStarted(recorder))
         }}
 
-    grabar.addEventListener("click", recorder)
 
     function onGifRecordingStarted(recorder) {
         recorder.startRecording();
         timer();
+        counter.className = "counter"
+        finalizar.className = "comenzar"
+        grabar.className = "dnone"
     }   
 
     const counter = document.getElementById("counter")
@@ -622,16 +625,13 @@
         let min = 0;
         let hour = 0;
         countdown = setInterval(function () {
-            counter.className = "counter"
-            finalizar.className = "comenzar"
-            grabar.className = "dnone"
             counter.innerHTML = `${hour}:${min}:${sec}`;
             sec++;
             if (sec == 60) {
-            sec = 00;
+            sec = 0;
             min++;
             if (min == 60) { 
-                min = 00;
+                min = 0;
                 hour++;
             }
             }
@@ -640,6 +640,7 @@
 
     finalizar.addEventListener("click", detenerGrabacion)
     
+    const previewImg = document.getElementById("previewImg")
     function detenerGrabacion(){
         recorder.startRecording()
         clearInterval(countdown);
@@ -648,12 +649,13 @@
         finalizar.className = "dnone"
         const blob = recorder.getBlob();
         console.log(blob)
-        // let urlCreator = window.URL || window.webkitURL;
-        // imageUrl = urlCreator.createObjectURL(blob);
-        // previewImg.src = imageUrl;
-        // video.style.display = "none";
-        // previewImg.style.display = "block";
-        // buttonFinalizar.style.display = "none";
+
+        let urlCreator = window.URL || window.webkitURL;
+        imageUrl = urlCreator.createObjectURL(blob);
+        previewImg.src = imageUrl;
+        video.style.display = "none";
+        previewImg.style.display = "block";
+        finalizar.style.display = "none";
         // buttonUpload.style.display = "block";
         // counter.addEventListener("click", repeatCapture);
     }
