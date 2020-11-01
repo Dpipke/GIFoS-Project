@@ -575,6 +575,8 @@
         getStreamAndRecord()
     }
     
+    let stream
+    let recorder
     async function getStreamAndRecord () { 
         stream = await navigator.mediaDevices.getUserMedia({
         audio: false,
@@ -582,7 +584,7 @@
             height: { max: 450 }
         }
         })
-        .then(function(stream) {
+        (function(stream) {
         video.srcObject = stream;
         video.play()
         acceso.className = "dnone"
@@ -592,18 +594,21 @@
         grabar.className ="comenzar"
         })}
 
-    const recorder = RecordRTC(stream, {
+        recorder = RecordRTC(stream, {
             type: 'gif',
             frameRate: 1,
             quality: 10,
             width: 360,
             hidden: 240,
-            onGifRecordingStarted: function() {
-            console.log('started')
-            },
-        });
-    
+            onGifRecordingStarted(recorder)})
+
     grabar.addEventListener("click", recorder)
+
+    function onGifRecordingStarted(recorder) {
+        recorder.startRecording();
+        // timer();
+    }   
+
     
 </script>
 </html>
