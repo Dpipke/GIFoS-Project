@@ -565,6 +565,7 @@
     const pCreacionAclaracion = document.getElementById("pCreacionAclaracion")
     const primerPaso = document.getElementById("1erpaso")
     const segundoPaso = document.getElementById("2dopaso")
+    const tercerPaso = document.getElementById("3erpaso")
     const video = document.getElementById("video")
     const grabar = document.getElementById("grabar")
 
@@ -656,9 +657,58 @@
         video.style.display = "none";
         previewImg.style.display = "block";
         finalizar.style.display = "none";
-        // buttonUpload.style.display = "block";
         // counter.addEventListener("click", repeatCapture);
     }
 
+    subir.addEventListener("click", subirGifo)
+
+    async function subirGifo(){
+        segundoPaso.className = "number"
+        tercerPaso.className = "pasosHover"
+        counter.className = "dnone"
+        let formData = new FormData();
+            form.append("file", recorder.getBlob(), "myGif.gif");
+            form.append("tags", "");
+            const uploadGif = await fetch(
+                `upload.giphy.com/v1/gifs?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`,
+                {
+                method: "POST",
+                body: form,
+                }
+            );
+
+    const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
+    const resUpload = await uploadGif.json();
+        if (resUpload.meta.status === 200) {
+            // loaderSubirGifo.style.display = "none";
+            // imgSubir.style.display = "none";
+            // loaderExitoGifo.style.display = "block";
+            // imgExito.style.display = "block";
+            // spanActions.style.display = "block";
+            // iconDownload.download = "mygif";
+            // iconDownload.href = imageUrl;
+            // iconDownload.dataset.downloadurl = [
+            // "application/octet-stream",
+            // iconDownload.download,
+            // iconDownload.href,
+            // ].join(":");
+            const resultado = await apiGiphy.getGifoId(resUpload.data.id);
+            const res = await results.json();
+            console.log(res);
+            iconLink.href = res.data.url;
+            localStorageMisGifos.push({
+            id: res.data.id,
+            title: res.data.title,
+            username: res.data.username,
+            images: { original: { url: res.data.images.original.url } },
+            });
+
+            localStorage.setItem(
+            "listMisGifos",
+            JSON.stringify(apiGiphy.localStorageMisGifos)
+            );
+        }
+        
+    }
 </script>
 </html>
