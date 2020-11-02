@@ -692,7 +692,8 @@
             // iconDownload.download,
             // iconDownload.href,
             // ].join(":");
-            const resultado = await apiGiphy.getGifoId(resUpload.data.id);
+            console.log(resUpload)
+            const resultado = await fetch `https://api.giphy.com/v1/gifs/${resUpload.data.id}?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;
             const res = await results.json();
             console.log(res);
             iconLink.href = res.data.url;
@@ -708,6 +709,8 @@
             JSON.stringify(apiGiphy.localStorageMisGifos)
             );
         }
+
+ 
         
     }
 </script>
