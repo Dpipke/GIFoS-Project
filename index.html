@@ -31,7 +31,7 @@
                     <li class=""> <a href="#">Mis GIFOS</a></li>
                     <li><img class="crear day" src="images/button-crear-gifo.svg" alt="crear"></li>
                     <li><img class="crear createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear"></li>
-                    <li><img class="crear" src="images/CTA-crear-gifo-active.svg" alt="crear"></li>
+                    <li><img class="crear createactive" src="images/CTA-crear-gifo-active.svg" alt="crear"></li>
 
                     
                 </ul>
@@ -213,7 +213,7 @@
             eliminarFavoritos(item)
             gifContainer.classList.remove("favorite")
         }
-        const expand = () => ampliar(event, item, gifContainer)
+        const expand = () => ampliar(item, gifContainer, event)
         const overlay = imgHoverComponentFactory(item, expand, addToFavorites, removeFromFavorites)
         gifContainer.appendChild(overlay)
 
@@ -277,7 +277,7 @@
 
     const modal = document.getElementById("modal")
 
-    function ampliar(event, ampliado, gifContainer){
+    function ampliar(ampliado, gifContainer, event){
         event.stopPropagation()  
         gifContainer.className = "modal"
         const imgs = gifContainer.querySelectorAll(".mySlides")
@@ -290,8 +290,7 @@
             users.forEach(item => item.parentNode.removeChild(item))
            
         }
-
-        gifContainer.appendChild(ampliado)
+        console.log(gifContainer)
         const user = document.createElement("p")
 
         user.innerText = ampliado.username 
@@ -300,6 +299,7 @@
         title = document.createElement("figcaption")
         title.innerText = ampliado.alt
         title.className = "giftitle"
+        gifContainer.appendChild(ampliado)
         gifContainer.appendChild(title)
         gifContainer.appendChild(cruz)
 

@@ -37,7 +37,7 @@ label{
 }
 
 
-.noc, .crear{
+.noc, .createhover, .createactive{
     display: none;
 }
 
@@ -481,7 +481,7 @@ footer{
     .day:hover{
         display: none;
     }
-    .day:hover .createhover{
+    .crear.day:hover  .crear.createhover{
         right: 0%;
         display: inline-block;
         margin-top: 1%;
@@ -774,5 +774,14 @@ footer{
     }
     .modal .imgresultados, .modal .mySlides{
         width: 50vw;
+        position: relative;
+        z-index: 1;
     }
+
+    .searchresults.favorite .hoverviolet{
+        width: 20vw;
+        height: 30vh;
+    }
+
+   
     }
