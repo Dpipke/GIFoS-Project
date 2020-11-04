@@ -476,7 +476,8 @@
             buscado.className = "buscadotitle"
             resultados.appendChild(buscado)
             const verMas = document.getElementById("vermasresultados")
-            verMas.className ="vermas"
+            console.log(verMas)
+            // verMas.className ="vermas"
             if (results.data.length){
                 renderResult(results.data, resultados, "resultados", "imgresultados", "gifcontainer");
                 verMas.addEventListener("click", cargarMas)}
@@ -643,16 +644,15 @@
     
     let previewImg = document.getElementById("previewImgGif")
     function detenerGrabacion(){
-        recorder.startRecording()
+        recorder.stopRecording()
         clearInterval(countdown);
         counter.innerHTML = "REPETIR CAPTURA";
         subir.className = "comenzar"
         finalizar.className = "dnone"
         let blob
-        window.URL.createObjectURL = function() {};
         blob = recorder.getBlob();
-        imageUrl = URL.createObjectURL(blob)
-        console.log(imageUrl)
+        let urlCreator = window.URL || window.webkitURL;
+        imageUrl = urlCreator.createObjectURL(blob);
         previewImg.src = imageUrl;
         video.style.display = "none";
         previewImg.style.display = "block";
@@ -666,11 +666,12 @@
         segundoPaso.className = "number"
         tercerPaso.className = "pasosHover"
         counter.className = "dnone"
+        const template = uploadingOverlay()
         let formData = new FormData();
             form.append("file", recorder.getBlob(), "myGif.gif");
             form.append("tags", "");
             const uploadGif = await fetch(
-                `upload.giphy.com/v1/gifs?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`,
+                `https://upload.giphy.com/v1/gifs?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`,
                 {
                 method: "POST",
                 body: form,
@@ -709,9 +710,21 @@
             JSON.stringify(apiGiphy.localStorageMisGifos)
             );
         }
+    }    
+    function uploadingOverlay(){
+        const uploadOverlay = document.createElement("div")
+        const subiendo = document.createElement("p")
 
- 
-        
+        uploadOverlay.className = "uploadViolet"
+        subiendo.textContent = "Estamos subiendo tu GIFO"
+        subiendo.className = "subiendoP"
+        uploadOverlay.appendChild(subiendo)
+
+
+        return uploadOverlay
+        console.log(uploadOverlay)
     }
+        
+    
 </script>
 </html>
