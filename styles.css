@@ -478,10 +478,8 @@ footer{
         margin-top: 1%;
         margin-left: 9%;
     }
-    .day:hover{
-        display: none;
-    }
-    .crear.day:hover  .crear.createhover{
+
+    .createhover{
         right: 0%;
         display: inline-block;
         margin-top: 1%;
@@ -695,6 +693,7 @@ footer{
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
  
     }
     .titleCrear{
@@ -787,6 +786,11 @@ footer{
         opacity: 0.6;
         background: #572EE5;
         z-index: 1;
+        position: absolute;
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     .subiendoP{
         font-family: "Montserrat";
@@ -794,5 +798,6 @@ footer{
         font-size: 15px;
         color: #FFFFFF;
         text-align: center;
+        opacity: 1;
     }
     }

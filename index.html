@@ -29,9 +29,9 @@
                     <li class=""> <a href="#">Modo Nocturno</a></li>
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#">Mis GIFOS</a></li>
-                    <li><img class="crear day" src="images/button-crear-gifo.svg" alt="crear"></li>
-                    <li><img class="crear createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear"></li>
-                    <li><img class="crear createactive" src="images/CTA-crear-gifo-active.svg" alt="crear"></li>
+                    <li ><img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo"></li>
+                    <li><img class="dnone" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
+                    <li><img class="dnone" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive "></li>
 
                     
                 </ul>
@@ -71,11 +71,11 @@
             <img src="images/CTA-ver-mas.svg" alt="ver mas">
         </section>
 
-        <section class="crearGifo">
+        <section class="dnone" id="crearGifo">
             <div class="containerCamara">
                 <img class="camara" src="images/camara.svg" alt="camara">
                 <img class="luzcamara" src="images/element-luz-camara.svg" alt="">
-                <div class="containerCreacionGifos">
+                <div class="containerCreacionGifos" id="containerCreacionGifos">
                     <h2 class="titleCrear" id="titleCrear">Aquí podrás crear tus propios GIFOS </h2>
                     <h2 class="dnone" id="acceso">¿Nos das acceso a tu cámara?</h2>
                     <p class="dnone" id="pAcceso">El acceso a tu camara será válido sólo por el tiempo en el que estés creando el GIFO.</p>
@@ -667,64 +667,105 @@
         tercerPaso.className = "pasosHover"
         counter.className = "dnone"
         const template = uploadingOverlay()
+        const containerCreacionGifos = document.getElementById("containerCreacionGifos")
+        containerCreacionGifos.appendChild(template)
+        console.log(template)
         let formData = new FormData();
-            form.append("file", recorder.getBlob(), "myGif.gif");
-            form.append("tags", "");
-            const uploadGif = await fetch(
-                `https://upload.giphy.com/v1/gifs?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`,
-                {
-                method: "POST",
-                body: form,
-                }
-            );
+        formData.append("file", recorder.getBlob(), "myGif.gif");
+        formData.append("tags", "");
+        const uploadGif = await fetch(
+            `https://upload.giphy.com/v1/gifs?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`,
+            {
+            method: "POST",
+            body: formData,
+            mode: 'no-cors'
+            }
+        );
 
     const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
     const resUpload = await uploadGif.json();
-        if (resUpload.meta.status === 200) {
-            // loaderSubirGifo.style.display = "none";
-            // imgSubir.style.display = "none";
-            // loaderExitoGifo.style.display = "block";
-            // imgExito.style.display = "block";
-            // spanActions.style.display = "block";
-            // iconDownload.download = "mygif";
-            // iconDownload.href = imageUrl;
-            // iconDownload.dataset.downloadurl = [
-            // "application/octet-stream",
-            // iconDownload.download,
-            // iconDownload.href,
-            // ].join(":");
-            console.log(resUpload)
-            const resultado = await fetch `https://api.giphy.com/v1/gifs/${resUpload.data.id}?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;
-            const res = await results.json();
-            console.log(res);
-            iconLink.href = res.data.url;
-            localStorageMisGifos.push({
-            id: res.data.id,
-            title: res.data.title,
-            username: res.data.username,
-            images: { original: { url: res.data.images.original.url } },
-            });
 
-            localStorage.setItem(
-            "listMisGifos",
-            JSON.stringify(apiGiphy.localStorageMisGifos)
-            );
-        }
+    if (resUpload.meta.status === 200) {
+        loader.style.display = "none";
+        // imgSubir.style.display = "none";
+        // loaderExitoGifo.style.display = "block";
+        // imgExito.style.display = "block";
+        // spanActions.style.display = "block";
+        // iconDownload.download = "mygif";
+        // iconDownload.href = imageUrl;
+        // iconDownload.dataset.downloadurl = [
+        // "application/octet-stream",
+        // iconDownload.download,
+        // iconDownload.href,
+        // ].join(":");
+        console.log(resUpload)
+        const resultado = await fetch `https://api.giphy.com/v1/gifs/${resUpload.data.id}?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;
+        const res = await results.json();
+        console.log(res);
+        iconLink.href = res.data.url;
+        localStorageMisGifos.push({
+        id: res.data.id,
+        title: res.data.title,
+        username: res.data.username,
+        images: { original: { url: res.data.images.original.url } },
+        });
+
+        localStorage.setItem(
+        "listMisGifos",
+        JSON.stringify(apiGiphy.localStorageMisGifos)
+        );
+    }
     }    
     function uploadingOverlay(){
         const uploadOverlay = document.createElement("div")
         const subiendo = document.createElement("p")
+        const loader = document.createElement("img")
+        const downloadMyGifo = document.createElement("img")
+        const linkMyGifo = document.createElement("img")
 
+        loader.src = "images/loader.svg"
+        downloadMyGifo.src = "images/icon-download-hover.svg"
+        linkMyGifo.src = "images/icon-link-hover.svg"
+        
         uploadOverlay.className = "uploadViolet"
+        downloadMyGifo.className = "dnone"
+        linkMyGifo.className = "dnone"
         subiendo.textContent = "Estamos subiendo tu GIFO"
         subiendo.className = "subiendoP"
+        
+        uploadOverlay.appendChild(downloadMyGifo)
+        uploadOverlay.appendChild(linkMyGifo)
+        uploadOverlay.appendChild(loader)
         uploadOverlay.appendChild(subiendo)
 
 
         return uploadOverlay
-        console.log(uploadOverlay)
     }
+
+    const creategifo = document.getElementById("creategifo")
+    const creategifohover = document.getElementById("creategifohover")
+    const creategifoactive = document.getElementById("creategifoactive")
+    const crearGifo = document.getElementById("crearGifo")
+    creategifo.addEventListener("mouseover", createHover)
+    creategifohover.addEventListener("mouseout", undoHover)
         
-    
+    function createHover(){
+        creategifo.style.display="none"
+        creategifohover.className= "createhover"
+    }
+
+    function undoHover(){
+        creategifo.style.display = "inline-block"
+        creategifohover.className= "dnone"
+    }
+
+    creategifohover.addEventListener("click", openCreateGifo)
+
+    function openCreateGifo(){
+        creategifoactive.className = "createhover" 
+        creategifohover.className = "dnone"
+        crearGifo.className = "crearGifo"
+    }
+
 </script>
 </html>
