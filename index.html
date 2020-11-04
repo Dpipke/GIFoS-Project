@@ -31,7 +31,7 @@
                     <li class=""> <a href="#">Mis GIFOS</a></li>
                     <li ><img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo"></li>
                     <li><img class="dnone" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
-                    <li><img class="dnone" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive "></li>
+                    <li><img class="dnone" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive"></li>
 
                     
                 </ul>
@@ -102,10 +102,11 @@
         </section>
 
         <div class="resultados" id="resultados">
+            <div id="searchingResults"></div>
             <img class="dnone" src="images/CTA-ver-mas.svg" alt="" id="vermasresultados">
         </div>
 
-        <section class="lasttrending">
+        <section class="lasttrending" id="lasttrending">
             <h2 class="trendingGifos">Trending GIFOS</h2>
             <p class="comunidad">Mira los ultimos GIFOS de nuestra comunidad</p>
             
@@ -464,9 +465,11 @@
     const limit = 12
 
     const resultados = document.getElementById("resultados")
+    const searchingResults = document.getElementById("searchingResults")
+
     async function resultadosBusqueda(event) {
             event.preventDefault();
-            limpiarBusqueda()
+            searchingResults.innerHTML =""
             const q = input.value.split(" ").join("-")
             const url = getUrl(q, limit, offset);
             const response = await fetch(url);
@@ -474,12 +477,12 @@
             const buscado = document.createElement("h2")
             buscado.innerText = input.value
             buscado.className = "buscadotitle"
-            resultados.appendChild(buscado)
+            searchingResults.appendChild(buscado)
             const verMas = document.getElementById("vermasresultados")
             console.log(verMas)
             verMas.className ="vermas"
             if (results.data.length){
-                renderResult(results.data, resultados, "resultados", "imgresultados", "gifcontainer");
+                renderResult(results.data, searchingResults, "resultados", "imgresultados", "gifcontainer");
                 verMas.addEventListener("click", cargarMas)}
             else{
                 const ouch = document.createElement("img")
@@ -497,9 +500,6 @@
 
         }
 
-        function limpiarBusqueda(){
-            resultados.innerHTML =""
-        }
         async function downloadIconGifo(item, contenedor) {
             const a = document.createElement("a");
             let response = await fetch(item.images.original.url);
@@ -746,16 +746,17 @@
     const creategifohover = document.getElementById("creategifohover")
     const creategifoactive = document.getElementById("creategifoactive")
     const crearGifo = document.getElementById("crearGifo")
+    const lastTrending = document.getElementById("lasttrending")
     creategifo.addEventListener("mouseover", createHover)
     creategifohover.addEventListener("mouseout", undoHover)
         
     function createHover(){
-        creategifo.style.display="none"
+        creategifo.className="dnone"
         creategifohover.className= "createhover"
     }
 
     function undoHover(){
-        creategifo.style.display = "inline-block"
+        creategifo.style.display = "createhover"
         creategifohover.className= "dnone"
     }
 
@@ -766,6 +767,8 @@
         creategifohover.className = "dnone"
         crearGifo.className = "crearGifo"
         intro.className = "dnone"
+        creategifo.className = "dnone"
+        lastTrending.className = "dnone"
     }
 
 </script>
