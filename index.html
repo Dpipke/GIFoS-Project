@@ -678,15 +678,16 @@
             {
             method: "POST",
             body: formData,
-            mode: 'no-cors'
+            mode: 'cors'
             }
         );
-
+    
     const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
     const resUpload = await uploadGif.json();
 
     if (resUpload.meta.status === 200) {
-        loader.style.display = "none";
+        template.classList.add("uploadOk")
+        // loader.style.display = "none";
         // imgSubir.style.display = "none";
         // loaderExitoGifo.style.display = "block";
         // imgExito.style.display = "block";
@@ -728,7 +729,7 @@
         linkMyGifo.src = "images/icon-link-hover.svg"
         
         uploadOverlay.className = "uploadViolet"
-        downloadMyGifo.className = "dnone"
+        downloadMyGifo.className = "downloadmygifo"
         linkMyGifo.className = "dnone"
         subiendo.textContent = "Estamos subiendo tu GIFO"
         subiendo.className = "subiendoP"

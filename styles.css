@@ -800,4 +800,10 @@ footer{
         text-align: center;
         opacity: 1;
     }
+    .downloadmygifo{
+        display: none
+    }
+    .uploadOk .downloadmygifo{
+        display:block
+    }
     }
