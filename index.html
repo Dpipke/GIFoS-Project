@@ -293,14 +293,16 @@
         }
         console.log(gifContainer)
         const user = document.createElement("p")
+        let imagen = document.createElement("img")
 
+        imagen.src = ampliado.src
         user.innerText = ampliado.username 
         user.className = "user"
         gifContainer.appendChild(user)
         title = document.createElement("figcaption")
         title.innerText = ampliado.alt
         title.className = "giftitle"
-        gifContainer.appendChild(ampliado)
+        gifContainer.appendChild(imagen)
         gifContainer.appendChild(title)
         gifContainer.appendChild(cruz)
 
@@ -477,14 +479,15 @@
             const buscado = document.createElement("h2")
             buscado.innerText = input.value
             buscado.className = "buscadotitle"
-            searchingResults.appendChild(buscado)
             const verMas = document.getElementById("vermasresultados")
             console.log(verMas)
             verMas.className ="vermas"
             if (results.data.length){
-                renderResult(results.data, searchingResults, "resultados", "imgresultados", "gifcontainer");
+                resultados.appendChild(buscado)
+                renderResult(results.data, searchingResults, "resultados", "imgresultados", "gifcontainer busqueda");
                 verMas.addEventListener("click", cargarMas)}
             else{
+                resultados.appendChild(buscado)
                 const ouch = document.createElement("img")
                 const otra = document.createElement("figcaption")
 
@@ -520,7 +523,7 @@
         const url = getUrl(q, limit, offset+=12);
         const response = await fetch(url);
         const results = await response.json();  
-        renderResult(results.data, resultados, "resultados", "imgresultados" )
+        renderResult(results.data, resultados, "resultados", "imgresultados","gifcontainer busqueda" )
     
 
 
@@ -728,9 +731,10 @@
         downloadMyGifo.src = "images/icon-download-hover.svg"
         linkMyGifo.src = "images/icon-link-hover.svg"
         
+        loader.className = "loader"
         uploadOverlay.className = "uploadViolet"
         downloadMyGifo.className = "downloadmygifo"
-        linkMyGifo.className = "dnone"
+        linkMyGifo.className = "linkmygifo"
         subiendo.textContent = "Estamos subiendo tu GIFO"
         subiendo.className = "subiendoP"
         

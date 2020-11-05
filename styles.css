@@ -806,4 +806,12 @@ footer{
     .uploadOk .downloadmygifo{
         display:block
     }
+    .uploadOk .loader{
+        display: none;
+    }
+    .busqueda{
+        height: 30vh;
+        width: 20vw;
+    }
+  
     }
