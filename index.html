@@ -539,12 +539,11 @@
             const verMas = document.getElementById("vermasresultados")
             console.log(verMas)
             verMas.className ="vermas"
-            if (results.data.length){
                 resultados.appendChild(buscado)
+            if (results.data.length){
                 renderResult(results.data, searchingResults, "resultados", "imgresultados", "gifcontainer busqueda");
                 verMas.addEventListener("click", cargarMas)}
             else{
-                resultados.appendChild(buscado)
                 searchingResults.classList.add("notfound")
                 resultados.classList.add("resultsnotfound")
                 const ouch = document.createElement("img")
