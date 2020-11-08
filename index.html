@@ -115,8 +115,10 @@
             <p class="comunidad">Mira los ultimos GIFOS de nuestra comunidad</p>
             
             <img class="prev" src="images/button-slider-left.svg" alt="previous" id="prev">
+            <img class="prevhover" src="images/button-slider-left-hover.svg" alt="" id="prevhover">
             <img class="prevnoct" src="images/button-slider-left-md-noct.svg" alt="previous" id="prevnoct">
             <img class="next" src="images/Button-Slider-right.svg" alt="" id="next">
+            <img class="nexthover" src="images/button-slider-right-hover.svg" alt="" id="nexthover">
             <img class="nextnoct" src="images/button-slider-right-md-noct.svg" alt="next" id="nextnoct">
             
             <div class="gallery" id="gallery">
@@ -125,9 +127,7 @@
             </div>
             <div class="dnone" id="modal">
                 <img class="cruz" src="images/close.svg" alt="cerrar" id="cruz">
-                <img class="like" src="images/icon-fav-hover.svg" alt="" id="like">
-                <img class="dnone" src="images/icon-fav-active.svg" alt="" id="likehover">
-                <img class= "download" src="images/icon-download.svg" alt="" id="download">
+ 
                 
             </div>
         </section>
@@ -195,12 +195,14 @@
     
     const prev = document.getElementById("prev")
     const next = document.getElementById("next")
+    const prevhover = document.getElementById("prevhover")
+    const nexthover = document.getElementById("nexthover")
     const prevnoct = document.getElementById("prevnoct")
     const nextnoct = document.getElementById("nextnoct")
 
-    prev.addEventListener("click", scrollIzq)
+    prevhover.addEventListener("click", scrollIzq)
     prevnoct.addEventListener("click", scrollIzq)
-    next.addEventListener("click", scrollDer)
+    nexthover.addEventListener("click", scrollDer)
     nextnoct.addEventListener("click", scrollDer)
  
 
@@ -346,7 +348,9 @@
         divtitle.appendChild(title)
         gifContainer.appendChild(divtitle)
         gifContainer.appendChild(prev)
+        gifContainer.appendChild(prevhover)
         gifContainer.appendChild(next)
+        gifContainer.appendChild(nexthover)
 
         const violetFavHover = document.createElement("img")
         const violetFavActive = document.createElement("img")
@@ -367,13 +371,11 @@
         violetDownloadHover.addEventListener("click", () =>downloadIconGifo(ampliado, divtitle))
         }   
 
-    
     const cruz = document.getElementById("cruz")
-    cruz.addEventListener("click", ()=> cerrar(modal))
+    cruz.addEventListener("click", cerrar)
+    
 
-    function cerrar(elemento){
-        elemento.classList.add("dnone")
-    }
+
 
     function imgHoverComponentFactory(item, expandir, agregarFavoritos, eliminarFavoritos, eliminarMisGifos){
         const violet = document.createElement("div")
@@ -622,7 +624,7 @@
     function misFavoritos(){
         const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
         renderResult(localStorageFavorites, favoritegallery, "resultados", "imgresultados", "searchresults")
-        
+      
         // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
     }
     misFavoritos()
@@ -848,6 +850,17 @@
     function eliminarMisGifos(item){
         localStorage.setItem("listMisGifos", JSON.stringify(localStorageMisGifos.filter(migifo => migifo.id !== item.id)));
     }
+
+    function cerrar(container){
+        modal.style.position ="initial"
+        modal.className = "gifcontainer"
+        console.log("cerrar")
+        console.log(modal)
+    }
+
+    // if(localStorageMisGifos.lenght < 12){
+    //     vermas. display none else block 
+    // }else
 
 </script>
 </html>

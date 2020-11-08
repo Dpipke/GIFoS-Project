@@ -315,7 +315,9 @@ footer{
     right: 0;
     border-radius: 3px 0 0 3px;
 }
-
+.nextnoct,.prevnoct{
+    display: none;
+}
 .modal{
     position: fixed;
     width: 100vw;
@@ -521,12 +523,74 @@ footer{
         z-index: 1;
         transform: translateY(170%);
     } 
+    
+    .prevhover, .nexthover{
+        display: none;
+    }
+    .prev:hover ~ .prevhover{
+        display: block;
+        position: absolute;
+        width: auto;
+        height: 10%;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        z-index: 1;
+        transform: translateY(170%);
+    }
 
-    .prev{
+    .next:hover ~ .nexthover{
+        display: block;
+        position: absolute;
+        width: auto;
+        height: 10%;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        z-index: 1;
+        transform: translateY(170%);
+        right: 0;
+    }
+    .modal .prev{
+        display: block;
+        left: 13%;
+        top: 35%
+    }
+    .modal .prevhover{
+        left: 15.6%;
+        top: 13%
+    }
+    .modal .prev, .modal .next, .modal .prevhover, .modal .nexthover{
+        transform: translateY(0%);
+        height: 10vh;
+        width: 10vw;
+    }
+    .modal .next{
+        right: 13%;
+        top: 35%;
+    }
+
+    .modal img .prev:hover ~ .modal img .prevhover{
         display: block;
 
     }
-
+    .modal .nexthover{
+        left: 77.3%;
+        top: 13%;
+    }
+    .modal img .next:hover ~ .modal img .nexthover{
+        display: block;
+    }
     .day{
         right: 0%;
         display: inline-block;
@@ -934,6 +998,8 @@ footer{
     }
     .modal .cruz{
         margin-top: 5%;
+        z-index: 1;
+        cursor: pointer
     }
     .divtitle{
         margin-right: 30%;
