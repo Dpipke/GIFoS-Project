@@ -371,18 +371,21 @@
         const violetFavActive = document.createElement("img")
         const violetDownloadHover = document.createElement("img")
         const violetExpandHover = document.createElement("img")
+        const trash = document.createElement("img")
         
         violetFavHover.src = "images/icon-fav-hover.svg"
         violetFavActive.src = "images/icon-fav-active.svg"  
         violetDownloadHover.src = "images/icon-download-hover.svg"
         violetExpandHover.src = "images/icon-max-hover.svg"
         violet.src = "images/icon-max-hover.svg"
+        trash.src = "images/icon-trash-hover.svg" 
 
         violet.className = "hoverviolet"
         violetExpandHover.className = "violeticonshover exph"
         violetFavHover.className = "violeticonshover favh"
         violetDownloadHover.className = "violeticonshover dlh"
         violetFavActive.className = "violetfavinactive"
+        trash.className = "violeticonshover trash"
 
         title = document.createElement("figcaption")
         user = document.createElement("p")
@@ -392,7 +395,7 @@
         title.className = "violettitle"
         violet.appendChild(title)
         violet.appendChild(user)
-        
+        violet.appendChild(trash)
         violet.appendChild(violetFavHover)
         violet.appendChild(violetFavActive)
         violet.appendChild(violetDownloadHover)
@@ -742,6 +745,8 @@
         misgifoslist.appendChild(gifoVacioP)
 
         console.log("esta vacio, ves? no hay monstruos aqui")
+    }else{
+        misgifoslist.className = "hayGifs"
     }
 
     async function subirGifo(){
@@ -790,7 +795,7 @@
 
     function misGifos(){
         const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
-        renderResult(localStorageMisGifos, misgifoslist, "resultados", "imgresultados", "searchresults")
+        renderResult(localStorageMisGifos, misgifoslist, "resultados", "imgresultados", "searchresults agregadomisgifos")
         
         // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
     }

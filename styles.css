@@ -444,6 +444,20 @@ footer{
     display: none;
 }
 
+.hayGifs{
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.searchresults.agregadomisgifos .trash{
+    opacity: 0.7;
+    background: #FFFFFF;
+    border-radius: 6px;
+    display: inline-block;
+    height: 10%;
+    right: 0;
+    margin: 3%;
+}
 
 @media screen and (min-width: 730px){
     .crear.day{
@@ -939,5 +953,8 @@ footer{
         width: 7vw;
         height: 7vh;
      
+    }
+    .trash{
+        display: none;
     }
     }
