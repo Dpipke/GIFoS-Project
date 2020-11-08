@@ -159,19 +159,24 @@
     const gallery = document.getElementById("gallery")
     favoritos.addEventListener("click", activarFavoritos)
     misgifos.addEventListener("click", activarMisGifos)
+
     const favoritegallery = document.getElementById("favoritegallery")
+    const resultados = document.getElementById("resultados")
+
 
 
 
     function activarFavoritos(){
         favsec.classList.toggle("dnone");
         intro.classList.toggle("dnone");
+        resultados.classList.toggle("dnone")
 
     }
 
     function activarMisGifos(){
         misgifossec.classList.toggle("dnone");
         intro.classList.toggle("dnone");
+        resultados.classList.toggle("dnone")
     }
 
     
@@ -521,7 +526,6 @@
     let offset = 0
     const limit = 12
 
-    const resultados = document.getElementById("resultados")
     const searchingResults = document.getElementById("searchingResults")
 
     async function resultadosBusqueda(event) {
@@ -827,13 +831,13 @@
     creategifohover.addEventListener("mouseout", undoHover)
         
     function createHover(){
-        creategifo.className="dnone"
-        creategifohover.className= "createhover"
+        creategifo.classList.toggle("dnone")
+        creategifohover.classList.toggle("createhover")
     }
 
     function undoHover(){
-        creategifo.style.display = "createhover"
-        creategifohover.className= "dnone"
+        creategifo.classList.toggle("createhover")
+        creategifohover.classList.toggle("dnone")
     }
 
     creategifohover.addEventListener("click", openCreateGifo)
