@@ -105,7 +105,8 @@
         </section>
 
         <div class="resultados" id="resultados">
-            <div id="searchingResults"></div>
+            <h2 class="buscadotitle" id="buscado"></h2>
+            <div id="searchingResults" class=""></div>
             <img class="dnone" src="images/CTA-ver-mas.svg" alt="" id="vermasresultados">
         </div>
 
@@ -525,7 +526,7 @@
 
     async function resultadosBusqueda(event) {
             event.preventDefault();
-            const buscado = document.createElement("h2")
+            const buscado = document.getElementById("buscado")
             searchingResults.innerHTML =""
             buscado.textContent= ""
             searchingResults.classList.remove("notfound")
@@ -535,11 +536,9 @@
             const response = await fetch(url);
             const results = await response.json();
             buscado.innerText = input.value
-            buscado.className = "buscadotitle"
             const verMas = document.getElementById("vermasresultados")
             console.log(verMas)
             verMas.className ="vermas"
-                resultados.appendChild(buscado)
             if (results.data.length){
                 renderResult(results.data, searchingResults, "resultados", "imgresultados", "gifcontainer busqueda");
                 verMas.addEventListener("click", cargarMas)}
