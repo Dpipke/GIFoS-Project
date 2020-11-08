@@ -159,6 +159,7 @@
     const gallery = document.getElementById("gallery")
     const creategifohover = document.getElementById("creategifohover")
     const crearGifo = document.getElementById("crearGifo")
+    const lasttrending = document.getElementById("lasttrending")
 
     favoritos.addEventListener("click", activarFavoritos)
     misgifos.addEventListener("click", activarMisGifos)
@@ -182,6 +183,9 @@
 
     function activarCrearGifo(){
         crearGifo.classList.toggle("crearGifo")
+        intro.classList.toggle("dnone");
+        resultados.classList.toggle("dnone")
+        lasttrending.classList.toggle("dnone")
     }
     
     const trending = galery => {
