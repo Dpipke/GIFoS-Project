@@ -533,8 +533,14 @@ footer{
         margin-top: 1%;
         margin-left: 9%;
     }
-
     .createhover{
+        display: none
+    }
+ 
+    .licreateday:hover .crear.day{
+        display: none;
+    }
+    .licreateday:hover ~ .licreatehover .createhover{
         right: 0%;
         display: inline-block;
         margin-top: 1%;
@@ -646,7 +652,7 @@ footer{
 
     .divtitle.favorite .violetfavinactive, .gifcontainer.favorite .violetfavinactive{
         display: inline-block;
-        height: 7%;
+        height: 15%;
         opacity: 0.7;
         background: #FFFFFF;
         border-radius: 6px;
@@ -857,7 +863,7 @@ footer{
         background: #FFFFFF;
         border-radius: 6px;
         display: inline-block;
-        height: 10%;
+        height: 15%;
         right: 0;
         margin: 3%;
     }
@@ -959,5 +965,17 @@ footer{
     }
     .searchresults.agregadomisgifos .favh{
         display: none;
+    }
+
+    .gifcontainer.busqueda .hoverviolet, .searchresults.agregadomisgifos .hoverviolet{
+        width: 20vw;
+        height: 30vh;
+    }
+
+    .gifcontainer.busqueda .hoverviolet .violeticonshover, .searchresults.agregadomisgifos .hoverviolet .violeticonshover, .searchresults.favorite .hoverviolet .violeticonshover{
+        height: 15%;
+    }
+    .violeticonshover.trash:hover{
+        opacity: 1;
     }
     }

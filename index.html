@@ -29,9 +29,9 @@
                     <li class=""> <a href="#">Modo Nocturno</a></li>
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#" id="misgifos">Mis GIFOS</a></li>
-                    <li ><img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo"></li>
-                    <li><img class="dnone" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
-                    <li><img class="createactive" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive"></li>
+                    <li class="licreateday"><img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo"></li>
+                    <li class="licreatehover"><img class="createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
+                    <li class="createactive"><img class="createactive" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive"></li>
                     <li><img class="createnoc" src="images/CTA-crear-gifo-modo-noc.svg" alt=""></li>
                     <li><img class="createnoc" src="images/CTA-crear-gifo-hover-modo-noc.svg" alt=""></li>
                     <li><img class="createnoc" src="images/CTA-crear-gifo-active-modo-noc.svg" alt=""></li>
@@ -240,9 +240,11 @@
             eliminarFavoritos(item)
             gifContainer.classList.remove("favorite")
         }
-       
+        const removeMisGifos = () => {
+            eliminarMisGifos(item)
+        }
         const expand = () => ampliar(item, gifContainer, event)
-        const overlay = imgHoverComponentFactory(item, expand, addToFavorites, removeFromFavorites)
+        const overlay = imgHoverComponentFactory(item, expand, addToFavorites, removeFromFavorites, removeMisGifos)
         gifContainer.appendChild(overlay)
 
         gifContainer.appendChild(img)
@@ -365,7 +367,7 @@
         elemento.classList.add("dnone")
     }
 
-    function imgHoverComponentFactory(item, expandir, agregarFavoritos, eliminarFavoritos){
+    function imgHoverComponentFactory(item, expandir, agregarFavoritos, eliminarFavoritos, eliminarMisGifos){
         const violet = document.createElement("div")
         const violetFavHover = document.createElement("img")
         const violetFavActive = document.createElement("img")
@@ -404,7 +406,7 @@
         violetExpandHover.addEventListener("click", expandir) 
         violetFavHover.addEventListener("click", agregarFavoritos)
         violetFavActive.addEventListener("click", eliminarFavoritos)
-
+        trash.addEventListener("click",eliminarMisGifos )
         violetDownloadHover.addEventListener("click", () =>downloadIconGifo(item, violet))
 
         return violet
@@ -835,34 +837,8 @@
         return uploadOverlay
     }
 
-    const creategifo = document.getElementById("creategifo")
-    const creategifohover = document.getElementById("creategifohover")
-    const creategifoactive = document.getElementById("creategifoactive")
-    const crearGifo = document.getElementById("crearGifo")
-    const lastTrending = document.getElementById("lasttrending")
-    creategifo.addEventListener("mouseover", createHover)
-    creategifohover.addEventListener("mouseout", undoHover)
-        
-    function createHover(){
-        creategifo.style.display = "none"
-        creategifohover.classList.toggle("createhover")
-    }
-
-    function undoHover(){
-        creategifo.style.display = "block"
-        creategifohover.classList.toggle("dnone")
-    }
-
-    creategifohover.addEventListener("click", openCreateGifo)
-
-    function openCreateGifo(){
-        creategifoactive.className = "createhover" 
-        creategifohover.className = "dnone"
-        crearGifo.className = "crearGifo"
-        intro.className = "dnone"
-        creategifo.className = "dnone"
-        lastTrending.className = "dnone"
-        favoritos.className = "dnone"
+    function eliminarMisGifos(item){
+        localStorage.setItem("listMisGifos", JSON.stringify(localStorageMisGifos.filter(migifo => migifo.id !== item.id)));
     }
 
 </script>
