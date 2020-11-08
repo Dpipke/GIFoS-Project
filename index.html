@@ -398,8 +398,20 @@
         return violet
     }
 
+    const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+    if(localStorageFavorites == 0){
+        const favoritosVacio = document.createElement("img")
+        const favoritosVacioP = document.createElement("p")
+
+        favoritosVacio.src= "images/icon-fav-sin-contenido.svg"
+        favoritosVacioP.textContent = "¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!"
+        favoritosVacioP.className = "gifoVacioP"
+
+        favoritegallery.appendChild(favoritosVacio)
+        favoritegallery.appendChild(favoritosVacioP)
+    }
+
     function existeFavorito(item){
-        const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
         const idGifo = item.id;
         return localStorageFavorites.some((element) => {
                 return element.id === idGifo;
@@ -547,19 +559,19 @@
 
         }
 
-        async function downloadIconGifo(item, contenedor) {
-            const a = document.createElement("a");
-            let response = await fetch(item.images.original.url);
-            let file = await response.blob();
-            a.download = item.title;
-            a.href = window.URL.createObjectURL(file);
-            a.dataset.downloadurl = ["application/octet-stream", a.download, a.href].join(
-                ":"
-            );
-            contenedor.appendChild(a);
-            a.click()
-            return a;
-        }
+    async function downloadIconGifo(item, contenedor) {
+        const a = document.createElement("a");
+        let response = await fetch(item.images.original.url);
+        let file = await response.blob();
+        a.download = item.title;
+        a.href = window.URL.createObjectURL(file);
+        a.dataset.downloadurl = ["application/octet-stream", a.download, a.href].join(
+            ":"
+        );
+        contenedor.appendChild(a);
+        a.click()
+        return a;
+    }
   
     
     async function cargarMas(){
