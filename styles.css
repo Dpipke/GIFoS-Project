@@ -442,6 +442,8 @@ footer{
     align-items: center;
 }
 
+
+
 @media screen and (min-width: 730px){
     .crear.day{
         display:block;
@@ -843,6 +845,18 @@ footer{
     .searchresults.favorite .hoverviolet{
         width: 20vw;
         height: 30vh;
+    }
+    .searchresults.favorite .hoverviolet .violetfavinactive{
+        opacity: 0.7;
+        background: #FFFFFF;
+        border-radius: 6px;
+        display: inline-block;
+        height: 12%;
+        right: 0;
+        margin: 3%;
+    }
+    .searchresults.favorite .hoverviolet .violeticonshover.favh{
+        display: none;
     }
 
     .uploadViolet{

@@ -158,6 +158,8 @@
     const gallery = document.getElementById("gallery")
     favoritos.addEventListener("click", activarFavoritos)
     misgifos.addEventListener("click", activarMisGifos)
+    const favoritegallery = document.getElementById("favoritegallery")
+
 
 
     function activarFavoritos(){
@@ -406,6 +408,7 @@
         favoritosVacio.src= "images/icon-fav-sin-contenido.svg"
         favoritosVacioP.textContent = "¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!"
         favoritosVacioP.className = "gifoVacioP"
+        favoritegallery.className = "mistgifoslist"
 
         favoritegallery.appendChild(favoritosVacio)
         favoritegallery.appendChild(favoritosVacioP)
@@ -601,10 +604,10 @@
 
     palabrasTendencia()
     
-    const favoritegallery = document.getElementById("favoritegallery")
     function misFavoritos(){
         const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
         renderResult(localStorageFavorites, favoritegallery, "resultados", "imgresultados", "searchresults")
+        
         // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
     }
     misFavoritos()
