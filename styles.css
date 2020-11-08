@@ -546,6 +546,15 @@ footer{
         margin-top: 1%;
         margin-left: 9%;
     }
+    .licreatehover .createhover:active{
+        display: none;
+    }
+    .licreatehover .createhover:active ~ .licreateactive .createactive{
+        right: 0%;
+        display: inline-block;
+        margin-top: 1%;
+        margin-left: 9%;
+    }
     .title{
         font-size: 35px;
         text-align: center;
