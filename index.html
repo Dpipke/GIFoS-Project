@@ -707,6 +707,7 @@
     finalizar.addEventListener("click", detenerGrabacion)
     
     let previewImg = document.getElementById("previewImgGif")
+    const misgifoslist = document.getElementById("misgifoslist")
     function detenerGrabacion(){
         recorder.stopRecording()
         clearInterval(countdown);
@@ -730,7 +731,6 @@
     if(localStorageMisGifos.length == 0){
         const gifoVacio = document.createElement("img")
         const gifoVacioP = document.createElement("h2")
-        const misgifoslist = document.getElementById("misgifoslist")
         const verMasMisGifos = document.getElementById("vermasmisgifos")
 
         gifoVacio.src = "images/icon-mis-gifos-sin-contenido.svg"
@@ -787,6 +787,15 @@
         );
     }
     }    
+
+    function misGifos(){
+        const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
+        renderResult(localStorageMisGifos, misgifoslist, "resultados", "imgresultados", "searchresults")
+        
+        // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
+    }
+    misGifos()
+    
 
     function uploadingOverlay(){
         const uploadOverlay = document.createElement("div")
