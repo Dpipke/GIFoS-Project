@@ -37,7 +37,7 @@ label{
 }
 
 
-.noc, .createhover, .createactive{
+.noc, .createhover, .createactive, .createnoc{
     display: none;
 }
 
@@ -392,7 +392,6 @@ footer{
     font-size: 25px;
     color: #572EE5;
     line-height: 40px;
-    margin-left: 38%;
     align-self: center;
 
 
@@ -407,7 +406,30 @@ footer{
 .hoverviolet{ 
     display: none;
 }
+.crear.day{
+    display:none
+}
+.searchresults{
+    margin: 2%;
+}
+.notfound +.vermas{
+    display: none;
+}
+.notfound{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+}
+.resultsnotfound{
+    display: flex;
+    flex-direction: column;
+}
+
 @media screen and (min-width: 730px){
+    .crear.day{
+        display:block;
+    }
     .logomobile{
         height: 10%;
         width: auto;
@@ -445,9 +467,18 @@ footer{
         margin-left: 3%;}
         
     .imgppal{
-        width: 60%;
+        width: 40vw;
+    }
+    .search{
+        width:60vw
+    }
+    input[type= "search"]{
+        width: 45vw;
     }
 
+    .prevnoct, .next.noct{
+        display: none
+    }
 
     .prev, .next {
         display: block;
@@ -491,9 +522,7 @@ footer{
         line-height: 50px;
         width: 60%;
     }
-    .imgppal{
-        width: 50%;
-    }
+
     .search{
         padding: 0;
     }
@@ -511,6 +540,7 @@ footer{
     }
     .lupita{
         width: 5%;
+        margin-top: 2%
     }
 
     .trending{
@@ -523,9 +553,23 @@ footer{
     footer{
         flex-direction: row;
         padding: 0;
+        position: relative;
     }
     .final{
-        top:0;
+        position: absolute;
+        bottom:0;
+        align-self: flex-end;
+    }
+    .compartir{
+        display: flex;
+        flex-direction: row;
+        align-self: flex-start;
+        margin: 5%;
+        margin-left: 0;
+
+    }
+    .compartir a{
+        margin-right: 3vw;
     }
     .modal .like{
         border: #572EE5 1px solid;
@@ -562,7 +606,7 @@ footer{
     }
 
 
-    .gifcontainer .violeticonshover, .searchresults .violeticonshover{
+    .modal .divtitle .violeticonshover, .gifcontainer .violeticonshover, .searchresults .violeticonshover{
         opacity: 0.7;
         background: #FFFFFF;
         border-radius: 6px;
@@ -576,7 +620,7 @@ footer{
         display: none;
     }
 
-    .gifcontainer.favorite .violetfavinactive{
+    .divtitle.favorite .violetfavinactive, .gifcontainer.favorite .violetfavinactive{
         display: inline-block;
         height: 7%;
         opacity: 0.7;
@@ -624,6 +668,7 @@ footer{
         left: 5%;
         margin: 2%;
     }
+
 
     .imgresultados{
         width: 20vw;
@@ -718,11 +763,12 @@ footer{
         display: flex;  
         width: 20vw;      
         justify-content: center;
+       
     }
     .number{
         border: 1px solid #572EE5;
         border-radius: 50%;
-        padding: 5%;
+        padding: 5px;
         font-family: "Roboto";
         font-weight: 300;
         font-size: 18px;
@@ -759,7 +805,7 @@ footer{
         display: inline-block;
         margin: 15%;
         border-radius: 50%;
-        padding: 10%;
+        padding: 10px;
     }
 
     .counter{
@@ -770,6 +816,7 @@ footer{
         letter-spacing: 0;
         text-align: center;
         line-height: 22px;
+        margin-left: 40%;
     }
     .modal .imgresultados, .modal .mySlides{
         width: 50vw;
@@ -791,6 +838,7 @@ footer{
         display: flex;
         flex-direction: column;
         justify-content: center;
+        height: 240px;
     }
     .subiendoP{
         font-family: "Montserrat";
@@ -800,18 +848,64 @@ footer{
         text-align: center;
         opacity: 1;
     }
-    .downloadmygifo{
+    .downloadmygifo, .linkmygifo, .exitoP{
         display: none
     }
-    .uploadOk .downloadmygifo{
+    .uploadOk .downloadmygifo, .uploadOk.linkmygifo, .uploadOk .exitoP{
         display:block
     }
     .uploadOk .loader{
         display: none;
     }
+    
     .busqueda{
         height: 30vh;
         width: 20vw;
     }
-  
+    .check{
+        display: none;
+    }
+    .uploadOk .check{
+        display: block;
+    }
+    .modal{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        z-index: 1
+    }
+    .modal img{
+        width: 50vw;
+        margin: 0
+    }
+    .modal .cruz{
+        margin-top: 5%;
+    }
+    .divtitle{
+        margin-right: 30%;
+        margin-top: 3%;
+        display: flex;
+   
+    }
+    .ul-nav{
+     z-index: 0
+    }
+    .giftitle{
+        width: 70vw;
+    }
+    .user{
+        font-family: "Roboto";
+        font-weight: 500;
+        font-size: 15px;
+        color: #000000;
+        text-align: center;
+    }
+
+    .modal .divtitle .violeticonshover{
+        margin: 0;
+        width: 7vw;
+        height: 7vh;
+     
+    }
     }

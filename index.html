@@ -20,8 +20,8 @@
             <label for="navcb" class="label-nav">
                 <img class="burger dia" src="images/burger.svg" alt="boton menu">
                 <img class="burger noc" src="images/burger-modo-noct.svg" alt="boton menu">
-                <img class="close dia" src="images/Button-close-modo-noc.svg" alt="cerrar menu">
-                <img class="close noc" src="images/Button-close-hover-modo-noc.svg" alt="cerrar menu">
+                <img class="close dia" src="images/close.svg" alt="cerrar menu">
+                <img class="close noc" src="images/close-modo-noct.svg" alt="cerrar menu">
                 
             </label>
             <ul class="ul-nav">
@@ -30,9 +30,11 @@
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#">Mis GIFOS</a></li>
                     <li ><img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo"></li>
-                    <li><img class="dnone" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
-                    <li><img class="dnone" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive"></li>
-
+                    <li><img class="createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
+                    <li><img class="createactive" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive"></li>
+                    <li><img class="createnoc" src="images/CTA-crear-gifo-modo-noc.svg" alt=""></li>
+                    <li><img class="createnoc" src="images/CTA-crear-gifo-hover-modo-noc.svg" alt=""></li>
+                    <li><img class="createnoc" src="images/CTA-crear-gifo-active-modo-noc.svg" alt=""></li>
                     
                 </ul>
         </nav>
@@ -47,7 +49,7 @@
                     <input type="search" placeholder="Buscá GIFOS y más..." id="busqueda" autocomplete="off">
                     <label for="submit">
                         <img class="lupita" src="images/icon-search.svg" alt="buscar" id="lupita">
-                        <img  class="noc" src="images/icon-search-mod-noc.svg" alt="buscar">
+                        <img  class="lens noc" src="images/icon-search-mod-noc.svg" alt="buscar">
                         <img class="dnone" src="images/close.svg" alt="cerrar" id="cerrar">
                 </label>
             </form>
@@ -87,11 +89,11 @@
                 <img class="cinta" src="images/pelicula.svg" alt="">
             </div>
             <div class="containerBotones">
+                <p class="dnone" id="counter">00:00:00</p>
                 <ul class="numbers">
                     <li class="number" id="1erpaso">1</li>
                     <li class="number" id="2dopaso">2</li>
                     <li class="number" id="3erpaso">3</li>
-                    <p class="dnone" id="counter">00:00:00</p>
                 </ul>
                 <div class="linea grabarmg"></div>
                 <p class="comenzar" id="comenzar">COMENZAR</p>
@@ -110,8 +112,10 @@
             <h2 class="trendingGifos">Trending GIFOS</h2>
             <p class="comunidad">Mira los ultimos GIFOS de nuestra comunidad</p>
             
-            <img class="prev" src="images/button-slider-left.svg" alt="" id="prev">
+            <img class="prev" src="images/button-slider-left.svg" alt="previous" id="prev">
+            <img class="prevnoct" src="images/button-slider-left-md-noct.svg" alt="previous" id="prevnoct">
             <img class="next" src="images/Button-Slider-right.svg" alt="" id="next">
+            <img class="nextnoct" src="images/button-slider-right-md-noct.svg" alt="next" id="nextnoct">
             
             <div class="gallery" id="gallery">
                 
@@ -165,9 +169,13 @@
     
     const prev = document.getElementById("prev")
     const next = document.getElementById("next")
+    const prevnoct = document.getElementById("prevnoct")
+    const nextnoct = document.getElementById("nextnoct")
 
     prev.addEventListener("click", scrollIzq)
+    prevnoct.addEventListener("click", scrollIzq)
     next.addEventListener("click", scrollDer)
+    nextnoct.addEventListener("click", scrollDer)
  
 
     // section trending
@@ -291,22 +299,43 @@
             users.forEach(item => item.parentNode.removeChild(item))
            
         }
-        console.log(gifContainer)
+        console.log(ampliado)
         const user = document.createElement("p")
         let imagen = document.createElement("img")
+        const divtitle = document.createElement("div")
 
-        imagen.src = ampliado.src
+        imagen.src = ampliado.images.original.url
         user.innerText = ampliado.username 
         user.className = "user"
-        gifContainer.appendChild(user)
+        divtitle.className = "divtitle"
         title = document.createElement("figcaption")
-        title.innerText = ampliado.alt
+        title.innerText = ampliado.title
         title.className = "giftitle"
-        gifContainer.appendChild(imagen)
-        gifContainer.appendChild(title)
         gifContainer.appendChild(cruz)
+        gifContainer.appendChild(imagen)
+        divtitle.appendChild(user)
+        divtitle.appendChild(title)
+        gifContainer.appendChild(divtitle)
+        gifContainer.appendChild(prev)
+        gifContainer.appendChild(next)
 
+        const violetFavHover = document.createElement("img")
+        const violetFavActive = document.createElement("img")
+        const violetDownloadHover = document.createElement("img")
+        violetFavHover.src = "images/icon-fav-hover.svg"
+        violetFavActive.src = "images/icon-fav-active.svg"  
+        violetDownloadHover.src = "images/icon-download-hover.svg"
+        violetFavHover.className = "violeticonshover favh"
+        violetDownloadHover.className = "violeticonshover dlh"
+        violetFavActive.className = "violetfavinactive"
 
+        divtitle.appendChild(violetFavHover)
+        divtitle.appendChild(violetFavActive)
+        divtitle.appendChild(violetDownloadHover)
+        violetFavHover.addEventListener("click", agregarFavoritos)
+        violetFavActive.addEventListener("click", eliminarFavoritos)
+
+        violetDownloadHover.addEventListener("click", () =>downloadIconGifo(ampliado, divtitle))
         }   
 
     
@@ -471,12 +500,15 @@
 
     async function resultadosBusqueda(event) {
             event.preventDefault();
+            const buscado = document.createElement("h2")
             searchingResults.innerHTML =""
+            buscado.textContent= ""
+            searchingResults.classList.remove("notfound")
+            resultados.classList.remove("resultsnotfound")
             const q = input.value.split(" ").join("-")
             const url = getUrl(q, limit, offset);
             const response = await fetch(url);
             const results = await response.json();
-            const buscado = document.createElement("h2")
             buscado.innerText = input.value
             buscado.className = "buscadotitle"
             const verMas = document.getElementById("vermasresultados")
@@ -488,6 +520,8 @@
                 verMas.addEventListener("click", cargarMas)}
             else{
                 resultados.appendChild(buscado)
+                searchingResults.classList.add("notfound")
+                resultados.classList.add("resultsnotfound")
                 const ouch = document.createElement("img")
                 const otra = document.createElement("figcaption")
 
@@ -495,8 +529,8 @@
                 otra.innerText = "Intenta con otra búsqueda"
                 otra.className = "otra"
 
-                resultados.appendChild(ouch)
-                resultados.appendChild(otra)
+                searchingResults.appendChild(ouch)
+                searchingResults.appendChild(otra)
             }
 
 
@@ -690,18 +724,6 @@
 
     if (resUpload.meta.status === 200) {
         template.classList.add("uploadOk")
-        // loader.style.display = "none";
-        // imgSubir.style.display = "none";
-        // loaderExitoGifo.style.display = "block";
-        // imgExito.style.display = "block";
-        // spanActions.style.display = "block";
-        // iconDownload.download = "mygif";
-        // iconDownload.href = imageUrl;
-        // iconDownload.dataset.downloadurl = [
-        // "application/octet-stream",
-        // iconDownload.download,
-        // iconDownload.href,
-        // ].join(":");
         console.log(resUpload)
         const resultado = await fetch `https://api.giphy.com/v1/gifs/${resUpload.data.id}?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;
         const res = await results.json();
@@ -723,26 +745,33 @@
     function uploadingOverlay(){
         const uploadOverlay = document.createElement("div")
         const subiendo = document.createElement("p")
+        const exito = document.createElement("p")
         const loader = document.createElement("img")
         const downloadMyGifo = document.createElement("img")
         const linkMyGifo = document.createElement("img")
+        const check = document.createElement("img")
 
         loader.src = "images/loader.svg"
+        check.src = "images/check.svg"
         downloadMyGifo.src = "images/icon-download-hover.svg"
         linkMyGifo.src = "images/icon-link-hover.svg"
         
         loader.className = "loader"
+        check.className = "check"
         uploadOverlay.className = "uploadViolet"
         downloadMyGifo.className = "downloadmygifo"
         linkMyGifo.className = "linkmygifo"
         subiendo.textContent = "Estamos subiendo tu GIFO"
         subiendo.className = "subiendoP"
+        exito.textContent = "GIFO subido con éxito"
+        exito.className = "exitoP"
         
         uploadOverlay.appendChild(downloadMyGifo)
         uploadOverlay.appendChild(linkMyGifo)
         uploadOverlay.appendChild(loader)
         uploadOverlay.appendChild(subiendo)
 
+        downloadMyGifo.addEventListener("click", downloadIconGifo)
 
         return uploadOverlay
     }
@@ -774,6 +803,7 @@
         intro.className = "dnone"
         creategifo.className = "dnone"
         lastTrending.className = "dnone"
+        favoritos.className = "dnone"
     }
 
 </script>

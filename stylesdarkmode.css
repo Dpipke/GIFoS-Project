@@ -1,0 +1,126 @@
+body{
+    background: #37383C;
+}
+.logomobile{
+    display: none;
+}
+.logomobilenoct.noc{
+    display: block;
+    position: relative;
+    width: 15%;
+    height: 15%;
+    left: 5%;
+    margin-top:8%;
+    margin-bottom: 5%;
+}
+
+.burger.dia{
+    display: none;
+}
+
+.burger.noc{
+    display: block;
+}
+
+.close.dia{
+    display: none;
+}
+
+.close.noc{
+    position: absolute;
+    box-sizing: border-box;
+    margin-right: 16px;
+    padding: 0;
+    right: 0;
+    top: 8%;}
+
+.title{
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 25px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 33px;
+}
+
+.search{
+    border: 1px solid #FFFFFF;
+    border-radius: 27px;
+    width: 95%; 
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+}
+
+.lupita{
+    display: none;
+}
+.lens.noc{
+    width: 5%;
+    display: block;
+
+}
+
+.trending{
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 25px;
+    margin-top: 10%;
+    margin-bottom: 0;
+    width: 65%;
+}
+
+.tendenciasActuales{
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 14px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 25px;
+}
+
+.lasttrending{
+    background: #222326;
+    height: auto;
+    margin-top: 15%;
+}
+
+.trendingGifos{
+    font-family: "Montserrat";
+    font-weight: bold;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 30px;
+}
+
+.comunidad{
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 23px;
+    line-height: 23px;
+    width: 60%;
+    margin-left: 20%
+}
+
+footer{
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 15px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+}
+.compartir{
+    display: none;
+}
+.compartirnoc.noc{
+    display: block;
+    margin: 10%;
+}
+
