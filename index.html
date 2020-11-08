@@ -240,6 +240,7 @@
             eliminarFavoritos(item)
             gifContainer.classList.remove("favorite")
         }
+       
         const expand = () => ampliar(item, gifContainer, event)
         const overlay = imgHoverComponentFactory(item, expand, addToFavorites, removeFromFavorites)
         gifContainer.appendChild(overlay)
@@ -430,7 +431,6 @@
 
     
     function agregarFavoritos(item) {
-        const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
 
         const idGifo = item.id;
         const titleGifo = item.title;
@@ -766,7 +766,7 @@
     
     const resUpload = await uploadGif.json();
 
-
+    
     if (resUpload.meta.status === 200) {
         template.classList.add("uploadOk")
         console.log(resUpload)
