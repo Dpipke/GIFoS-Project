@@ -30,7 +30,7 @@
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#" id="misgifos">Mis GIFOS</a></li>
                     <li ><img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo"></li>
-                    <li><img class="createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
+                    <li><img class="dnone" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
                     <li><img class="createactive" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive"></li>
                     <li><img class="createnoc" src="images/CTA-crear-gifo-modo-noc.svg" alt=""></li>
                     <li><img class="createnoc" src="images/CTA-crear-gifo-hover-modo-noc.svg" alt=""></li>
@@ -770,10 +770,10 @@
     if (resUpload.meta.status === 200) {
         template.classList.add("uploadOk")
         console.log(resUpload)
-        const resultado = await fetch `https://api.giphy.com/v1/gifs/${resUpload.data.id}?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;
-        const res = await results.json();
+        const resultadoUpload = await fetch (`https://api.giphy.com/v1/gifs/${resUpload.data.id}?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`);
+        const res = await resultadoUpload.json();
         console.log(res);
-        iconLink.href = res.data.url;
+        // iconLink.href = res.data.url;
         localStorageMisGifos.push({
         id: res.data.id,
         title: res.data.title,
@@ -831,12 +831,12 @@
     creategifohover.addEventListener("mouseout", undoHover)
         
     function createHover(){
-        creategifo.classList.toggle("dnone")
+        creategifo.style.display = "none"
         creategifohover.classList.toggle("createhover")
     }
 
     function undoHover(){
-        creategifo.classList.toggle("createhover")
+        creategifo.style.display = "block"
         creategifohover.classList.toggle("dnone")
     }
 
