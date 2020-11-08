@@ -157,14 +157,15 @@
     const misgifossec = document.getElementById("misgifossec")
     const intro = document.getElementById("intro")
     const gallery = document.getElementById("gallery")
+    const creategifohover = document.getElementById("creategifohover")
+    const crearGifo = document.getElementById("crearGifo")
+
     favoritos.addEventListener("click", activarFavoritos)
     misgifos.addEventListener("click", activarMisGifos)
+    creategifohover.addEventListener("click", activarCrearGifo)
 
     const favoritegallery = document.getElementById("favoritegallery")
     const resultados = document.getElementById("resultados")
-
-
-
 
     function activarFavoritos(){
         favsec.classList.toggle("dnone");
@@ -179,6 +180,9 @@
         resultados.classList.toggle("dnone")
     }
 
+    function activarCrearGifo(){
+        crearGifo.classList.toggle("crearGifo")
+    }
     
     const trending = galery => {
         return `https://api.giphy.com/v1/gifs/trending?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`;

@@ -749,6 +749,7 @@ footer{
         margin-top: 5%;
     }
     .crearGifo{
+        display: block;
         margin-bottom: 10%;
     }
 
