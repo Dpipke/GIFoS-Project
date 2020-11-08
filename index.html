@@ -28,7 +28,7 @@
                 
                     <li class=""> <a href="#">Modo Nocturno</a></li>
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
-                    <li class=""> <a href="#">Mis GIFOS</a></li>
+                    <li class=""> <a href="#" id="misgifos">Mis GIFOS</a></li>
                     <li ><img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo"></li>
                     <li><img class="createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
                     <li><img class="createactive" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive"></li>
@@ -67,10 +67,11 @@
             <img src="images/CTA-ver-mas.svg" alt="ver mas" id="vermas">
         </section>
 
-        <section class="dnone">
+        <section class="misgifossec dnone" id="misgifossec">
             <img src="images/icon-mis-gifos.svg" alt="">
             <h2 class="mgtitle">Mis GIFOS</h2>
-            <img src="images/CTA-ver-mas.svg" alt="ver mas">
+            <div class="misgifoslist" id="misgifoslist"></div>
+            <img src="images/CTA-ver-mas.svg" alt="ver mas" id="vermasmisgifos">
         </section>
 
         <section class="dnone" id="crearGifo">
@@ -150,15 +151,24 @@
 </body>
 <script>
     const favoritos = document.getElementById("favoritos")
+    const misgifos = document.getElementById("misgifos")
     const favsec = document.getElementById("favsec")
+    const misgifossec = document.getElementById("misgifossec")
     const intro = document.getElementById("intro")
     const gallery = document.getElementById("gallery")
     favoritos.addEventListener("click", activarFavoritos)
+    misgifos.addEventListener("click", activarMisGifos)
+
 
     function activarFavoritos(){
         favsec.classList.toggle("dnone");
         intro.classList.toggle("dnone");
 
+    }
+
+    function activarMisGifos(){
+        misgifossec.classList.toggle("dnone");
+        intro.classList.toggle("dnone");
     }
 
     
@@ -699,6 +709,24 @@
 
     subir.addEventListener("click", subirGifo)
 
+    const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
+    if(localStorageMisGifos.length == 0){
+        const gifoVacio = document.createElement("img")
+        const gifoVacioP = document.createElement("h2")
+        const misgifoslist = document.getElementById("misgifoslist")
+        const verMasMisGifos = document.getElementById("vermasmisgifos")
+
+        gifoVacio.src = "images/icon-mis-gifos-sin-contenido.svg"
+        gifoVacioP.textContent = "¡Anímate a crear tu primer GIFO!"
+        gifoVacioP.className = "gifoVacioP"
+        verMasMisGifos.style.display = "none"
+
+        misgifoslist.appendChild(gifoVacio)
+        misgifoslist.appendChild(gifoVacioP)
+
+        console.log("esta vacio, ves? no hay monstruos aqui")
+    }
+
     async function subirGifo(){
         segundoPaso.className = "number"
         tercerPaso.className = "pasosHover"
@@ -719,8 +747,8 @@
             }
         );
     
-    const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
     const resUpload = await uploadGif.json();
+
 
     if (resUpload.meta.status === 200) {
         template.classList.add("uploadOk")
@@ -742,6 +770,7 @@
         );
     }
     }    
+
     function uploadingOverlay(){
         const uploadOverlay = document.createElement("div")
         const subiendo = document.createElement("p")
