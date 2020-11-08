@@ -449,15 +449,6 @@ footer{
     justify-content: flex-start;
 }
 
-.searchresults.agregadomisgifos .trash{
-    opacity: 0.7;
-    background: #FFFFFF;
-    border-radius: 6px;
-    display: inline-block;
-    height: 10%;
-    right: 0;
-    margin: 3%;
-}
 
 @media screen and (min-width: 730px){
     .crear.day{
@@ -954,7 +945,19 @@ footer{
         height: 7vh;
      
     }
-    .trash{
+    .violeticonshover.trash{
+        display: none;
+    }
+    .searchresults.agregadomisgifos .trash{
+        opacity: 0.7;
+        background: #FFFFFF;
+        border-radius: 6px;
+        display: inline-block;
+        height: 10%;
+        right: 0;
+        margin: 3%;
+    }
+    .searchresults.agregadomisgifos .favh{
         display: none;
     }
     }
