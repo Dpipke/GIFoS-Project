@@ -117,6 +117,7 @@
             <img class="prev" src="images/button-slider-left.svg" alt="previous" id="prev">
             <img class="prevhover" src="images/button-slider-left-hover.svg" alt="" id="prevhover">
             <img class="prevnoct" src="images/button-slider-left-md-noct.svg" alt="previous" id="prevnoct">
+            <img class="prevnocthover" src="images/Button-close-hover-modo-noc.svg" alt="">
             <img class="next" src="images/Button-Slider-right.svg" alt="" id="next">
             <img class="nexthover" src="images/button-slider-right-hover.svg" alt="" id="nexthover">
             <img class="nextnoct" src="images/button-slider-right-md-noct.svg" alt="next" id="nextnoct">
@@ -241,7 +242,17 @@
             gifContainer.classList.add("favorite")
         }
         
+        const favExpand = document.createElement("img")
+        const favActiveExpand = document.createElement("img")
+        const downloadExpand = document.createElement("img")
+        favExpand.src = "images/icon-fav-hover.svg"
+        favActiveExpand.src = "images/icon-fav-active.svg"
+        downloadExpand.src ="images/icon-download-hover.svg"
+        favExpand.className = "expanded"
+        favActiveExpand.className = "expanded"
+        downloadExpand.className = "expanded"
         
+
         const addToFavorites = () => {
             agregarFavoritos(item)
             gifContainer.classList.add("favorite")
@@ -253,10 +264,14 @@
         const removeMisGifos = () => {
             eliminarMisGifos(item)
         }
-        const expand = () => ampliar(item, gifContainer, event)
+        // const expand = () => ampliar(item, gifContainer, event)
+        const expand = () => expandir(event, gifContainer, item)
         const overlay = imgHoverComponentFactory(item, expand, addToFavorites, removeFromFavorites, removeMisGifos)
         gifContainer.appendChild(overlay)
 
+        gifContainer.appendChild(favExpand)
+        gifContainer.appendChild(favActiveExpand)
+        gifContainer.appendChild(downloadExpand)
         gifContainer.appendChild(img)
         container.appendChild(gifContainer);
 
@@ -315,12 +330,66 @@
     
     
 
-    const modal = document.getElementById("modal")
+    // const modal = document.getElementById("modal")
 
-    const cruz = document.getElementById("cruz")
-    function ampliar(ampliado, gifContainer, event){
+    // function ampliar(ampliado, gifContainer, event){
+    //     event.stopPropagation()  
+    //     gifContainer.className = "modal"
+    //     const imgs = gifContainer.querySelectorAll(".mySlides")
+    //     const titles = gifContainer.querySelectorAll(".giftitle")
+    //     const users = gifContainer.querySelectorAll(".user")
+
+    //     if (imgs.length > 0){
+    //         imgs.forEach(item => item.parentNode.removeChild(item))
+    //         titles.forEach(item => item.parentNode.removeChild(item))
+    //         users.forEach(item => item.parentNode.removeChild(item))
+           
+    //     }
+    //     console.log(ampliado)
+    //     const user = document.createElement("p")
+    //     let imagen = document.createElement("img")
+    //     const divtitle = document.createElement("div")
+
+    //     imagen.src = ampliado.images.original.url
+    //     user.innerText = ampliado.username 
+    //     user.className = "user"
+    //     divtitle.className = "divtitle"
+    //     title = document.createElement("figcaption")
+    //     title.innerText = ampliado.title
+    //     title.className = "giftitle"
+    //     gifContainer.appendChild(cruz)
+    //     gifContainer.appendChild(imagen)
+    //     divtitle.appendChild(user)
+    //     divtitle.appendChild(title)
+    //     gifContainer.appendChild(divtitle)
+    //     gifContainer.appendChild(prev)
+    //     gifContainer.appendChild(prevhover)
+    //     gifContainer.appendChild(next)
+    //     gifContainer.appendChild(nexthover)
+
+    //     const violetFavHover = document.createElement("img")
+    //     const violetFavActive = document.createElement("img")
+    //     const violetDownloadHover = document.createElement("img")
+    //     violetFavHover.src = "images/icon-fav-hover.svg"
+    //     violetFavActive.src = "images/icon-fav-active.svg"  
+    //     violetDownloadHover.src = "images/icon-download-hover.svg"
+    //     violetFavHover.className = "violeticonshover favh"
+    //     violetDownloadHover.className = "violeticonshover dlh"
+    //     violetFavActive.className = "violetfavinactive"
+
+    //     divtitle.appendChild(violetFavHover)
+    //     divtitle.appendChild(violetFavActive)
+    //     divtitle.appendChild(violetDownloadHover)
+    //     violetFavHover.addEventListener("click", agregarFavoritos)
+    //     violetFavActive.addEventListener("click", eliminarFavoritos)
+
+    //     violetDownloadHover.addEventListener("click", () =>downloadIconGifo(ampliado, divtitle))
+    //     cruz.addEventListener("click", () => cerrar(ampliado, gifContainer, "gifcontainer"))
+    //     }   
+
+    function expandir(event, gifContainer, ampliado){
         event.stopPropagation()  
-        gifContainer.className = "modal"
+        gifContainer.classList.toggle("modal")
         const imgs = gifContainer.querySelectorAll(".mySlides")
         const titles = gifContainer.querySelectorAll(".giftitle")
         const users = gifContainer.querySelectorAll(".user")
@@ -329,50 +398,9 @@
             imgs.forEach(item => item.parentNode.removeChild(item))
             titles.forEach(item => item.parentNode.removeChild(item))
             users.forEach(item => item.parentNode.removeChild(item))
-           
         }
-        console.log(ampliado)
-        const user = document.createElement("p")
-        let imagen = document.createElement("img")
-        const divtitle = document.createElement("div")
 
-        imagen.src = ampliado.images.original.url
-        user.innerText = ampliado.username 
-        user.className = "user"
-        divtitle.className = "divtitle"
-        title = document.createElement("figcaption")
-        title.innerText = ampliado.title
-        title.className = "giftitle"
-        gifContainer.appendChild(cruz)
-        gifContainer.appendChild(imagen)
-        divtitle.appendChild(user)
-        divtitle.appendChild(title)
-        gifContainer.appendChild(divtitle)
-        gifContainer.appendChild(prev)
-        gifContainer.appendChild(prevhover)
-        gifContainer.appendChild(next)
-        gifContainer.appendChild(nexthover)
-
-        const violetFavHover = document.createElement("img")
-        const violetFavActive = document.createElement("img")
-        const violetDownloadHover = document.createElement("img")
-        violetFavHover.src = "images/icon-fav-hover.svg"
-        violetFavActive.src = "images/icon-fav-active.svg"  
-        violetDownloadHover.src = "images/icon-download-hover.svg"
-        violetFavHover.className = "violeticonshover favh"
-        violetDownloadHover.className = "violeticonshover dlh"
-        violetFavActive.className = "violetfavinactive"
-
-        divtitle.appendChild(violetFavHover)
-        divtitle.appendChild(violetFavActive)
-        divtitle.appendChild(violetDownloadHover)
-        violetFavHover.addEventListener("click", agregarFavoritos)
-        violetFavActive.addEventListener("click", eliminarFavoritos)
-
-        violetDownloadHover.addEventListener("click", () =>downloadIconGifo(ampliado, divtitle))
-        cruz.addEventListener("click", () => cerrar("gifcontainer"))
-        }   
-
+    }
     
 
 
@@ -862,11 +890,11 @@
         localStorage.setItem("listMisGifos", JSON.stringify(localStorageMisGifos.filter(migifo => migifo.id !== item.id)));
     }
 
-    function cerrar(claseoriginal){
-        modal.style.position ="initial"
-        modal.className = claseoriginal
+    function cerrar(ampliado, gifContainer, claseoriginal){
+        gifContainer.className = claseoriginal
+        ampliado.className = "mySlides"
         console.log("cerrar")
-        console.log(modal)
+        console.log(gifContainer)
     }
 
     

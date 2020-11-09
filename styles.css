@@ -302,7 +302,9 @@ footer{
     margin: 5%;
     height: 30vh;
 }
-
+.expanded{
+    display: none;
+}
 .mySlides{
     margin: 5%
 }
@@ -1053,5 +1055,11 @@ footer{
     }
     .violeticonshover.trash:hover{
         opacity: 1;
+    }
+    .expanded{
+        display: none;
+    }
+    .modal .expanded{
+        display: inline-block;
     }
     }

@@ -143,6 +143,9 @@ input[placeholder]{
     color: #000000;
     text-align: left;
 }
+.prev, .next, .prevhover, .nexthover {
+    display: none;
+}
 
 @media screen and (min-width: 730px){
 
@@ -161,6 +164,9 @@ input[placeholder]{
     width: 60vw;
     padding: 0;
    
+}
+.prev, .next, .prevhover, .nexthover {
+    display: none;
 }
 
 }
