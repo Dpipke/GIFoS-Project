@@ -307,7 +307,7 @@ footer{
     margin: 5%
 }
 
-.prev, .next {
+.prev, .next, .prevhover, .nexthover {
     display: none;
 }
 

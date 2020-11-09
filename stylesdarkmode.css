@@ -57,7 +57,7 @@ body{
 }
 .lens.noc{
     width: 5%;
-    display: block;
+    display: inline-block;
 
 }
 
@@ -129,4 +129,38 @@ footer{
 }
 .ul-nav{
     background: #000000;
+
+}
+input[type= "search"]{
+    opacity: 0; 
+    background: #37383C;
+   
+  }
+input[placeholder]{
+    font-family: "Roboto";
+    font-weight:300;
+    font-size: 16px;
+    color: #000000;
+    text-align: left;
+}
+
+@media screen and (min-width: 730px){
+
+.logomobile{
+    display: none;
+}
+.logomobilenoct.noc{
+    height: 10%;
+    width: auto;
+    left: 10%;
+    margin-top: 2%;
+    display: inline-block;
+
+}
+.search{
+    width: 60vw;
+    padding: 0;
+   
+}
+
 }

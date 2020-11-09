@@ -317,6 +317,7 @@
 
     const modal = document.getElementById("modal")
 
+    const cruz = document.getElementById("cruz")
     function ampliar(ampliado, gifContainer, event){
         event.stopPropagation()  
         gifContainer.className = "modal"
@@ -369,10 +370,9 @@
         violetFavActive.addEventListener("click", eliminarFavoritos)
 
         violetDownloadHover.addEventListener("click", () =>downloadIconGifo(ampliado, divtitle))
+        cruz.addEventListener("click", () => cerrar("gifcontainer"))
         }   
 
-    const cruz = document.getElementById("cruz")
-    cruz.addEventListener("click", cerrar)
     
 
 
@@ -535,7 +535,7 @@
 
     }
 
-    cerrarBusqueda.addEventListener("click", ()=> {cerrar(cerrarBusqueda)&(input.value = "")})
+    // cerrarBusqueda.addEventListener("click", ()=> {cerrar(cerrarBusqueda)&(input.value = "")})
 
 
     let offset = 0
@@ -628,7 +628,8 @@
     function misFavoritos(){
         const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
         renderResult(localStorageFavorites, favoritegallery, "resultados", "imgresultados", "searchresults")
-      
+        cruz.addEventListener("click", () => cerrar("searchresults favorite"))
+   
         // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
     }
     misFavoritos()
@@ -817,7 +818,8 @@
     function misGifos(){
         const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
         renderResult(localStorageMisGifos, misgifoslist, "resultados", "imgresultados", "searchresults agregadomisgifos")
-              
+        cruz.addEventListener("click", () => cerrar("searchresults agregadomisgifos"))
+
     }
     misGifos()
     
@@ -860,16 +862,13 @@
         localStorage.setItem("listMisGifos", JSON.stringify(localStorageMisGifos.filter(migifo => migifo.id !== item.id)));
     }
 
-    function cerrar(container){
+    function cerrar(claseoriginal){
         modal.style.position ="initial"
-        modal.className = "gifcontainer"
+        modal.className = claseoriginal
         console.log("cerrar")
         console.log(modal)
     }
 
-    // if(localStorageMisGifos.lenght < 12){
-    //     vermas. display none else block 
-    // }else
     
     const head = document.getElementById("head")
     const link = document.createElement('link')
@@ -878,7 +877,7 @@
     
     function cambiarModo(){
         link.innerHTML = `<link rel="stylesheet" href="stylesdarkmode.css">`
-        link.appendChild(head)
+        head.appendChild(link)
     }
 </script>
 </html>
