@@ -141,7 +141,7 @@
             </div>
             <div class="compartirnoc noc">
                 <a href="https://www.facebook.com/"><img src="images/icon_facebook_noc.svg" alt=""></a>
-                <a href="https://twitter.com/?lang=es"><img src="images/icon-tw-normal.svg" alt=""></a>
+                <a href="https://twitter.com/?lang=es"><img src="images/icon-tw-normal.svg" alt="tw"></a>
                 <a href="https://www.instagram.com/?hl=es-la"><img src="images/icon_instagram_noc.svg" alt=""></a>
             </div>
             <p>GIFOS 2020 All Rights Reserved.</p>
@@ -387,18 +387,10 @@
     //     cruz.addEventListener("click", () => cerrar(ampliado, gifContainer, "gifcontainer"))
     //     }   
 
-    function expandir(event, gifContainer, ampliado){
+    function expandir(event, gifContainer){
         event.stopPropagation()  
         gifContainer.classList.toggle("modal")
-        const imgs = gifContainer.querySelectorAll(".mySlides")
-        const titles = gifContainer.querySelectorAll(".giftitle")
-        const users = gifContainer.querySelectorAll(".user")
-
-        if (imgs.length > 0){
-            imgs.forEach(item => item.parentNode.removeChild(item))
-            titles.forEach(item => item.parentNode.removeChild(item))
-            users.forEach(item => item.parentNode.removeChild(item))
-        }
+       
 
     }
     

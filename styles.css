@@ -320,30 +320,7 @@ footer{
 .nextnoct,.prevnoct{
     display: none;
 }
-.modal{
-    position: fixed;
-    width: 100vw;
-    top: 0%;
-    left: 0;
-    background: rgba(255,255,255,0.90);
-    height: 100vh;
-}
 
-.modal img{
-    width: 90vw;  
-    height: 60vh;
-    margin: 5%;
-    
-}
-.modal .cruz{
-    margin-left: 90%;
-    top:15%;
-    right: 10%;
-    height: 3.5%;
-    margin-top: 10%;
-    width: 3.5%;
-
-}
 
 /* .modal .like{
     height: 7%;
@@ -451,6 +428,31 @@ footer{
 .hayGifs{
     flex-direction: row;
     justify-content: flex-start;
+}
+
+.gifcontainer.modal{
+    position: fixed;
+    width: 100vw;
+    top: 0%;
+    left: 0;
+    background: rgba(255,255,255,0.90);
+    height: 100vh;
+}
+
+.modal img{
+    width: 90vw;  
+    height: 60vh;
+    margin: 5%;
+    
+}
+.modal .cruz{
+    margin-left: 90%;
+    top:15%;
+    right: 10%;
+    height: 3.5%;
+    margin-top: 10%;
+    width: 3.5%;
+
 }
 
 
@@ -924,11 +926,6 @@ footer{
         line-height: 22px;
         margin-left: 40%;
     }
-    .modal .imgresultados, .modal .mySlides{
-        width: 50vw;
-        position: relative;
-        z-index: 1;
-    }
 
     .searchresults.favorite .hoverviolet{
         width: 20vw;
@@ -987,22 +984,7 @@ footer{
     .uploadOk .check{
         display: block;
     }
-    .modal{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100vh;
-        z-index: 1
-    }
-    .modal img{
-        width: 50vw;
-        margin: 0
-    }
-    .modal .cruz{
-        margin-top: 5%;
-        z-index: 1;
-        cursor: pointer
-    }
+
     .divtitle{
         margin-right: 30%;
         margin-top: 3%;
@@ -1023,12 +1005,7 @@ footer{
         text-align: center;
     }
 
-    .modal .divtitle .violeticonshover{
-        margin: 0;
-        width: 7vw;
-        height: 7vh;
-     
-    }
+
     .violeticonshover.trash{
         display: none;
     }
@@ -1059,7 +1036,44 @@ footer{
     .expanded{
         display: none;
     }
+    .modal .divtitle .violeticonshover{
+        margin: 0;
+        width: 7vw;
+        height: 7vh;
+     
+    }
     .modal .expanded{
         display: inline-block;
+        width: 7vw;
+        height: 7vh;
+    }
+    .modal .mySlides:hover ~ .hoverviolet{
+        display: none;
+    }
+
+    .modal .imgresultados, .modal .mySlides{
+        width: 50vw;
+        position: relative;
+        z-index: 1;
+    }
+    .modal{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        z-index: 1
+    }
+    .modal img{
+        width: 50vw;
+        margin: 0
+    }
+    .modal .cruz{
+        margin-top: 5%;
+        z-index: 1;
+        cursor: pointer
+    }
+
+    .modal .hoverviolet{
+        display: none;
     }
     }
