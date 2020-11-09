@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+    <head id="head">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>GIFOS</title>
@@ -26,7 +26,7 @@
             </label>
             <ul class="ul-nav">
                 
-                    <li class=""> <a href="#">Modo Nocturno</a></li>
+                    <li class="" id="lightmode"> <a href="#">Modo Nocturno</a></li>
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#" id="misgifos">Mis GIFOS</a></li>
                     <li class="licreateday"><img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo"></li>
@@ -542,6 +542,7 @@
     const limit = 12
 
     const searchingResults = document.getElementById("searchingResults")
+    const verMas = document.getElementById("vermasresultados")
 
     async function resultadosBusqueda(event) {
             event.preventDefault();
@@ -555,8 +556,7 @@
             const response = await fetch(url);
             const results = await response.json();
             buscado.innerText = input.value
-            const verMas = document.getElementById("vermasresultados")
-            console.log(verMas)
+            console.log(response)
             verMas.className ="vermas"
             if (results.data.length){
                 renderResult(results.data, searchingResults, "resultados", "imgresultados", "gifcontainer busqueda");
@@ -601,7 +601,11 @@
         const results = await response.json();  
         renderResult(results.data, resultados, "resultados", "imgresultados","gifcontainer busqueda" )
     
-
+        console.log(results.data.length)
+        console.log(url)
+        if(results.data.length != offset){
+            verMas.style.display = "none"
+        }
 
     }    
 
@@ -737,10 +741,15 @@
         video.style.display = "none";
         previewImg.style.display = "block";
         finalizar.style.display = "none";
-        // counter.addEventListener("click", repeatCapture);
+        counter.addEventListener("click", repeatCapture);
     }
 
     subir.addEventListener("click", subirGifo)
+
+    // function repeatCapture(){
+    //     recorder.
+    //     solicitudPermiso()
+    // }
 
     const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
     if(localStorageMisGifos.length == 0){
@@ -861,6 +870,15 @@
     // if(localStorageMisGifos.lenght < 12){
     //     vermas. display none else block 
     // }else
-
+    
+    const head = document.getElementById("head")
+    const link = document.createElement('link')
+    const lightMode = document.getElementById("lightmode")
+    lightMode.addEventListener("click", cambiarModo)
+    
+    function cambiarModo(){
+        link.innerHTML = `<link rel="stylesheet" href="stylesdarkmode.css">`
+        link.appendChild(head)
+    }
 </script>
 </html>

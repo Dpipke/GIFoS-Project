@@ -872,14 +872,14 @@ footer{
     .number{
         border: 1px solid #572EE5;
         border-radius: 50%;
-        padding: 5px;
+        padding: 10px;
         font-family: "Roboto";
         font-weight: 300;
         font-size: 18px;
         color: #572EE5;
         text-align: center;
         display: inline-block;
-        margin: 5%;
+        margin: 15%;
     }
 
     .comenzar{

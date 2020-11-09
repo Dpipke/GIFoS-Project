@@ -124,3 +124,9 @@ footer{
     margin: 10%;
 }
 
+.licreateday, .licreatehover, .licreateactive{
+    display: none;
+}
+.ul-nav{
+    background: #000000;
+}
