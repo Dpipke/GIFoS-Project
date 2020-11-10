@@ -29,9 +29,11 @@
                     <li class="" id="lightmode"> <a href="#">Modo Nocturno</a></li>
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#" id="misgifos">Mis GIFOS</a></li>
-                    <li class="licreateday"><img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo"></li>
-                    <li class="licreatehover"><img class="createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover"></li>
-                    <li class="licreateactive"><img class="createactive" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive"></li>
+                    <li class="licreateday">
+                        <img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo">
+                        <img class="createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover">
+                        <img class="createactive" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive">
+                    </li>
                     <li><img class="createnoc" src="images/CTA-crear-gifo-modo-noc.svg" alt=""></li>
                     <li><img class="createnoc" src="images/CTA-crear-gifo-hover-modo-noc.svg" alt=""></li>
                     <li><img class="createnoc" src="images/CTA-crear-gifo-active-modo-noc.svg" alt=""></li>
@@ -77,6 +79,7 @@
         <section class="dnone" id="crearGifo">
             <div class="containerCamara">
                 <img class="camara" src="images/camara.svg" alt="camara">
+                <img class="camaranoc" src="images/camara-modo-noc.svg" alt="">
                 <img class="luzcamara" src="images/element-luz-camara.svg" alt="">
                 <div class="containerCreacionGifos" id="containerCreacionGifos">
                     <h2 class="titleCrear" id="titleCrear">Aquí podrás crear tus propios GIFOS </h2>
@@ -87,7 +90,8 @@
                     <video src="" id="video"></video>
                     <img class="dnone" id= "previewImgGif" src="" alt="Preview Gif"/>
                 </div>
-                <img class="cinta" src="images/pelicula.svg" alt="">
+                <img class="cinta" src="images/pelicula.svg" alt="cinta">
+                <img class="cintanoc" src="images/pelicula-modo-noc.svg" alt="cinta">
             </div>
             <div class="containerBotones">
                 <p class="dnone" id="counter">00:00:00</p>
@@ -576,7 +580,7 @@
             const response = await fetch(url);
             const results = await response.json();
             buscado.innerText = input.value
-            console.log(response)
+            console.log(results.pagination.total_count)
             verMas.className ="vermas"
             if (results.data.length){
                 renderResult(results.data, searchingResults, "resultados", "imgresultados", "gifcontainer busqueda");
@@ -620,13 +624,12 @@
         const response = await fetch(url);
         const results = await response.json();  
         renderResult(results.data, resultados, "resultados", "imgresultados","gifcontainer busqueda" )
-    
-        console.log(results.data.length)
-        console.log(url)
-        if(results.data.length != offset){
+
+        console.log(results.pagination.total_count)
+        console.log(results.pagination.total_count - offset)
+        if(results.pagination.total_count - offset <  offset){
             verMas.style.display = "none"
         }
-
     }    
 
     
@@ -648,7 +651,6 @@
     function misFavoritos(){
         const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
         renderResult(localStorageFavorites, favoritegallery, "resultados", "imgresultados", "searchresults")
-        cruz.addEventListener("click", () => cerrar("searchresults favorite"))
    
         // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
     }
@@ -762,7 +764,7 @@
         video.style.display = "none";
         previewImg.style.display = "block";
         finalizar.style.display = "none";
-        counter.addEventListener("click", repeatCapture);
+        // counter.addEventListener("click", repeatCapture);
     }
 
     subir.addEventListener("click", subirGifo)
@@ -833,12 +835,11 @@
         JSON.stringify(localStorageMisGifos)
         );
     }
-    }    
+    }
 
     function misGifos(){
         const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
         renderResult(localStorageMisGifos, misgifoslist, "resultados", "imgresultados", "searchresults agregadomisgifos")
-        cruz.addEventListener("click", () => cerrar("searchresults agregadomisgifos"))
 
     }
     misGifos()
@@ -872,6 +873,9 @@
         uploadOverlay.appendChild(linkMyGifo)
         uploadOverlay.appendChild(loader)
         uploadOverlay.appendChild(subiendo)
+        uploadOverlay.appendChild(check)
+        uploadOverlay.appendChild(exito)
+
 
         downloadMyGifo.addEventListener("click", downloadIconGifo)
 
@@ -898,6 +902,9 @@
     function cambiarModo(){
         link.innerHTML = `<link rel="stylesheet" href="stylesdarkmode.css">`
         head.appendChild(link)
+        if(lightMode.textContent == "Modo Nocturno"){
+            lightMode.textContent == "Modo Diurno"
+        }
     }
 </script>
 </html>

@@ -168,5 +168,18 @@ input[placeholder]{
 .prev, .next, .prevhover, .nexthover {
     display: none;
 }
+.camara, .cinta{
+    display: none;
+}
 
+.camaranoc{
+    display: block;
+    align-self: center ;
+
+}
+.cintanoc{
+    display: block;
+    margin-left: 10%;
+    align-self: flex-end;
+}
 }

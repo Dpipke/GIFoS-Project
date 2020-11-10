@@ -601,23 +601,23 @@ footer{
         margin-top: 1%;
         margin-left: 9%;
     }
-    .createhover{
+    .licreateday .createhover{
         display: none
     }
  
     .licreateday:hover .crear.day{
         display: none;
     }
-    .licreateday:hover ~ .licreatehover .createhover{
+    .licreateday:hover .createhover{
         right: 0%;
         display: inline-block;
         margin-top: 1%;
         margin-left: 9%;
     }
-    .licreatehover .createhover:active{
+    .licreateday .createhover:active .createhover{
         display: none;
     }
-    .licreatehover .createhover:active ~ .licreateactive .createactive{
+    .licreateday .createhover:active ~ .createactive{
         right: 0%;
         display: inline-block;
         margin-top: 1%;
@@ -830,7 +830,6 @@ footer{
     .cinta{
         margin-left: 10%;
         align-self: flex-end;
-        
      
     }
     .grabarmg{
@@ -955,7 +954,7 @@ footer{
         justify-content: center;
         height: 240px;
     }
-    .subiendoP{
+    .subiendoP, .exitoP{
         font-family: "Montserrat";
         font-weight: bold;
         font-size: 15px;
@@ -963,28 +962,28 @@ footer{
         text-align: center;
         opacity: 1;
     }
-    .downloadmygifo, .linkmygifo, .exitoP{
+    .loader{
+        margin: 2%;
+    }
+    .downloadmygifo, .linkmygifo, .exitoP, .check{
         display: none
     }
-    .uploadOk .downloadmygifo, .uploadOk.linkmygifo, .uploadOk .exitoP{
+    .uploadOk .downloadmygifo, .uploadOk .linkmygifo, .uploadOk .exitoP, .uploadOk .check{
         display:block
     }
-    .uploadOk .loader{
+    .uploadOk .loader, .uploadOk .subiendoP{
         display: none;
     }
-    
+    .uploadOk{
+        display: flex;
+        justify-content: space-between;
+    }
     .busqueda{
         height: 30vh;
         width: 20vw;
 
     }
-    .check{
-        display: none;
-    }
-    .uploadOk .check{
-        display: block;
-    }
-
+    
     .divtitle{
         margin-right: 30%;
         margin-top: 3%;
@@ -1074,6 +1073,9 @@ footer{
     }
 
     .modal .hoverviolet{
+        display: none;
+    }
+    .camaranoc, .cintanoc{
         display: none;
     }
     }
