@@ -226,6 +226,9 @@ input[placeholder]{
     z-index: 1;
     transform: translateY(170%);
 }
+.ul-nav li a{
+    color: #FFFFFF;
+}
 .navegador .ul-nav .licreateday{
     display: none;
 }
@@ -274,5 +277,12 @@ input[placeholder]{
 }
 .titleCrear, .pCreacionGifos, .pCreacionAclaracion, .counter, .sugerencia{
     color: #FFFFFF
+}
+.compartirnoc{
+    display: flex;
+    flex-direction: row;
+    align-self: flex-start;
+    margin: 5%;
+    margin-left: 0;
 }
 }
