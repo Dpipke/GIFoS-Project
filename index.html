@@ -26,7 +26,7 @@
             </label>
             <ul class="ul-nav">
                 
-                    <li class="" id="lightmode"> <a href="#">Modo Nocturno</a></li>
+                    <li class=""> <a href="#"  id="mode">Modo Nocturno</a></li>
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#" id="misgifos">Mis GIFOS</a></li>
                     <li class="licreateday">
@@ -616,6 +616,20 @@
         a.click()
         return a;
     }
+    async function downloadIconMyGifo(item, contenedor) {
+        const a = document.createElement("a");
+        console.log(item)
+        let response = await fetch(item.data.images.url);
+        let file = await response.blob();
+        a.download = item.title;
+        a.href = window.URL.createObjectURL(file);
+        a.dataset.downloadurl = ["application/octet-stream", a.download, a.href].join(
+            ":"
+        );
+        contenedor.appendChild(a);
+        a.click()
+        return a;
+    }
   
     
     async function cargarMas(){
@@ -651,6 +665,7 @@
     function misFavoritos(){
         const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
         renderResult(localStorageFavorites, favoritegallery, "resultados", "imgresultados", "searchresults")
+        console.log(localStorageFavorites.length)
    
         // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
     }
@@ -764,15 +779,18 @@
         video.style.display = "none";
         previewImg.style.display = "block";
         finalizar.style.display = "none";
-        // counter.addEventListener("click", repeatCapture);
+        counter.addEventListener("click", repeatCapture);
     }
 
     subir.addEventListener("click", subirGifo)
 
-    // function repeatCapture(){
-    //     recorder.
-    //     solicitudPermiso()
-    // }
+    function repeatCapture(){
+        recorder.reset()
+        previewImg.src=""
+        subir.className = "dnone"
+        counter.className = "dnone"
+        solicitudPermiso()
+    }
 
     const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
     if(localStorageMisGifos.length == 0){
@@ -818,6 +836,7 @@
     
     if (resUpload.meta.status === 200) {
         template.classList.add("uploadOk")
+        subir.className = "dnone"
         console.log(resUpload)
         const resultadoUpload = await fetch (`https://api.giphy.com/v1/gifs/${resUpload.data.id}?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM`);
         const res = await resultadoUpload.json();
@@ -853,6 +872,7 @@
         const downloadMyGifo = document.createElement("img")
         const linkMyGifo = document.createElement("img")
         const check = document.createElement("img")
+        const divBotonesSubido = document.createElement("div")
 
         loader.src = "images/loader.svg"
         check.src = "images/check.svg"
@@ -868,16 +888,18 @@
         subiendo.className = "subiendoP"
         exito.textContent = "GIFO subido con éxito"
         exito.className = "exitoP"
+        divBotonesSubido.className = "divbotonessubido"
         
-        uploadOverlay.appendChild(downloadMyGifo)
-        uploadOverlay.appendChild(linkMyGifo)
+        divBotonesSubido.appendChild(downloadMyGifo)
+        divBotonesSubido.appendChild(linkMyGifo)
+        uploadOverlay.appendChild(divBotonesSubido)
         uploadOverlay.appendChild(loader)
         uploadOverlay.appendChild(subiendo)
         uploadOverlay.appendChild(check)
         uploadOverlay.appendChild(exito)
 
 
-        downloadMyGifo.addEventListener("click", downloadIconGifo)
+        downloadMyGifo.addEventListener("click", downloadIconMyGifo)
 
         return uploadOverlay
     }
@@ -896,15 +918,16 @@
     
     const head = document.getElementById("head")
     const link = document.createElement('link')
-    const lightMode = document.getElementById("lightmode")
-    lightMode.addEventListener("click", cambiarModo)
+    const mode = document.getElementById("mode")
+    mode.addEventListener("click", cambiarModo)
     
     function cambiarModo(){
         link.innerHTML = `<link rel="stylesheet" href="stylesdarkmode.css">`
         head.appendChild(link)
-        if(lightMode.textContent == "Modo Nocturno"){
-            lightMode.textContent == "Modo Diurno"
-        }
+        mode.textContent == "Modo Diurno"
+        // if(mode.textContent == "Modo Nocturno"){
+        //     mode.textContent == "Modo Diurno"
+        // }
     }
 </script>
 </html>

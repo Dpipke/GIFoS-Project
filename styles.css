@@ -968,7 +968,11 @@ footer{
     .downloadmygifo, .linkmygifo, .exitoP, .check{
         display: none
     }
-    .uploadOk .downloadmygifo, .uploadOk .linkmygifo, .uploadOk .exitoP, .uploadOk .check{
+    .uploadOk .downloadmygifo, .uploadOk .linkmygifo{
+        display: inline-block;
+        margin: 2%;
+
+    } .uploadOk .exitoP, .uploadOk .check{
         display:block
     }
     .uploadOk .loader, .uploadOk .subiendoP{
@@ -976,7 +980,21 @@ footer{
     }
     .uploadOk{
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
+    }
+    .divbotonessubido{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .uploadOk .check{
+        margin-top: 10%;
+    }
+    .uploadOk .exitoP{
+        margin-top: 5%;
+    }
+
+    .uploadOk .downloadmygifo:hover, .uploadOk .linkmygifo:hover{
+        opacity: 1;
     }
     .busqueda{
         height: 30vh;
