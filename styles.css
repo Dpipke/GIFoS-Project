@@ -35,9 +35,11 @@ label{
     margin-top:8%;
     margin-bottom: 5%;
 }
+.navegador .ul-nav .licreatenoct{
+    display: none;
+}
 
-
-.noc, .createhover, .createactive, .createnoc{
+.noc, .createhover, .createactive{
     display: none;
 }
 
@@ -72,7 +74,9 @@ label{
   
    
 }
-
+.ul-nav li:active, .ul-nav li:visited, .ul-nav li:link{
+    text-decoration: none;
+}
 
 
 .navegador input:not(:checked)~ .ul-nav{
@@ -143,7 +147,7 @@ label{
 
 .eachlupa{
     position: absolute;
-    left: 10%;
+    left: 25%;
     
 }
 
@@ -445,16 +449,10 @@ footer{
     margin: 5%;
     
 }
-.modal .cruz{
-    margin-left: 90%;
-    top:15%;
-    right: 10%;
-    height: 3.5%;
-    margin-top: 10%;
-    width: 3.5%;
 
+.vermasnoc{
+    display: none;
 }
-
 
 @media screen and (min-width: 730px){
     .crear.day{
@@ -527,7 +525,9 @@ footer{
         z-index: 1;
         transform: translateY(170%);
     } 
-    
+    .prev{
+        margin-top: 1%;
+    }
     .prevhover, .nexthover{
         display: none;
     }
@@ -536,7 +536,7 @@ footer{
         position: absolute;
         width: auto;
         height: 10%;
-        margin-top: -22px;
+        margin-top: 1%;
         padding: 16px;
         color: white;
         font-weight: bold;
@@ -614,7 +614,7 @@ footer{
         margin-top: 1%;
         margin-left: 9%;
     }
-    .licreateday .createhover:active .createhover{
+    .licreateday:active .createhover{
         display: none;
     }
     .licreateday .createhover:active ~ .createactive{
@@ -678,10 +678,7 @@ footer{
     .compartir a{
         margin-right: 3vw;
     }
-    .modal .like{
-        border: #572EE5 1px solid;
-        border-radius: 6px;
-    }
+
 
     .hoverviolet{
         background-color: transparent;
@@ -729,7 +726,7 @@ footer{
 
     .divtitle.favorite .violetfavinactive, .gifcontainer.favorite .violetfavinactive{
         display: inline-block;
-        height: 15%;
+        height: 3.5vh;
         opacity: 0.7;
         background: #FFFFFF;
         border-radius: 6px;
@@ -1061,13 +1058,23 @@ footer{
     }
     .modal .expanded{
         display: inline-block;
-        width: 7vw;
-        height: 7vh;
+        width: 4vw;
+        height: 4vh;
+        margin: 0;
+        border: #572EE5 1px solid;
+        border-radius: 6px;
+        margin-right: 3%;
+        opacity: 0.6;
     }
-    .modal .mySlides:hover ~ .hoverviolet{
+    .modal .expanded.bajar:hover, .modal .expanded.favear:hover{
+        opacity: 1;
+    }
+    .gifcontainer.modal .hoverviolet{
         display: none;
     }
-
+    .gifcontainer .mySlides:hover, .hoverviolet:hover ~ .mySlides {
+        opacity: 1;
+    }
     .modal .imgresultados, .modal .mySlides{
         width: 50vw;
         position: relative;
@@ -1078,22 +1085,44 @@ footer{
         flex-direction: column;
         align-items: center;
         height: 100vh;
-        z-index: 1
+        z-index: 1;
+        margin: 0;
     }
-    .modal img{
+    .modal .mySlides{
         width: 50vw;
         margin: 0
     }
+
+
     .modal .cruz{
+        margin: 2%;
+        margin-right: 15%;
         margin-top: 5%;
         z-index: 1;
-        cursor: pointer
+        cursor: pointer;
+        height: 4vh;
+        width: 4vw;
+        align-self: flex-end;
+        border: none;
     }
-
-    .modal .hoverviolet{
-        display: none;
+    
+    .gifcontainer.modal{
+        display: flex;
+        align-items: center;
+    }
+    .modal .expandeddiv{
+        margin-top: 2%;
+        width: 50vw;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .modal .expandeddiv:last-child{
+        margin-right: 0;
     }
     .camaranoc, .cintanoc{
+        display: none;
+    }
+    .expanded.faveado{
         display: none;
     }
     }

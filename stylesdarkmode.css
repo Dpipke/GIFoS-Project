@@ -146,7 +146,12 @@ input[placeholder]{
 .prev, .next, .prevhover, .nexthover {
     display: none;
 }
-
+.mgtitle, .favtitle{
+    color: #FFFFFF;
+}
+.linea{
+    background: #000000;
+}
 @media screen and (min-width: 730px){
 
 .logomobile{
@@ -181,5 +186,93 @@ input[placeholder]{
     display: block;
     margin-left: 10%;
     align-self: flex-end;
+}
+.prevnoct, .nextnoct{
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    width: auto;
+    height: 10%;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    z-index: 1;
+    transform: translateY(170%);
+}
+.nextnoct{
+    right: 0;
+}
+.prevnoct{
+    margin-top: 1%;
+}
+.prevnoct:hover ~ .prevnocthover{
+    display: block;
+    position: absolute;
+    width: auto;
+    height: 10%;
+    margin-top: 1%;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    z-index: 1;
+    transform: translateY(170%);
+}
+.navegador .ul-nav .licreateday{
+    display: none;
+}
+.navegador .ul-nav .licreatenoct{
+    display: inline-block;
+}
+.createnoc{
+    display: inline-block;
+}
+.createnochover, .createnocactive{
+    display: none;
+}
+.licreatenoct:hover .createnochover{
+    right: 0%;
+    display: inline-block;
+    margin-top: 1%;
+    margin-left: 9%;
+}
+.licreatenoct:hover .createnoc{
+    display: none;
+}
+.licreatenoct:active .createnochover{
+    display: none;
+}
+.licreatenoct:active .createnocactive{
+    display: inline-block;
+}
+.number{
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+.pasosHover{
+    background: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    color: #37383C;
+}
+.comenzar{
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+}
+.vermasday{
+    display: none;
+}
+.vermasnoc{
+    display: block;
+}
+.titleCrear, .pCreacionGifos, .pCreacionAclaracion, .counter{
+    color: #FFFFFF
 }
 }

@@ -29,14 +29,16 @@
                     <li class=""> <a href="#"  id="mode">Modo Nocturno</a></li>
                     <li class=""> <a href="#" id="favoritos">Favoritos</a></li>
                     <li class=""> <a href="#" id="misgifos">Mis GIFOS</a></li>
-                    <li class="licreateday">
+                    <li class="licreateday" id="abrircrear">
                         <img class="crear day" src="images/button-crear-gifo.svg" alt="crear" id="creategifo">
-                        <img class="createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifohover">
+                        <img class="createhover" src="images/CTA-crear-gifo-hover.svg" alt="crear" id="creategifoactive">
                         <img class="createactive" src="images/CTA-crear-gifo-active.svg" alt="crear" id="creategifoactive">
                     </li>
-                    <li><img class="createnoc" src="images/CTA-crear-gifo-modo-noc.svg" alt=""></li>
-                    <li><img class="createnoc" src="images/CTA-crear-gifo-hover-modo-noc.svg" alt=""></li>
-                    <li><img class="createnoc" src="images/CTA-crear-gifo-active-modo-noc.svg" alt=""></li>
+                    <li class="licreatenoct" id="abrircrearnoc">
+                        <img class="createnoc" src="images/CTA-crear-gifo-modo-noc.svg" alt="">
+                        <img class="createnochover" src="images/CTA-crear-gifo-hover-modo-noc.svg" alt="">
+                        <img class="createnocactive" src="images/CTA-crear-gifo-active-modo-noc.svg" alt="">
+                    </li>
                     
                 </ul>
         </nav>
@@ -66,14 +68,16 @@
             <img src="images/icon-favoritos.svg" alt="favoritos">
             <h2 class="favtitle">Favoritos</h2>
             <div class="favoritegallery" id="favoritegallery"></div>
-            <img src="images/CTA-ver-mas.svg" alt="ver mas" id="vermas">
+            <img class="vermasday" src="images/CTA-ver-mas.svg" alt="ver mas" id="vermas">
+            <img class="vermasnoc"src="images/CTA-ver+-modo-noc.svg" alt="ver mas" id="vermasfavnoc">
         </section>
 
         <section class="misgifossec dnone" id="misgifossec">
             <img src="images/icon-mis-gifos.svg" alt="">
             <h2 class="mgtitle">Mis GIFOS</h2>
             <div class="misgifoslist" id="misgifoslist"></div>
-            <img src="images/CTA-ver-mas.svg" alt="ver mas" id="vermasmisgifos">
+            <img class="vermasday" src="images/CTA-ver-mas.svg" alt="ver mas" id="vermasmisgifos">
+            <img class="vermasnoc"src="images/CTA-ver+-modo-noc.svg" alt="ver mas" id="vermasmisgifosnoc">
         </section>
 
         <section class="dnone" id="crearGifo">
@@ -121,7 +125,6 @@
             <img class="prev" src="images/button-slider-left.svg" alt="previous" id="prev">
             <img class="prevhover" src="images/button-slider-left-hover.svg" alt="" id="prevhover">
             <img class="prevnoct" src="images/button-slider-left-md-noct.svg" alt="previous" id="prevnoct">
-            <img class="prevnocthover" src="images/Button-close-hover-modo-noc.svg" alt="">
             <img class="next" src="images/Button-Slider-right.svg" alt="" id="next">
             <img class="nexthover" src="images/button-slider-right-hover.svg" alt="" id="nexthover">
             <img class="nextnoct" src="images/button-slider-right-md-noct.svg" alt="next" id="nextnoct">
@@ -162,13 +165,15 @@
     const misgifossec = document.getElementById("misgifossec")
     const intro = document.getElementById("intro")
     const gallery = document.getElementById("gallery")
-    const creategifohover = document.getElementById("creategifohover")
+    const creategifoactive = document.getElementById("abrircrear")
+    const creategifonoc = document.getElementById("abrircrearnoc")
     const crearGifo = document.getElementById("crearGifo")
     const lasttrending = document.getElementById("lasttrending")
 
     favoritos.addEventListener("click", activarFavoritos)
     misgifos.addEventListener("click", activarMisGifos)
-    creategifohover.addEventListener("click", activarCrearGifo)
+    creategifoactive.addEventListener("click", activarCrearGifo)
+    creategifonoc.addEventListener("click", activarCrearGifo)
 
     const favoritegallery = document.getElementById("favoritegallery")
     const resultados = document.getElementById("resultados")
@@ -249,13 +254,20 @@
         const favExpand = document.createElement("img")
         const favActiveExpand = document.createElement("img")
         const downloadExpand = document.createElement("img")
+        const divExpandedIcons = document.createElement("div")
+        const cruz = document.createElement("img")
+        cruz.src = "images/close.svg"
         favExpand.src = "images/icon-fav-hover.svg"
         favActiveExpand.src = "images/icon-fav-active.svg"
         downloadExpand.src ="images/icon-download-hover.svg"
-        favExpand.className = "expanded"
-        favActiveExpand.className = "expanded"
-        downloadExpand.className = "expanded"
-        
+        cruz.className= "expanded cruz"
+        favExpand.className = "expanded favear"
+        favActiveExpand.className = "expanded faveado"
+        downloadExpand.className = "expanded bajar"
+        divExpandedIcons.className = "expandeddiv"
+        downloadExpand.addEventListener("click", ()=> downloadIconGifo(img, gifContainer))
+        favExpand.addEventListener("click", agregarFavoritos)
+        favActiveExpand.addEventListener("click", eliminarFavoritos)
 
         const addToFavorites = () => {
             agregarFavoritos(item)
@@ -268,15 +280,17 @@
         const removeMisGifos = () => {
             eliminarMisGifos(item)
         }
-        // const expand = () => ampliar(item, gifContainer, event)
         const expand = () => expandir(event, gifContainer, item)
         const overlay = imgHoverComponentFactory(item, expand, addToFavorites, removeFromFavorites, removeMisGifos)
+        cruz.addEventListener("click", () => close(gifContainer))
         gifContainer.appendChild(overlay)
 
-        gifContainer.appendChild(favExpand)
-        gifContainer.appendChild(favActiveExpand)
-        gifContainer.appendChild(downloadExpand)
+        gifContainer.appendChild(cruz)
         gifContainer.appendChild(img)
+        divExpandedIcons.appendChild(favExpand)
+        divExpandedIcons.appendChild(favActiveExpand)
+        divExpandedIcons.appendChild(downloadExpand)
+        gifContainer.appendChild(divExpandedIcons)
         container.appendChild(gifContainer);
 
 
@@ -285,8 +299,9 @@
     })
     }showResult()
 
-    // const fav = document.getElementById("like")
-    // const favhover = document.getElementById("likehover")
+   function close(gifContainer){
+        gifContainer.classList.remove("modal")
+   }
 
 
     const medidasGallery =gallery.getBoundingClientRect()
@@ -446,6 +461,8 @@
         return violet
     }
 
+    const verMasFavoritos = document.getElementById("vermas")
+    const verMasFavoritosNoc = document.getElementById("vermasfavnoc")
     const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
     if(localStorageFavorites == 0){
         const favoritosVacio = document.createElement("img")
@@ -454,8 +471,10 @@
         favoritosVacio.src= "images/icon-fav-sin-contenido.svg"
         favoritosVacioP.textContent = "¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!"
         favoritosVacioP.className = "gifoVacioP"
-        favoritegallery.className = "mistgifoslist"
-
+        favoritegallery.className = "misgifoslist"
+        verMasFavoritos.className = "dnone"
+        verMasFavoritosNoc.className = "dnone"
+        
         favoritegallery.appendChild(favoritosVacio)
         favoritegallery.appendChild(favoritosVacioP)
     }
@@ -540,9 +559,7 @@
             const lupaHover = document.createElement("img")
             sugerenciasContainer.appendChild(sugerencia);
             sugerencia.addEventListener("click", autocompletar)
-            
-            // add event listener con input.value. funcion q tome suggested.name y lo asigne al input.value 
-            // esa fx ponerla como listener para sugenreical
+
        
         });
 
@@ -558,8 +575,6 @@
         }
 
     }
-
-    // cerrarBusqueda.addEventListener("click", ()=> {cerrar(cerrarBusqueda)&(input.value = "")})
 
 
     let offset = 0
@@ -778,20 +793,20 @@
         previewImg.src = imageUrl;
         video.style.display = "none";
         previewImg.style.display = "block";
-        finalizar.style.display = "none";
+        finalizar.className= "dnone";
         counter.addEventListener("click", repeatCapture);
     }
 
     subir.addEventListener("click", subirGifo)
 
     function repeatCapture(){
-        recorder.reset()
         previewImg.src=""
         subir.className = "dnone"
         counter.className = "dnone"
+        video.style.display = "inline-block"
         solicitudPermiso()
     }
-
+    const verMasMisGifosNoc = document.getElementById("vermasmisgifosnoc")
     const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
     if(localStorageMisGifos.length == 0){
         const gifoVacio = document.createElement("img")
@@ -802,6 +817,7 @@
         gifoVacioP.textContent = "¡Anímate a crear tu primer GIFO!"
         gifoVacioP.className = "gifoVacioP"
         verMasMisGifos.style.display = "none"
+        verMasMisGifosNoc.style.display = "none"
 
         misgifoslist.appendChild(gifoVacio)
         misgifoslist.appendChild(gifoVacioP)
@@ -908,12 +924,6 @@
         localStorage.setItem("listMisGifos", JSON.stringify(localStorageMisGifos.filter(migifo => migifo.id !== item.id)));
     }
 
-    function cerrar(ampliado, gifContainer, claseoriginal){
-        gifContainer.className = claseoriginal
-        ampliado.className = "mySlides"
-        console.log("cerrar")
-        console.log(gifContainer)
-    }
 
     
     const head = document.getElementById("head")
@@ -922,12 +932,20 @@
     mode.addEventListener("click", cambiarModo)
     
     function cambiarModo(){
-        link.innerHTML = `<link rel="stylesheet" href="stylesdarkmode.css">`
-        head.appendChild(link)
-        mode.textContent == "Modo Diurno"
-        // if(mode.textContent == "Modo Nocturno"){
-        //     mode.textContent == "Modo Diurno"
-        // }
+        if(link.innerHTML === ""){
+            link.innerHTML = `<link rel="stylesheet" href="stylesdarkmode.css">`
+            head.appendChild(link)
+        }
+
+       changeText()
     }
+    function changeText() {
+        if (mode.textContent === 'Modo Nocturno') {
+            mode.textContent = 'Modo Diurno';
+            head.removeChild(link)
+        } else if (mode.textContent === 'Modo Diurno') {
+            mode.textContent = 'Modo Nocturno';
+        }
+}
 </script>
 </html>
