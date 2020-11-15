@@ -182,13 +182,13 @@
         favsec.classList.toggle("dnone");
         intro.classList.toggle("dnone");
         resultados.classList.toggle("dnone")
-
     }
 
     function activarMisGifos(){
         misgifossec.classList.toggle("dnone");
         intro.classList.toggle("dnone");
         resultados.classList.toggle("dnone")
+
     }
 
     function activarCrearGifo(){
@@ -196,6 +196,7 @@
         intro.classList.toggle("dnone");
         resultados.classList.toggle("dnone")
         lasttrending.classList.toggle("dnone")
+        favsec.classList.toggle("dnone")
     }
     
     const trending = galery => {
@@ -256,16 +257,40 @@
         const downloadExpand = document.createElement("img")
         const divExpandedIcons = document.createElement("div")
         const cruz = document.createElement("img")
+        const cruzNoc = document.createElement("img")
+        const prevExpand = document.createElement("img")
+        const prevHoverExpand = document.createElement("img")
+        const prevExpandNoc = document.createElement("img")
+        const nextExpand = document.createElement("img")
+        const nextHoverExpand = document.createElement("img")
+        const nextExpandNoc = document.createElement("img")
+
+        prevExpand.src = "images/button-slider-left.svg"
+        prevHoverExpand.src = "images/button-slider-left-hover.svg"
+        prevExpandNoc.src = "images/button-slider-left-md-noct.svg"
+        nextExpand.src = "images/Button-Slider-right.svg"
+        nextHoverExpand.src = "images/button-slider-right-hover.svg"
+        nextExpandNoc.src = "images/button-slider-right-md-noct.svg"
+
+
+        prevExpand.className = "botones prevdaybutton"
+        prevHoverExpand.className = "botones prevhoverbutton"
+        prevExpandNoc.className= "botones prevnocbutton"
+        nextExpand.className= "botones nextdaybutton"
+        nextHoverExpand.className= "botones nexthoverbutton"
+        nextExpandNoc.className= "botones nextnocbutton"
+        cruzNoc.src = "images/close-modo-noct.svg"
         cruz.src = "images/close.svg"
         favExpand.src = "images/icon-fav-hover.svg"
         favActiveExpand.src = "images/icon-fav-active.svg"
         downloadExpand.src ="images/icon-download-hover.svg"
         cruz.className= "expanded cruz"
+        cruzNoc.className = "expanded cruznoc"
         favExpand.className = "expanded favear"
         favActiveExpand.className = "expanded faveado"
         downloadExpand.className = "expanded bajar"
         divExpandedIcons.className = "expandeddiv"
-        downloadExpand.addEventListener("click", ()=> downloadIconGifo(img, gifContainer))
+        downloadExpand.addEventListener("click", ()=> downloadIconMyGifo(img, gifContainer))
         favExpand.addEventListener("click", agregarFavoritos)
         favActiveExpand.addEventListener("click", eliminarFavoritos)
 
@@ -283,10 +308,19 @@
         const expand = () => expandir(event, gifContainer, item)
         const overlay = imgHoverComponentFactory(item, expand, addToFavorites, removeFromFavorites, removeMisGifos)
         cruz.addEventListener("click", () => close(gifContainer))
+        cruzNoc.addEventListener("click", ()=>close(gifContainer))
         gifContainer.appendChild(overlay)
 
+
         gifContainer.appendChild(cruz)
+        gifContainer.appendChild(cruzNoc)
         gifContainer.appendChild(img)
+        gifContainer.appendChild(prevExpand)
+        gifContainer.appendChild(prevHoverExpand)
+        gifContainer.appendChild(prevExpandNoc)
+        gifContainer.appendChild(nextExpand)
+        gifContainer.appendChild(nextHoverExpand)
+        gifContainer.appendChild(nextExpandNoc)
         divExpandedIcons.appendChild(favExpand)
         divExpandedIcons.appendChild(favActiveExpand)
         divExpandedIcons.appendChild(downloadExpand)
@@ -310,31 +344,6 @@
     
 
     var slideIndex = 1;
-
-    // Next/previous controls
-    // function plusSlides(n) {
-    // showSlides(slideIndex += n);
-    // }
-
-    // // // Thumbnail image controls
-    // function currentSlide(n) {
-    // showSlides(slideIndex = n);
-    // }
-
-    // function showSlides(n) {
-    // var i;
-    // var slides = document.getElementsByClassName("mySlides");
- 
-    // if (n > slides.length) {slideIndex = 1}
-    // if (n < 1) {slideIndex = slides.length}
-
-    // for (i = 0; i < slides.length; i++) {
-    //     slides[i].style.display = "none";
-    // }
-   
-    // slides[slideIndex-1].style.display = "block";}
-
-    
   
     function scrollDer(event){
         gallery.scrollLeft += desplazar;
@@ -347,64 +356,6 @@
 
     }
     
-    
-
-    // const modal = document.getElementById("modal")
-
-    // function ampliar(ampliado, gifContainer, event){
-    //     event.stopPropagation()  
-    //     gifContainer.className = "modal"
-    //     const imgs = gifContainer.querySelectorAll(".mySlides")
-    //     const titles = gifContainer.querySelectorAll(".giftitle")
-    //     const users = gifContainer.querySelectorAll(".user")
-
-    //     if (imgs.length > 0){
-    //         imgs.forEach(item => item.parentNode.removeChild(item))
-    //         titles.forEach(item => item.parentNode.removeChild(item))
-    //         users.forEach(item => item.parentNode.removeChild(item))
-           
-    //     }
-    //     console.log(ampliado)
-    //     const user = document.createElement("p")
-    //     let imagen = document.createElement("img")
-    //     const divtitle = document.createElement("div")
-
-    //     imagen.src = ampliado.images.original.url
-    //     user.innerText = ampliado.username 
-    //     user.className = "user"
-    //     divtitle.className = "divtitle"
-    //     title = document.createElement("figcaption")
-    //     title.innerText = ampliado.title
-    //     title.className = "giftitle"
-    //     gifContainer.appendChild(cruz)
-    //     gifContainer.appendChild(imagen)
-    //     divtitle.appendChild(user)
-    //     divtitle.appendChild(title)
-    //     gifContainer.appendChild(divtitle)
-    //     gifContainer.appendChild(prev)
-    //     gifContainer.appendChild(prevhover)
-    //     gifContainer.appendChild(next)
-    //     gifContainer.appendChild(nexthover)
-
-    //     const violetFavHover = document.createElement("img")
-    //     const violetFavActive = document.createElement("img")
-    //     const violetDownloadHover = document.createElement("img")
-    //     violetFavHover.src = "images/icon-fav-hover.svg"
-    //     violetFavActive.src = "images/icon-fav-active.svg"  
-    //     violetDownloadHover.src = "images/icon-download-hover.svg"
-    //     violetFavHover.className = "violeticonshover favh"
-    //     violetDownloadHover.className = "violeticonshover dlh"
-    //     violetFavActive.className = "violetfavinactive"
-
-    //     divtitle.appendChild(violetFavHover)
-    //     divtitle.appendChild(violetFavActive)
-    //     divtitle.appendChild(violetDownloadHover)
-    //     violetFavHover.addEventListener("click", agregarFavoritos)
-    //     violetFavActive.addEventListener("click", eliminarFavoritos)
-
-    //     violetDownloadHover.addEventListener("click", () =>downloadIconGifo(ampliado, divtitle))
-    //     cruz.addEventListener("click", () => cerrar(ampliado, gifContainer, "gifcontainer"))
-    //     }   
 
     function expandir(event, gifContainer){
         event.stopPropagation()  
@@ -620,6 +571,7 @@
 
     async function downloadIconGifo(item, contenedor) {
         const a = document.createElement("a");
+        console.log(item)
         let response = await fetch(item.images.original.url);
         let file = await response.blob();
         a.download = item.title;
@@ -634,7 +586,7 @@
     async function downloadIconMyGifo(item, contenedor) {
         const a = document.createElement("a");
         console.log(item)
-        let response = await fetch(item.data.images.url);
+        let response = await fetch(item.url);
         let file = await response.blob();
         a.download = item.title;
         a.href = window.URL.createObjectURL(file);
@@ -645,7 +597,20 @@
         a.click()
         return a;
     }
-  
+    async function downloadMyGifoFunction(item, contenedor) {
+        const a = document.createElement("a");
+        console.log(item)
+        let response = await fetch(previewImg.src);
+        let file = await response.blob();
+        a.download = item.title;
+        a.href = window.URL.createObjectURL(file);
+        a.dataset.downloadurl = ["application/octet-stream", a.download, a.href].join(
+            ":"
+        );
+        contenedor.appendChild(a);
+        a.click()
+        return a;
+    }
     
     async function cargarMas(){
         const q = input.value.split(" ").join("-")
@@ -679,8 +644,21 @@
     
     function misFavoritos(){
         const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
-        renderResult(localStorageFavorites, favoritegallery, "resultados", "imgresultados", "searchresults")
-        console.log(localStorageFavorites.length)
+        console.log(localStorageFavorites)
+        let ppio = 0
+        let fin = 12
+        const primerosFavoritos = localStorageFavorites.splice(ppio, fin)
+        renderResult(primerosFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults")
+        let cantidadFavoritos = document.getElementsByClassName("favorite")
+        console.log(localStorageFavorites)
+        ppio+=12
+        fin+=12
+        verMasFavoritos.addEventListener("click", () => renderResult(primerosFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults"))
+        if(cantidadFavoritos.length = localStorageFavorites.lenght){
+            verMasFavoritos.className = "dnone"
+        }
+        
+   
    
         // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
     }
@@ -915,7 +893,7 @@
         uploadOverlay.appendChild(exito)
 
 
-        downloadMyGifo.addEventListener("click", downloadIconMyGifo)
+        downloadMyGifo.addEventListener("click", () => downloadMyGifoFunction(previewImg.src, uploadOverlay))
 
         return uploadOverlay
     }
@@ -946,6 +924,8 @@
             mode.textContent = 'Modo Nocturno';
             head.removeChild(link)
         }
+
+
 }
 </script>
 </html>

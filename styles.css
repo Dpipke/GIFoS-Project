@@ -218,6 +218,7 @@ input[type= "search"]{
     background-color: #F3F5F8;
     height: auto;
     margin-top: 15%;
+    padding-top: 10%;
 
 }
 
@@ -238,6 +239,7 @@ input[type= "search"]{
     color: #572EE5;
     text-align: center;
     line-height: 30px;
+   
 }
 
 .comunidad{
@@ -323,28 +325,6 @@ footer{
 .nextnoct,.prevnoct{
     display: none;
 }
-
-
-/* .modal .like{
-    height: 7%;
-    bottom: 5%;
-    width: 7%;
-    right: 20%;
-    position: absolute;
-    margin-top: 5%;
-
-}
-
-.modal .download{
-    height: 7%;
-    bottom: 5%;
-    width: 7%;
-    right: 10%;
-    position: absolute;
-    margin-top: 5%;
-    border: #572EE5 1px solid;
-    border-radius: 6px;
-} */
 
 .giftitle{
     margin-left: 5%;
@@ -442,18 +422,23 @@ footer{
     height: 100vh;
 }
 
-.modal img{
+/* .modal img{
     width: 90vw;  
     height: 60vh;
     margin: 5%;
     
-}
+} */
 
 .vermasnoc{
     display: none;
 }
-
+.botones{
+    display: none;
+}
 @media screen and (min-width: 730px){
+    .ul-nav li {
+        border: none;
+    }
     .crear.day{
         display:block;
     }
@@ -1125,6 +1110,42 @@ footer{
         display: none;
     }
     .expanded.faveado{
+        display: none;
+    }
+    .modal .cruznoc{
+        display: none;
+    }
+    .modal .botones.prevdaybutton, .modal .botones.nextdaybutton{
+        display: inline-block;
+    }
+    .modal .botones.prevdaybutton{
+        left: 15%;
+        top: 40%;
+        position: absolute;
+    }
+    .modal .botones.nextdaybutton{
+        right: 15%;
+        top: 40%;
+        position: absolute;
+    }
+    .modal .botones.prevdaybutton:hover ~ .prevhoverbutton{
+        display: inline-block;
+        left: 15%;
+        top: 40%;
+        position: absolute;
+        transition: 1s;
+    }
+    .modal .botones.prevdaybutton:hover{
+        display: none;
+    }
+    .modal .botones.nextdaybutton:hover ~ .nexthoverbutton{
+        display: inline-block;
+        right: 15%;
+        top: 40%;
+        position: absolute;
+        transition: 1s;
+    }
+    .modal .botones.nextdaybutton:hover{
         display: none;
     }
     }

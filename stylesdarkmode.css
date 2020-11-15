@@ -152,6 +152,12 @@ input[placeholder]{
 .linea{
     background: #000000;
 }
+.vermasday{
+    display: none;
+}
+.vermasnoc{
+    display: block;
+}
 @media screen and (min-width: 730px){
 
 .logomobile{
@@ -269,12 +275,7 @@ input[placeholder]{
     border: 1px solid #FFFFFF;
     color: #FFFFFF;
 }
-.vermasday{
-    display: none;
-}
-.vermasnoc{
-    display: block;
-}
+
 .titleCrear, .pCreacionGifos, .pCreacionAclaracion, .counter, .sugerencia{
     color: #FFFFFF
 }
@@ -284,5 +285,44 @@ input[placeholder]{
     align-self: flex-start;
     margin: 5%;
     margin-left: 0;
+}
+.modal .cruz{
+    display: none;
+}
+.modal .cruznoc{
+        display: inline-block;
+        margin: 2%;
+        margin-right: 15%;
+        margin-top: 5%;
+        z-index: 1;
+        cursor: pointer;
+        height: 4vh;
+        width: 4vw;
+        align-self: flex-end;
+        border: none;
+}
+.gifcontainer.modal{
+    background: #37383C;
+    opacity: 0.9;
+}
+.modal .expand{
+    border: #37383c 1px solid;
+}
+.compartirnoc a{
+    margin-right: 3vw;
+}
+.modal .botones.prevdaybutton,.modal .botones.nextdaybutton, .modal .botones.prevhoverbutton, .modal .botones.nexthoverbutton{
+    display: none;
+}
+.modal .botones.nextnocbutton, .modal .botones.prevnocbutton{
+    display: inline-block;
+    top: 40%;
+    position: absolute;
+}
+.botones.nextnocbutton{
+    right: 15%;
+}
+.botones.prevnocbutton{
+    left: 15%;
 }
 }
