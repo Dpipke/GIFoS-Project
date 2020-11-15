@@ -272,7 +272,7 @@ input[placeholder]{
 .vermasnoc{
     display: block;
 }
-.titleCrear, .pCreacionGifos, .pCreacionAclaracion, .counter{
+.titleCrear, .pCreacionGifos, .pCreacionAclaracion, .counter, .sugerencia{
     color: #FFFFFF
 }
 }
