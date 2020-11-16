@@ -132,15 +132,16 @@ footer{
 
 }
 input[type= "search"]{
-    opacity: 0; 
+    opacity: 1; 
     background: #37383C;
+
    
   }
 input[placeholder]{
     font-family: "Roboto";
     font-weight:300;
     font-size: 16px;
-    color: #000000;
+    color: #FFFFFF;
     text-align: left;
 }
 .prev, .next, .prevhover, .nexthover {
@@ -324,5 +325,11 @@ input[placeholder]{
 }
 .botones.prevnocbutton{
     left: 15%;
+}
+.compartirnoc a{
+    opacity: 0.6;
+}
+.compartirnoc a:hover{
+    opacity: 1;
 }
 }

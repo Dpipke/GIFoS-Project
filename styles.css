@@ -311,9 +311,7 @@ footer{
 .expanded{
     display: none;
 }
-.mySlides{
-    margin: 5%
-}
+
 
 .prev, .next, .prevhover, .nexthover {
     display: none;
@@ -359,8 +357,11 @@ footer{
     
 
 }
-
-.vermas{
+.vermasday{
+    display: none;
+}
+.resultados.buscando .vermasday{
+    display: inline-block;
     order: 1;
     margin: 10%;
     z-index: 1;
@@ -375,7 +376,7 @@ footer{
 .searchresults{
     margin: 2%;
 }
-.notfound +.vermas{
+.notfound +.vermasday{
     display: none;
 }
 .notfound{
@@ -421,14 +422,9 @@ footer{
     left: 0;
     background: rgba(255,255,255,0.90);
     height: 100vh;
+    margin: 0;
 }
 
-/* .modal img{
-    width: 90vw;  
-    height: 60vh;
-    margin: 5%;
-    
-} */
 
 .vermasnoc{
     display: none;
@@ -436,6 +432,68 @@ footer{
 .botones{
     display: none;
 }
+
+
+.vermasdayhover{
+    display: none;
+}
+.resultados.buscando .vermasday:hover ~.vermasdayhover{
+    display: inline-block;
+    order: 1;
+    margin: 10%;
+    z-index: 1;
+    transition: 5s;
+}
+.resultados.buscando .vermasday:hover{
+    display: none;
+
+}
+.twhover, .fbhover, .ighover{
+    display: none;
+}
+.modal{
+    display: flex;
+    align-items:  center;
+    flex-direction: column;
+    justify-content: center;
+}
+.modal .mySlides{
+    width: 80vw;
+}
+
+.modal .expandeddiv, .modal .expanded{
+    display: inline-block;
+}
+.modal .expandeddiv{
+    margin-top: 2%;
+    width: 80vw;
+    display: flex;
+    justify-content: flex-end;
+}
+.modal .expanded{
+    opacity: 0.5;
+    border: 1px solid #9CAFC3;
+    border-radius: 6px;
+    border-radius: 6px;
+    margin-right: 5%;
+}
+.modal .expanded.faveado{
+    display: none;
+}
+.modal .expanded.favear:active{
+    display: none;
+}
+.modal .expanded.favear:active ~ .modal .expanded.expanded.faveado{
+    display: inline-block;
+}
+.modal .cruz{
+    display: inline-block;
+    position: absolute;
+    top: 15vh;
+    right: 8vw;
+    border: none;
+}
+
 @media screen and (min-width: 730px){
     .ul-nav li {
         border: none;
@@ -675,9 +733,7 @@ footer{
         margin-right: 3vw;
 
     }
-    .twhover, .fbhover, .ighover{
-        display: none;
-    }
+
     .tw:hover, .ig:hover, .fb:hover{
         display: none;
     }
