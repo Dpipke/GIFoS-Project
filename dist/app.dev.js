@@ -768,7 +768,8 @@ function timer() {
 subir.addEventListener("click", subirGifo);
 
 function repeatCapture() {
-  previewImg.src = "";
+  var previewImg = document.getElementById("previewImgGif");
+  previewImg.style.display = "none";
   subir.className = "dnone";
   counter.className = "dnone";
   video.style.display = "inline-block";
