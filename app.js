@@ -103,6 +103,8 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     const nextExpand = document.createElement("img")
     const nextHoverExpand = document.createElement("img")
     const nextExpandNoc = document.createElement("img")
+    const itemTitle = document.createElement("p")
+    const itemUser = document.createElement("p")
 
     prevExpand.src = "images/button-slider-left.svg"
     prevHoverExpand.src = "images/button-slider-left-hover.svg"
@@ -110,7 +112,8 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     nextExpand.src = "images/Button-Slider-right.svg"
     nextHoverExpand.src = "images/button-slider-right-hover.svg"
     nextExpandNoc.src = "images/button-slider-right-md-noct.svg"
-
+    itemTitle.textContent = item.title
+    itemUser.textContent = item.username
 
     prevExpand.className = "botones prevdaybutton"
     prevHoverExpand.className = "botones prevhoverbutton"
@@ -129,6 +132,9 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     favActiveExpand.className = "expanded faveado"
     downloadExpand.className = "expanded bajar"
     divExpandedIcons.className = "expandeddiv"
+    itemTitle.className = "captionexpanded titulo"
+    itemUser.className = "captionexpanded user"
+
     downloadExpand.addEventListener("click", ()=> downloadIconMyGifo(img, gifContainer))
     favExpand.addEventListener("click", agregarFavoritos)
     favActiveExpand.addEventListener("click", eliminarFavoritos)
@@ -150,11 +156,14 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     cruzNoc.addEventListener("click", ()=>close(gifContainer))
     gifContainer.appendChild(overlay)
 
-    
+    function expandMobile(){ 
     if(screen.width < 730){
-        img.addEventListener("click", ()=> expandir(event, gifContainer, item))
-    
-    }
+        img.addEventListener("click", function(){
+            expandir(event, gifContainer, item)
+            console.log(item.title)
+        })
+    }}
+    expandMobile()
 
     gifContainer.appendChild(cruz)
     gifContainer.appendChild(cruzNoc)
@@ -169,6 +178,8 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     divExpandedIcons.appendChild(favActiveExpand)
     divExpandedIcons.appendChild(downloadExpand)
     gifContainer.appendChild(divExpandedIcons)
+    gifContainer.appendChild(itemUser)
+    gifContainer.appendChild(itemTitle)
     container.appendChild(gifContainer);
 
     
@@ -496,7 +507,7 @@ function misFavoritos(){
     let cantidadFavoritos = document.getElementsByClassName("favorite")
     console.log(localStorageFavorites)
     console.log(cantidadFavoritos.length)
-
+    
     verMasFavoritos.addEventListener("click", function(){
         ppio+=12
         fin+=12

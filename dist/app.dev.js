@@ -111,12 +111,16 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     var nextExpand = document.createElement("img");
     var nextHoverExpand = document.createElement("img");
     var nextExpandNoc = document.createElement("img");
+    var itemTitle = document.createElement("p");
+    var itemUser = document.createElement("p");
     prevExpand.src = "images/button-slider-left.svg";
     prevHoverExpand.src = "images/button-slider-left-hover.svg";
     prevExpandNoc.src = "images/button-slider-left-md-noct.svg";
     nextExpand.src = "images/Button-Slider-right.svg";
     nextHoverExpand.src = "images/button-slider-right-hover.svg";
     nextExpandNoc.src = "images/button-slider-right-md-noct.svg";
+    itemTitle.textContent = item.title;
+    itemUser.textContent = item.username;
     prevExpand.className = "botones prevdaybutton";
     prevHoverExpand.className = "botones prevhoverbutton";
     prevExpandNoc.className = "botones prevnocbutton";
@@ -134,6 +138,8 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     favActiveExpand.className = "expanded faveado";
     downloadExpand.className = "expanded bajar";
     divExpandedIcons.className = "expandeddiv";
+    itemTitle.className = "captionexpanded titulo";
+    itemUser.className = "captionexpanded user";
     downloadExpand.addEventListener("click", function () {
       return downloadIconMyGifo(img, gifContainer);
     });
@@ -167,12 +173,16 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     });
     gifContainer.appendChild(overlay);
 
-    if (screen.width < 730) {
-      img.addEventListener("click", function () {
-        return expandir(event, gifContainer, item);
-      });
+    function expandMobile() {
+      if (screen.width < 730) {
+        img.addEventListener("click", function () {
+          expandir(event, gifContainer, item);
+          console.log(item.title);
+        });
+      }
     }
 
+    expandMobile();
     gifContainer.appendChild(cruz);
     gifContainer.appendChild(cruzNoc);
     gifContainer.appendChild(img);
@@ -186,6 +196,8 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     divExpandedIcons.appendChild(favActiveExpand);
     divExpandedIcons.appendChild(downloadExpand);
     gifContainer.appendChild(divExpandedIcons);
+    gifContainer.appendChild(itemUser);
+    gifContainer.appendChild(itemTitle);
     container.appendChild(gifContainer);
   });
 }

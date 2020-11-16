@@ -147,7 +147,7 @@ label{
 
 .eachlupa{
     position: absolute;
-    left: 25%;
+    left: 10%;
     
 }
 
@@ -466,9 +466,11 @@ footer{
 }
 .modal .expandeddiv{
     margin-top: 2%;
-    width: 80vw;
+    margin-right: 10vw;
+    width: 40vw;
     display: flex;
     justify-content: flex-end;
+    align-self: flex-end;
 }
 .modal .expanded{
     opacity: 0.5;
@@ -492,6 +494,37 @@ footer{
     top: 15vh;
     right: 8vw;
     border: none;
+}
+.title.GIFOS{
+    color: #50E3C2;
+}
+.captionexpanded{
+    display: none;
+}
+.modal .captionexpanded{
+    display: inline-block;
+    font-family: "Roboto";
+    font-weight: 300;
+    font-size: 15px;
+    color: #000000;
+    align-self: flex-start;
+    margin-left: 10vw;
+    max-width: 50vw;
+    position: absolute;
+    top: 65vh;
+}
+.modal .captionexpanded.titulo{
+    font-weight: bold;
+    top: 69vh;
+}
+.favoritos .vermasday{
+    display: inline-block;
+}
+.favoritos .vermasday:hover ~ .vermasdayhover{
+    display: inline-block;
+}
+.favoritos .vermasday:hover{
+    display: none;
 }
 
 @media screen and (min-width: 730px){
@@ -1222,5 +1255,8 @@ footer{
     }
     .modal .botones.nextdaybutton:hover{
         display: none;
+    }
+    .eachlupa{
+        left: 25%;
     }
     }
