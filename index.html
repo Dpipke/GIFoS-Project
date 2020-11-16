@@ -142,9 +142,12 @@
         <footer>
             <p>Compartir en:</p>
             <div class="compartir">
-                <a href="https://www.facebook.com/"><img src="images/icon_facebook.svg" alt=""></a>
-                <a href="https://twitter.com/?lang=es"><img src="images/icon-twitter.svg" alt=""></a>
-                <a href="https://www.instagram.com/?hl=es-la"><img src="images/icon_instagram.svg" alt=""></a>             
+                <a class="fb" href="https://www.facebook.com/"><img src="images/icon_facebook.svg" alt=""></a>
+                <a class="fbhover" href="https://www.facebook.com/"><img src="images/icon_facebook_hover.svg" alt=""></a>
+                <a class="tw" href="https://twitter.com/?lang=es"><img src="images/icon-twitter.svg" alt=""></a>
+                <a class="twhover" href="https://twitter.com/?lang=es"><img src="images/icon-twitter-hover.svg" alt=""></a>
+                <a class="ig" href="https://www.instagram.com/?hl=es-la"><img src="images/icon_instagram.svg" alt=""></a>             
+                <a class="ighover" href="https://www.instagram.com/?hl=es-la"><img src="images/icon_instagram-hover.svg" alt=""></a>
             </div>
             <div class="compartirnoc noc">
                 <a href="https://www.facebook.com/"><img src="images/icon_facebook_noc.svg" alt=""></a>
@@ -657,7 +660,7 @@
             ppio+=12
             fin+=12
             renderResult(cargarFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults")})
-            if(cargarFavoritos.length <12){
+            if(cargarFavoritos.length <fin){
                 verMasFavoritos.className = "dnone"
             }
 

@@ -479,8 +479,16 @@ footer{
         margin-left: 3%;
         text-decoration: none;
     }    
-    .ul-nav li a, .ul-nav li a:active, .ul-nav li a:focus, .ul-nav li a:link{
+    .ul-nav li a, .ul-nav li a:focus, .ul-nav li a:link{
         color: #572EE5;
+
+    }
+    .ul-nav li a:hover{
+        border-bottom:2px solid #5ED7C6; 
+    }
+    .ul-nav li a:active{
+        color: #9CAFC3;
+        border-bottom: none;
     }
     .imgppal{
         width: 40vw;
@@ -665,8 +673,17 @@ footer{
     }
     .compartir a{
         margin-right: 3vw;
-    }
 
+    }
+    .twhover, .fbhover, .ighover{
+        display: none;
+    }
+    .tw:hover, .ig:hover, .fb:hover{
+        display: none;
+    }
+    .tw:hover ~.twhover, .ig:hover ~.ighover, .fb:hover~ .fbhover{
+        display: inline-block;
+    }
 
     .hoverviolet{
         background-color: transparent;
@@ -956,6 +973,7 @@ footer{
     .uploadOk .downloadmygifo, .uploadOk .linkmygifo{
         display: inline-block;
         margin: 2%;
+        opacity: 0.6;
 
     } .uploadOk .exitoP, .uploadOk .check{
         display:block
