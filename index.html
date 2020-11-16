@@ -196,7 +196,7 @@
         intro.classList.toggle("dnone");
         resultados.classList.toggle("dnone")
         lasttrending.classList.toggle("dnone")
-        favsec.classList.toggle("dnone")
+
     }
     
     const trending = galery => {
@@ -644,23 +644,23 @@
     
     function misFavoritos(){
         const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
-        console.log(localStorageFavorites)
+  
         let ppio = 0
         let fin = 12
-        const primerosFavoritos = localStorageFavorites.splice(ppio, fin)
-        renderResult(primerosFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults")
+        let cargarFavoritos = localStorageFavorites.splice(ppio, fin)
+        renderResult(cargarFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults")
         let cantidadFavoritos = document.getElementsByClassName("favorite")
         console.log(localStorageFavorites)
-        ppio+=12
-        fin+=12
-        verMasFavoritos.addEventListener("click", () => renderResult(primerosFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults"))
-        if(cantidadFavoritos.length = localStorageFavorites.lenght){
-            verMasFavoritos.className = "dnone"
-        }
-        
-   
-   
-        // comparar offset con largo de favoritos. comparar offset mas limit contra el largo de favoritos.
+        console.log(cantidadFavoritos.length)
+
+        verMasFavoritos.addEventListener("click", function(){
+            ppio+=12
+            fin+=12
+            renderResult(cargarFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults")})
+            if(cargarFavoritos.length <12){
+                verMasFavoritos.className = "dnone"
+            }
+
     }
     misFavoritos()
 
