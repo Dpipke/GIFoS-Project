@@ -499,22 +499,25 @@ palabrasTendencia()
 
 function misFavoritos(){
     const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
-
+    console.log(localStorageFavorites.length)
     let ppio = 0
     let fin = 12
-    const favoritesPages = localStorageFavorites.slice(ppio, fin)
-    console.log(favoritesPages.length)
-    renderResult(favoritesPages, favoritegallery, "resultados", "imgresultados", "searchresults")
+    console.log(ppio)
+    const favoritesPage = localStorageFavorites.slice(ppio, fin)
+    console.log(favoritesPage.length)
+    renderResult(favoritesPage, favoritegallery, "resultados", "imgresultados", "searchresults")
 
     
     verMasFavoritos.addEventListener("click", function(){
         const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+        
         ppio+=12
         fin+=12
-        const favoritesPages = localStorageFavorites.slice(ppio, fin)
-        renderResult(favoritesPages, favoritegallery, "resultados", "imgresultados", "searchresults")})
-        if(favoritesPages.length <12){
-            verMasFavoritos.className = "dnone"
+        const favoritesPage = localStorageFavorites.slice(ppio, fin)
+        console.log(favoritesPage)
+        renderResult(favoritesPage, favoritegallery, "resultados", "imgresultados", "searchresults")})
+        if(favoritesPage.length = localStorageFavorites.length){
+            // verMasFavoritos.className = "dnone"
         }
 
 }
