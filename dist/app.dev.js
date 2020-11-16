@@ -614,14 +614,14 @@ function misFavoritos() {
   var localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
   var ppio = 0;
   var fin = 12;
-  var cargarFavoritos = localStorageFavorites.splice(ppio, fin);
+  var cargarFavoritos = localStorageFavorites.slice(ppio, fin);
+  console.log(cargarFavoritos.length);
   renderResult(cargarFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults");
-  var cantidadFavoritos = document.getElementsByClassName("favorite");
-  console.log(localStorageFavorites);
-  console.log(cantidadFavoritos.length);
   verMasFavoritos.addEventListener("click", function () {
+    var localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
     ppio += 12;
     fin += 12;
+    var cargarFavoritos = localStorageFavorites.slice(ppio, fin);
     renderResult(cargarFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults");
   });
 

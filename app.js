@@ -502,15 +502,16 @@ function misFavoritos(){
 
     let ppio = 0
     let fin = 12
-    let cargarFavoritos = localStorageFavorites.splice(ppio, fin)
+    const cargarFavoritos = localStorageFavorites.slice(ppio, fin)
+    console.log(cargarFavoritos.length)
     renderResult(cargarFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults")
-    let cantidadFavoritos = document.getElementsByClassName("favorite")
-    console.log(localStorageFavorites)
-    console.log(cantidadFavoritos.length)
+
     
     verMasFavoritos.addEventListener("click", function(){
+        const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
         ppio+=12
         fin+=12
+        const cargarFavoritos = localStorageFavorites.slice(ppio, fin)
         renderResult(cargarFavoritos, favoritegallery, "resultados", "imgresultados", "searchresults")})
         if(cargarFavoritos.length <fin){
             verMasFavoritos.className = "dnone"
