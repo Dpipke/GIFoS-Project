@@ -267,6 +267,7 @@ function imgHoverComponentFactory(item, expandir, agregarFavoritos, eliminarFavo
 }
 
 const verMasFavoritos = document.getElementById("vermas")
+const verMasFavoritosUnhover = document.getElementById("vermasunhover")
 const verMasFavoritosNoc = document.getElementById("vermasfavnoc")
 const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
 if(localStorageFavorites == 0){
@@ -499,12 +500,10 @@ palabrasTendencia()
 
 function misFavoritos(){
     const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
-    console.log(localStorageFavorites.length)
     let ppio = 0
     let fin = 12
-    console.log(ppio)
     const favoritesPage = localStorageFavorites.slice(ppio, fin)
-    console.log(favoritesPage.length)
+
     renderResult(favoritesPage, favoritegallery, "resultados", "imgresultados", "searchresults")
 
     
@@ -514,11 +513,14 @@ function misFavoritos(){
         ppio+=12
         fin+=12
         const favoritesPage = localStorageFavorites.slice(ppio, fin)
-        console.log(favoritesPage)
-        renderResult(favoritesPage, favoritegallery, "resultados", "imgresultados", "searchresults")})
-        if(favoritesPage.length = localStorageFavorites.length){
-            // verMasFavoritos.className = "dnone"
-        }
+        console.log(ppio)
+        console.log(fin)
+        console.log(favoritesPage.length)
+        renderResult(favoritesPage, favoritegallery, "resultados", "imgresultados", "searchresults")
+        if(favoritesPage.length <12){
+            verMasFavoritos.className = "dnone"
+            verMasFavoritosUnhover.className = "dnone"
+        }})
 
 }
 misFavoritos()
@@ -599,7 +601,7 @@ function timer() {
     let sec = 0;
     let min = 0;
     let hour = 0;
-    countdown = setInterval(function () {
+    const countdown = setInterval(function () {
         counter.innerHTML = `${hour}:${min}:${sec}`;
         sec++;
         if (sec == 60) {
@@ -611,7 +613,7 @@ function timer() {
         }
         }
     }, 1000);
-}
+
 
 finalizar.addEventListener("click", detenerGrabacion)
 
@@ -626,15 +628,17 @@ function detenerGrabacion(){
     let blob
     blob = recorder.getBlob();
     let urlCreator = window.URL || window.webkitURL;
-    imageUrl = urlCreator.createObjectURL(blob);
+    let imageUrl = urlCreator.createObjectURL(blob);
     previewImg.src = imageUrl;
     video.style.display = "none";
     previewImg.style.display = "block";
     finalizar.className= "dnone";
     counter.addEventListener("click", repeatCapture);
 }
-
+}
 subir.addEventListener("click", subirGifo)
+
+
 
 function repeatCapture(){
     previewImg.src=""
@@ -708,10 +712,35 @@ if (resUpload.meta.status === 200) {
     );
 }
 }
+const verMasMisGifos = document.getElementById("vermasmisgifos")
+const verMasMisGifosUnhover = document.getElementById("vermasmisgifosunhover")
 
 function misGifos(){
     const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
-    renderResult(localStorageMisGifos, misgifoslist, "resultados", "imgresultados", "searchresults agregadomisgifos")
+
+    let ppio = 0
+    let fin = 12
+    const gifosPage = localStorageMisGifos.slice(ppio, fin)
+    console.log(ppio)
+    console.log(fin)
+    console.log(gifosPage.length)
+    renderResult(gifosPage, misgifoslist, "resultados", "imgresultados", "searchresults agregadomisgifos")
+
+    
+    verMasMisGifos.addEventListener("click", function(){
+        const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
+        
+        ppio+=12
+        fin+=12
+        const gifosPage = localStorageMisGifos.slice(ppio, fin)
+        console.log(ppio)
+        console.log(fin)
+        console.log(gifosPage.length)
+        renderResult(gifosPage, misgifoslist, "resultados", "imgresultados", "searchresults agregadomisgifos")
+        if(gifosPage.length <12){
+            verMasMisGifos.className = "dnone"
+            verMasMisGifosUnhover.className = "dnone"
+        }})
 
 }
 misGifos()
