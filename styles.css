@@ -1265,4 +1265,7 @@ form{
     .eachlupa{
         left: 25%;
     }
+    video{
+        height: 240px;
+    }
     }

@@ -656,11 +656,17 @@ subir.addEventListener("click", subirGifo)
 
 function repeatCapture(){
     let previewImg = document.getElementById("previewImgGif")
-    previewImg.style.display = "none"
-    subir.className = "dnone"
-    counter.className = "dnone"
-    video.style.display = "inline-block"
-    // solicitudPermiso()
+
+    let blob
+    blob = recorder.getBlob();
+    let urlCreator = window.URL || window.webkitURL;
+    let imageUrl = urlCreator.createObjectURL(blob);
+    previewImg.src = imageUrl;
+    subir.className = "dnone";
+    counter.className = "dnone";
+    video.style.display = "block";
+    previewImg.style.display = "none";
+    solicitudPermiso()
 }
 const verMasMisGifosNoc = document.getElementById("vermasmisgifosnoc")
 const verMasMisGifosNocHover = document.getElementById("vermasmisgifosnochover")

@@ -792,10 +792,16 @@ subir.addEventListener("click", subirGifo);
 
 function repeatCapture() {
   var previewImg = document.getElementById("previewImgGif");
-  previewImg.style.display = "none";
+  var blob;
+  blob = recorder.getBlob();
+  var urlCreator = window.URL || window.webkitURL;
+  var imageUrl = urlCreator.createObjectURL(blob);
+  previewImg.src = imageUrl;
   subir.className = "dnone";
   counter.className = "dnone";
-  video.style.display = "inline-block"; // solicitudPermiso()
+  video.style.display = "block";
+  previewImg.style.display = "none";
+  solicitudPermiso();
 }
 
 var verMasMisGifosNoc = document.getElementById("vermasmisgifosnoc");
