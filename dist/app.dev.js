@@ -654,25 +654,36 @@ var video = document.getElementById("video");
 var grabar = document.getElementById("grabar");
 
 function solicitudPermiso() {
-  comenzar.className = "dnone";
-  acceso.className = "titleCrear";
-  pAcceso.className = "pCreacionGifos";
-  titleCrear.className = "dnone";
-  pCreacionGifos.className = "dnone";
-  pCreacionAclaracion.className = "dnone";
-  primerPaso.className = "pasosHover";
-  getStreamAndRecord();
+  return regeneratorRuntime.async(function solicitudPermiso$(_context9) {
+    while (1) {
+      switch (_context9.prev = _context9.next) {
+        case 0:
+          comenzar.className = "dnone";
+          acceso.className = "titleCrear";
+          pAcceso.className = "pCreacionGifos";
+          titleCrear.className = "dnone";
+          pCreacionGifos.className = "dnone";
+          pCreacionAclaracion.className = "dnone";
+          primerPaso.className = "pasosHover";
+          getStreamAndRecord();
+
+        case 8:
+        case "end":
+          return _context9.stop();
+      }
+    }
+  });
 }
 
 var stream;
 var recorder;
 
 function getStreamAndRecord() {
-  return regeneratorRuntime.async(function getStreamAndRecord$(_context9) {
+  return regeneratorRuntime.async(function getStreamAndRecord$(_context10) {
     while (1) {
-      switch (_context9.prev = _context9.next) {
+      switch (_context10.prev = _context10.next) {
         case 0:
-          _context9.next = 2;
+          _context10.next = 2;
           return regeneratorRuntime.awrap(navigator.mediaDevices.getUserMedia({
             audio: false,
             video: {
@@ -683,7 +694,7 @@ function getStreamAndRecord() {
           }));
 
         case 2:
-          stream = _context9.sent;
+          stream = _context10.sent;
 
           if (stream.active === true) {
             video.srcObject = stream;
@@ -707,7 +718,7 @@ function getStreamAndRecord() {
 
         case 4:
         case "end":
-          return _context9.stop();
+          return _context10.stop();
       }
     }
   });
@@ -799,9 +810,9 @@ if (localStorageMisGifos.length == 0) {
 
 function subirGifo() {
   var template, containerCreacionGifos, formData, uploadGif, resUpload, resultadoUpload, res;
-  return regeneratorRuntime.async(function subirGifo$(_context10) {
+  return regeneratorRuntime.async(function subirGifo$(_context11) {
     while (1) {
-      switch (_context10.prev = _context10.next) {
+      switch (_context11.prev = _context11.next) {
         case 0:
           segundoPaso.className = "number";
           tercerPaso.className = "pasosHover";
@@ -813,7 +824,7 @@ function subirGifo() {
           formData = new FormData();
           formData.append("file", recorder.getBlob(), "myGif.gif");
           formData.append("tags", "");
-          _context10.next = 12;
+          _context11.next = 12;
           return regeneratorRuntime.awrap(fetch("https://upload.giphy.com/v1/gifs?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM", {
             method: "POST",
             body: formData,
@@ -821,31 +832,31 @@ function subirGifo() {
           }));
 
         case 12:
-          uploadGif = _context10.sent;
-          _context10.next = 15;
+          uploadGif = _context11.sent;
+          _context11.next = 15;
           return regeneratorRuntime.awrap(uploadGif.json());
 
         case 15:
-          resUpload = _context10.sent;
+          resUpload = _context11.sent;
 
           if (!(resUpload.meta.status === 200)) {
-            _context10.next = 29;
+            _context11.next = 29;
             break;
           }
 
           template.classList.add("uploadOk");
           subir.className = "dnone";
           console.log(resUpload);
-          _context10.next = 22;
+          _context11.next = 22;
           return regeneratorRuntime.awrap(fetch("https://api.giphy.com/v1/gifs/".concat(resUpload.data.id, "?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM")));
 
         case 22:
-          resultadoUpload = _context10.sent;
-          _context10.next = 25;
+          resultadoUpload = _context11.sent;
+          _context11.next = 25;
           return regeneratorRuntime.awrap(resultadoUpload.json());
 
         case 25:
-          res = _context10.sent;
+          res = _context11.sent;
           console.log(res); // iconLink.href = res.data.url;
 
           localStorageMisGifos.push({
@@ -862,7 +873,7 @@ function subirGifo() {
 
         case 29:
         case "end":
-          return _context10.stop();
+          return _context11.stop();
       }
     }
   });

@@ -545,7 +545,7 @@ const tercerPaso = document.getElementById("3erpaso")
 const video = document.getElementById("video")
 const grabar = document.getElementById("grabar")
 
-function solicitudPermiso(){
+async function solicitudPermiso(){
     comenzar.className = "dnone"
     acceso.className = "titleCrear"
     pAcceso.className = "pCreacionGifos"
@@ -582,7 +582,8 @@ async function getStreamAndRecord () {
         hidden: 240,
     })
     grabar.addEventListener("click", () => onGifRecordingStarted(recorder))
-    }}
+    }
+}
 
 
 function onGifRecordingStarted(recorder) {
