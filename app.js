@@ -371,6 +371,7 @@ async function sugerir(){
         sugerencia.innerHTML = `<img class = "eachlupa" src="images/icon-search-modo-noct.svg">${suggested.name}`
         sugerencia.className = "sugerencia"
         const lupaHover = document.createElement("img")
+        sugerenciasContainer.classList.remove("dnone")
         sugerenciasContainer.appendChild(sugerencia);
         sugerencia.addEventListener("click", autocompletar)
 

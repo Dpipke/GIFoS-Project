@@ -382,6 +382,7 @@ function sugerir() {
             sugerencia.innerHTML = "<img class = \"eachlupa\" src=\"images/icon-search-modo-noct.svg\">".concat(suggested.name);
             sugerencia.className = "sugerencia";
             var lupaHover = document.createElement("img");
+            sugerenciasContainer.classList.remove("dnone");
             sugerenciasContainer.appendChild(sugerencia);
             sugerencia.addEventListener("click", autocompletar);
           });
