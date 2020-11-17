@@ -148,6 +148,7 @@ label{
 .eachlupa{
     position: absolute;
     left: 10%;
+
     
 }
 
@@ -169,6 +170,7 @@ label{
 .cerrarbusqueda{
     position: relative;
     left: 5%;
+    margin-top: 1.5%;
 }
 
 input[type= "search"]{
@@ -181,6 +183,8 @@ input[type= "search"]{
 }
 .lupita{
     width: 5%;
+    position: absolute;
+    height: 3%;
 }
 
 .sugerencia{
@@ -1263,9 +1267,12 @@ form{
         display: none;
     }
     .eachlupa{
-        left: 25%;
+        left: 23%;
     }
     video{
         height: 240px;
+    }
+    .inputlupa{
+        margin-top: 1.5%;
     }
     }

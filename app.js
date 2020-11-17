@@ -353,7 +353,7 @@ async function sugerir(){
 
     
     const sugerenciasContainer = document.getElementById("sugerenciascontainer")
-    lupabuscador.className = "eachlupa"
+    lupabuscador.className = "eachlupa inputlupa"
     const suggestions = sugerenciasData.filter(function(item) {
     return item.name.toLowerCase().startsWith(q);
     });
@@ -577,7 +577,9 @@ let recorder
 async function getStreamAndRecord () { 
     stream = await navigator.mediaDevices.getUserMedia({
     audio: false,
-    video: {}
+    video: {
+        height: { max: 450 }
+    }
     })
     if (stream.active === true) {
     video.srcObject = stream;
@@ -666,7 +668,7 @@ function repeatCapture(){
     counter.className = "dnone";
     video.style.display = "block";
     previewImg.style.display = "none";
-    solicitudPermiso()
+    comenzar.className = "comenzar"
 }
 const verMasMisGifosNoc = document.getElementById("vermasmisgifosnoc")
 const verMasMisGifosNocHover = document.getElementById("vermasmisgifosnochover")

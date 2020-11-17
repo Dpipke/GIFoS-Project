@@ -366,7 +366,7 @@ function sugerir() {
           sugerenciasResults = _context2.sent;
           sugerenciasData = sugerenciasResults.data;
           sugerenciasContainer = document.getElementById("sugerenciascontainer");
-          lupabuscador.className = "eachlupa";
+          lupabuscador.className = "eachlupa inputlupa";
           suggestions = sugerenciasData.filter(function (item) {
             return item.name.toLowerCase().startsWith(q);
           });
@@ -702,7 +702,11 @@ function getStreamAndRecord() {
           _context10.next = 2;
           return regeneratorRuntime.awrap(navigator.mediaDevices.getUserMedia({
             audio: false,
-            video: {}
+            video: {
+              height: {
+                max: 450
+              }
+            }
           }));
 
         case 2:
@@ -801,7 +805,7 @@ function repeatCapture() {
   counter.className = "dnone";
   video.style.display = "block";
   previewImg.style.display = "none";
-  solicitudPermiso();
+  comenzar.className = "comenzar";
 }
 
 var verMasMisGifosNoc = document.getElementById("vermasmisgifosnoc");
