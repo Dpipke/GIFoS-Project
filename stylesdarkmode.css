@@ -155,11 +155,19 @@ input[placeholder]{
 }
 .vermasday{
     display: none;
+
 }
-.vermasnoc{
-    display: block;
+.favoritos .vermasday, .misgifossec .vermasday{
+    display: none;
 }
-.favoritos .vermasday, .favoritos .vermasdayhover, .misgifossec .vermasday, .misgifossec .vermasdayhover{
+.favoritos .vermasnoc, .misgifossec .vermasnoc{
+    display: inline-block;
+}
+
+.favoritos .vermasnoc:hover ~ .vermasnochover, .misgifossec .vermasnoc:hover ~ .vermasnochover{
+    display: inline-block;
+}
+.favoritos .vermasnoc:hover, .misgifossec .vermasnoc:hover{
     display: none;
 }
 @media screen and (min-width: 730px){

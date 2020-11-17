@@ -269,6 +269,8 @@ function imgHoverComponentFactory(item, expandir, agregarFavoritos, eliminarFavo
 const verMasFavoritos = document.getElementById("vermas")
 const verMasFavoritosUnhover = document.getElementById("vermasunhover")
 const verMasFavoritosNoc = document.getElementById("vermasfavnoc")
+const verMasFavoritosNocHover = document.getElementById("vermasfavnochover")
+
 const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
 if(localStorageFavorites == 0){
     const favoritosVacio = document.createElement("img")
@@ -521,7 +523,20 @@ function misFavoritos(){
             verMasFavoritos.className = "dnone"
             verMasFavoritosUnhover.className = "dnone"
         }})
-
+    verMasFavoritosNocHover.addEventListener("click", function(){
+        const localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+        
+        ppio+=12
+        fin+=12
+        const favoritesPage = localStorageFavorites.slice(ppio, fin)
+        console.log(ppio)
+        console.log(fin)
+        console.log(favoritesPage.length)
+        renderResult(favoritesPage, favoritegallery, "resultados", "imgresultados", "searchresults")
+        if(favoritesPage.length <12){
+            verMasFavoritosNocHover.className = "dnone"
+            verMasFavoritosNoc.className = "dnone"
+        }})
 }
 misFavoritos()
 
@@ -562,9 +577,7 @@ let recorder
 async function getStreamAndRecord () { 
     stream = await navigator.mediaDevices.getUserMedia({
     audio: false,
-    video: {
-        height: { max: 450 }
-    }
+    video: {}
     })
     if (stream.active === true) {
     video.srcObject = stream;
@@ -647,9 +660,10 @@ function repeatCapture(){
     subir.className = "dnone"
     counter.className = "dnone"
     video.style.display = "inline-block"
-    solicitudPermiso()
+    // solicitudPermiso()
 }
 const verMasMisGifosNoc = document.getElementById("vermasmisgifosnoc")
+const verMasMisGifosNocHover = document.getElementById("vermasmisgifosnochover")
 const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
 if(localStorageMisGifos.length == 0){
     const gifoVacio = document.createElement("img")
@@ -729,6 +743,7 @@ function misGifos(){
     renderResult(gifosPage, misgifoslist, "resultados", "imgresultados", "searchresults agregadomisgifos")
 
     
+    
     verMasMisGifos.addEventListener("click", function(){
         const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
         
@@ -742,6 +757,20 @@ function misGifos(){
         if(gifosPage.length <12){
             verMasMisGifos.className = "dnone"
             verMasMisGifosUnhover.className = "dnone"
+        }})
+    verMasMisGifosNocHover.addEventListener("click", function(){
+        const localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
+        
+        ppio+=12
+        fin+=12
+        const gifosPage = localStorageMisGifos.slice(ppio, fin)
+        console.log(ppio)
+        console.log(fin)
+        console.log(gifosPage.length)
+        renderResult(gifosPage, misgifoslist, "resultados", "imgresultados", "searchresults agregadomisgifos")
+        if(gifosPage.length <12){
+            verMasMisGifosNoc.className = "dnone"
+            verMasMisGifosNocHover.className = "dnone"
         }})
 
 }

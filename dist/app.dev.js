@@ -272,6 +272,7 @@ function imgHoverComponentFactory(item, expandir, agregarFavoritos, eliminarFavo
 var verMasFavoritos = document.getElementById("vermas");
 var verMasFavoritosUnhover = document.getElementById("vermasunhover");
 var verMasFavoritosNoc = document.getElementById("vermasfavnoc");
+var verMasFavoritosNocHover = document.getElementById("vermasfavnochover");
 var localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
 
 if (localStorageFavorites == 0) {
@@ -632,6 +633,21 @@ function misFavoritos() {
       verMasFavoritosUnhover.className = "dnone";
     }
   });
+  verMasFavoritosNocHover.addEventListener("click", function () {
+    var localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+    ppio += 12;
+    fin += 12;
+    var favoritesPage = localStorageFavorites.slice(ppio, fin);
+    console.log(ppio);
+    console.log(fin);
+    console.log(favoritesPage.length);
+    renderResult(favoritesPage, favoritegallery, "resultados", "imgresultados", "searchresults");
+
+    if (favoritesPage.length < 12) {
+      verMasFavoritosNocHover.className = "dnone";
+      verMasFavoritosNoc.className = "dnone";
+    }
+  });
 }
 
 misFavoritos(); // const busqueda = "cat";
@@ -686,11 +702,7 @@ function getStreamAndRecord() {
           _context10.next = 2;
           return regeneratorRuntime.awrap(navigator.mediaDevices.getUserMedia({
             audio: false,
-            video: {
-              height: {
-                max: 450
-              }
-            }
+            video: {}
           }));
 
         case 2:
@@ -783,11 +795,11 @@ function repeatCapture() {
   previewImg.style.display = "none";
   subir.className = "dnone";
   counter.className = "dnone";
-  video.style.display = "inline-block";
-  solicitudPermiso();
+  video.style.display = "inline-block"; // solicitudPermiso()
 }
 
 var verMasMisGifosNoc = document.getElementById("vermasmisgifosnoc");
+var verMasMisGifosNocHover = document.getElementById("vermasmisgifosnochover");
 var localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
 
 if (localStorageMisGifos.length == 0) {
@@ -904,6 +916,21 @@ function misGifos() {
     if (gifosPage.length < 12) {
       verMasMisGifos.className = "dnone";
       verMasMisGifosUnhover.className = "dnone";
+    }
+  });
+  verMasMisGifosNocHover.addEventListener("click", function () {
+    var localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
+    ppio += 12;
+    fin += 12;
+    var gifosPage = localStorageMisGifos.slice(ppio, fin);
+    console.log(ppio);
+    console.log(fin);
+    console.log(gifosPage.length);
+    renderResult(gifosPage, misgifoslist, "resultados", "imgresultados", "searchresults agregadomisgifos");
+
+    if (gifosPage.length < 12) {
+      verMasMisGifosNoc.className = "dnone";
+      verMasMisGifosNocHover.className = "dnone";
     }
   });
 }
