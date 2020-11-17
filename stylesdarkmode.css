@@ -170,6 +170,23 @@ input[placeholder]{
 .favoritos .vermasnoc:hover, .misgifossec .vermasnoc:hover{
     display: none;
 }
+.lens.noc{
+    width: 5%;
+    position: absolute;
+    height: 3%;
+}
+.cerrardia{
+    display: none;
+}
+.cerrarnoc{
+    display: inline-block;
+}
+.inputlupadia{
+    display: none;
+}
+.inputlupanoc{
+    display: inline-block;
+}
 @media screen and (min-width: 730px){
 
 .logomobile{

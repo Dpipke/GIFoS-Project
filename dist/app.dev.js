@@ -339,34 +339,41 @@ var getUrl = function getUrl(q, limit, offset) {
 
 input.addEventListener("keyup", sugerir);
 form.addEventListener("submit", resultadosBusqueda);
+var lupaNoc = document.getElementById("lupanoc");
+var cerrarNoc = document.getElementById("cerrarnoc");
 
 function sugerir() {
-  var q, apiSugerencias, sugerenciasResponse, sugerenciasResults, sugerenciasData, sugerenciasContainer, suggestions, autocompletar;
+  var q, apiSugerencias, sugerenciasResponse, sugerenciasResults, sugerenciasData, sugerenciasContainer, suggestions, autocompletar, cerrarBusquedaFuncion;
   return regeneratorRuntime.async(function sugerir$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
+          cerrarBusquedaFuncion = function _ref2() {
+            sugerenciasContainer.classList.add("dnone");
+          };
+
           autocompletar = function _ref(event, sugerencia) {
             input.value = event.target.textContent;
             resultadosBusqueda(event);
-            sugerenciasContainer.className = "dnone";
+            sugerenciasContainer.classList.remove("dnone");
           };
 
           q = input.value;
           apiSugerencias = "https://api.giphy.com/v1/gifs/search/tags?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=".concat(q);
-          _context2.next = 5;
+          _context2.next = 6;
           return regeneratorRuntime.awrap(fetch(apiSugerencias));
 
-        case 5:
+        case 6:
           sugerenciasResponse = _context2.sent;
-          _context2.next = 8;
+          _context2.next = 9;
           return regeneratorRuntime.awrap(sugerenciasResponse.json());
 
-        case 8:
+        case 9:
           sugerenciasResults = _context2.sent;
           sugerenciasData = sugerenciasResults.data;
           sugerenciasContainer = document.getElementById("sugerenciascontainer");
-          lupabuscador.className = "eachlupa inputlupa";
+          lupaNoc.className = "eachlupa inputlupadia";
+          lupabuscador.className = "eachlupa inputlupanoc";
           suggestions = sugerenciasData.filter(function (item) {
             return item.name.toLowerCase().startsWith(q);
           });
@@ -380,9 +387,12 @@ function sugerir() {
             sugerencia.addEventListener("click", autocompletar);
           });
           buscar.className = "dnone";
-          cerrarBusqueda.className = "cerrarbusqueda";
+          cerrarBusqueda.className = "cerrarbusqueda cerrardia";
+          cerrarNoc.className = "cerrarbusqueda cerrarnoc";
+          cerrarBusqueda.addEventListener("click", cerrarBusquedaFuncion);
+          cerrarNoc.addEventListener("click", cerrarBusquedaFuncion);
 
-        case 17:
+        case 22:
         case "end":
           return _context2.stop();
       }

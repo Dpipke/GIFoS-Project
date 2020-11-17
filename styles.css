@@ -530,11 +530,18 @@ footer{
     display: none;
 }
 .lupainput{
-    display: inline-block;
+    display: none;
 }
 form{
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+.cerrarnoc{
+    display: none;
+}
+.inputlupanoc{
+    display: none;
 }
 
 @media screen and (min-width: 730px){
@@ -741,10 +748,6 @@ form{
         height: 50vh;
         width: 23vw;
         margin: 0;
-    }
-    .lupita{
-        width: 5%;
-        margin-top: 2%
     }
 
     .trending{
@@ -1272,7 +1275,5 @@ form{
     video{
         height: 240px;
     }
-    .inputlupa{
-        margin-top: 1.5%;
-    }
+  
     }

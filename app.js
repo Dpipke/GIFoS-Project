@@ -343,7 +343,8 @@ input.addEventListener("keyup", sugerir)
 form.addEventListener("submit", resultadosBusqueda)
 
 
-
+const lupaNoc = document.getElementById("lupanoc")
+const cerrarNoc = document.getElementById("cerrarnoc")
 async function sugerir(){
     const q = input.value 
     const apiSugerencias = `https://api.giphy.com/v1/gifs/search/tags?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${q}`
@@ -353,7 +354,8 @@ async function sugerir(){
 
     
     const sugerenciasContainer = document.getElementById("sugerenciascontainer")
-    lupabuscador.className = "eachlupa inputlupa"
+    lupaNoc.className = "eachlupa inputlupadia"
+    lupabuscador.className = "eachlupa inputlupanoc"
     const suggestions = sugerenciasData.filter(function(item) {
     return item.name.toLowerCase().startsWith(q);
     });
@@ -372,14 +374,22 @@ async function sugerir(){
     });
 
     buscar.className = "dnone"
-    cerrarBusqueda.className = "cerrarbusqueda"
+    cerrarBusqueda.className = "cerrarbusqueda cerrardia"
+    cerrarNoc.className = "cerrarbusqueda cerrarnoc"
+
+    cerrarBusqueda.addEventListener("click", cerrarBusquedaFuncion)
+    cerrarNoc.addEventListener("click", cerrarBusquedaFuncion)
 
     function autocompletar(event, sugerencia){
         input.value = event.target.textContent
         resultadosBusqueda(event) 
-        sugerenciasContainer.className = "dnone"
+        sugerenciasContainer.classList.remove("dnone")
         
         
+    }
+
+    function cerrarBusquedaFuncion(){
+        sugerenciasContainer.classList.add("dnone")
     }
 
 }
