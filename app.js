@@ -756,7 +756,7 @@ async function subirGifo() {
     );
     const res = await resultadoUpload.json();
     console.log(res);
-    // iconLink.href = res.data.url;
+    aLink.href = res.data.url;
     localStorageMisGifos.push({
       id: res.data.id,
       title: res.data.title,
@@ -822,11 +822,13 @@ function uploadingOverlay() {
   const linkMyGifo = document.createElement("img");
   const check = document.createElement("img");
   const divBotonesSubido = document.createElement("div");
+  const aLink = document.getElementById("a");
 
   loader.src = "images/loader.svg";
   check.src = "images/check.svg";
   downloadMyGifo.src = "images/icon-download-hover.svg";
   linkMyGifo.src = "images/icon-link-hover.svg";
+  aLink.id= "link"
 
   loader.className = "loader";
   check.className = "check";
@@ -841,6 +843,7 @@ function uploadingOverlay() {
 
   divBotonesSubido.appendChild(downloadMyGifo);
   divBotonesSubido.appendChild(linkMyGifo);
+  divBotonesSubido.appendChild(aLink)
   uploadOverlay.appendChild(divBotonesSubido);
   uploadOverlay.appendChild(loader);
   uploadOverlay.appendChild(subiendo);
@@ -850,7 +853,7 @@ function uploadingOverlay() {
   downloadMyGifo.addEventListener("click", () =>
     downloadMyGifoFunction(previewImg.src, uploadOverlay)
   );
-
+  linkMyGifo.addEventListener("click",linkFunction)
   return uploadOverlay;
 }
 
@@ -862,7 +865,7 @@ function eliminarMisGifos(item) {
     )
   );
 }
-
+ 
 const head = document.getElementById("head");
 const link = document.createElement("link");
 const mode = document.getElementById("mode");

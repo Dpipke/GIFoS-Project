@@ -863,7 +863,7 @@ function subirGifo() {
           resUpload = _context11.sent;
 
           if (!(resUpload.meta.status === 200)) {
-            _context11.next = 29;
+            _context11.next = 30;
             break;
           }
 
@@ -880,8 +880,8 @@ function subirGifo() {
 
         case 25:
           res = _context11.sent;
-          console.log(res); // iconLink.href = res.data.url;
-
+          console.log(res);
+          aLink.href = res.data.url;
           localStorageMisGifos.push({
             id: res.data.id,
             title: res.data.title,
@@ -894,7 +894,7 @@ function subirGifo() {
           });
           localStorage.setItem("listMisGifos", JSON.stringify(localStorageMisGifos));
 
-        case 29:
+        case 30:
         case "end":
           return _context11.stop();
       }
@@ -942,10 +942,12 @@ function uploadingOverlay() {
   var linkMyGifo = document.createElement("img");
   var check = document.createElement("img");
   var divBotonesSubido = document.createElement("div");
+  var aLink = document.getElementById("a");
   loader.src = "images/loader.svg";
   check.src = "images/check.svg";
   downloadMyGifo.src = "images/icon-download-hover.svg";
   linkMyGifo.src = "images/icon-link-hover.svg";
+  aLink.id = "link";
   loader.className = "loader";
   check.className = "check";
   uploadOverlay.className = "uploadViolet";
@@ -958,6 +960,7 @@ function uploadingOverlay() {
   divBotonesSubido.className = "divbotonessubido";
   divBotonesSubido.appendChild(downloadMyGifo);
   divBotonesSubido.appendChild(linkMyGifo);
+  divBotonesSubido.appendChild(aLink);
   uploadOverlay.appendChild(divBotonesSubido);
   uploadOverlay.appendChild(loader);
   uploadOverlay.appendChild(subiendo);
@@ -966,6 +969,7 @@ function uploadingOverlay() {
   downloadMyGifo.addEventListener("click", function () {
     return downloadMyGifoFunction(previewImg.src, uploadOverlay);
   });
+  linkMyGifo.addEventListener("click", linkFunction);
   return uploadOverlay;
 }
 
