@@ -73,7 +73,7 @@ label{
     opacity: 0.5;
    
 }
-.ul-nav li a, .ul-nav li a:active, .ul-nav li a:focus{
+.ul-nav li a, .ul-nav li a:active{
     text-decoration: none;
     color: #FFFFFF;
 }
