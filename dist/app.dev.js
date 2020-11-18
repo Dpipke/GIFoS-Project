@@ -832,7 +832,8 @@ if (localStorageMisGifos.length == 0) {
 }
 
 function subirGifo() {
-  var template, containerCreacionGifos, formData, uploadGif, resUpload, resultadoUpload, res;
+  var template, containerCreacionGifos, formData, uploadGif, resUpload, resultadoUpload, res, _aLink;
+
   return regeneratorRuntime.async(function subirGifo$(_context11) {
     while (1) {
       switch (_context11.prev = _context11.next) {
@@ -840,7 +841,7 @@ function subirGifo() {
           segundoPaso.className = "number";
           tercerPaso.className = "pasosHover";
           counter.className = "dnone";
-          template = uploadingOverlay();
+          template = uploadingOverlay(aLink);
           containerCreacionGifos = document.getElementById("containerCreacionGifos");
           containerCreacionGifos.appendChild(template);
           console.log(template);
@@ -881,7 +882,7 @@ function subirGifo() {
         case 25:
           res = _context11.sent;
           console.log(res);
-          aLink.href = res.data.url;
+          _aLink = res.data.url;
           localStorageMisGifos.push({
             id: res.data.id,
             title: res.data.title,
@@ -933,7 +934,7 @@ function misGifos() {
 
 misGifos();
 
-function uploadingOverlay() {
+function uploadingOverlay(aLink) {
   var uploadOverlay = document.createElement("div");
   var subiendo = document.createElement("p");
   var exito = document.createElement("p");
@@ -942,12 +943,12 @@ function uploadingOverlay() {
   var linkMyGifo = document.createElement("img");
   var check = document.createElement("img");
   var divBotonesSubido = document.createElement("div");
-  var aLink = document.getElementById("a");
+  var Link = document.getElementById("a");
   loader.src = "images/loader.svg";
   check.src = "images/check.svg";
   downloadMyGifo.src = "images/icon-download-hover.svg";
   linkMyGifo.src = "images/icon-link-hover.svg";
-  aLink.id = "link";
+  Link.href = aLink;
   loader.className = "loader";
   check.className = "check";
   uploadOverlay.className = "uploadViolet";
@@ -960,7 +961,7 @@ function uploadingOverlay() {
   divBotonesSubido.className = "divbotonessubido";
   divBotonesSubido.appendChild(downloadMyGifo);
   divBotonesSubido.appendChild(linkMyGifo);
-  divBotonesSubido.appendChild(aLink);
+  divBotonesSubido.appendChild(Link);
   uploadOverlay.appendChild(divBotonesSubido);
   uploadOverlay.appendChild(loader);
   uploadOverlay.appendChild(subiendo);

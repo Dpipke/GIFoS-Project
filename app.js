@@ -727,10 +727,10 @@ async function subirGifo() {
   segundoPaso.className = "number";
   tercerPaso.className = "pasosHover";
   counter.className = "dnone";
-  const template = uploadingOverlay();
+  const template = uploadingOverlay(aLink);
   const containerCreacionGifos = document.getElementById(
     "containerCreacionGifos"
-  );
+    );
   containerCreacionGifos.appendChild(template);
   console.log(template);
   let formData = new FormData();
@@ -756,7 +756,7 @@ async function subirGifo() {
     );
     const res = await resultadoUpload.json();
     console.log(res);
-    aLink.href = res.data.url;
+    const aLink= res.data.url;
     localStorageMisGifos.push({
       id: res.data.id,
       title: res.data.title,
@@ -813,7 +813,7 @@ function misGifos() {
 }
 misGifos();
 
-function uploadingOverlay() {
+function uploadingOverlay(aLink) {
   const uploadOverlay = document.createElement("div");
   const subiendo = document.createElement("p");
   const exito = document.createElement("p");
@@ -822,13 +822,13 @@ function uploadingOverlay() {
   const linkMyGifo = document.createElement("img");
   const check = document.createElement("img");
   const divBotonesSubido = document.createElement("div");
-  const aLink = document.getElementById("a");
+  const Link = document.getElementById("a");
 
   loader.src = "images/loader.svg";
   check.src = "images/check.svg";
   downloadMyGifo.src = "images/icon-download-hover.svg";
   linkMyGifo.src = "images/icon-link-hover.svg";
-  aLink.id= "link"
+  Link.href= aLink
 
   loader.className = "loader";
   check.className = "check";
@@ -843,7 +843,7 @@ function uploadingOverlay() {
 
   divBotonesSubido.appendChild(downloadMyGifo);
   divBotonesSubido.appendChild(linkMyGifo);
-  divBotonesSubido.appendChild(aLink)
+  divBotonesSubido.appendChild(Link);
   uploadOverlay.appendChild(divBotonesSubido);
   uploadOverlay.appendChild(loader);
   uploadOverlay.appendChild(subiendo);
