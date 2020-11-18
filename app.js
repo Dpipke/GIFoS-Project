@@ -869,7 +869,7 @@ function uploadedOverlay(uploadOverlay, aLink){
 }
 
 function redirigir(Link){
-  return Link
+  window.open(Link) 
 }
 
 function eliminarMisGifos(item) {
