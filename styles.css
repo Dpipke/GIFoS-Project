@@ -1275,5 +1275,19 @@ form{
     video{
         height: 240px;
     }
-  
+    
+    .containerCreacionGifos{
+        background: 
+        linear-gradient(to right,#50E3C2 1px, transparent 1px) 3% 5%,
+        linear-gradient(to right,#50E3C2 1px, transparent 1px) 3% 95%,
+        linear-gradient(to left,#50E3C2 1px, transparent 1px) 97% 5%,
+        linear-gradient(to left,#50E3C2 1px, transparent 1px) 97% 95%,
+        linear-gradient(to bottom,#50E3C2 1px, transparent 1px) 3% 5%,
+        linear-gradient(to bottom,#50E3C2 1px, transparent 1px) 97% 5%,
+        linear-gradient(to top,#50E3C2 1px, transparent 1px) 3% 95%,
+        linear-gradient(to top,#50E3C2 1px, transparent 1px) 97% 95%;
+
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+    }
     }
