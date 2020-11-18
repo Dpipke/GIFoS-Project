@@ -350,7 +350,11 @@ footer{
     margin: 2%;
 }
 
-.buscadotitle{
+.resultados .buscadotitle{
+    display: none;
+}
+.resultados.buscando .buscadotitle{
+    display: inline-block;
     font-family: "Montserrat";
     font-weight: bold;
     font-size: 25px;

@@ -807,7 +807,7 @@ function repeatCapture() {
   pCreacionGifos.className = "pCreacionGifos";
   pCreacionAclaracion.className = "pCreacionAclaracion";
   segundoPaso.className = "number";
-  comenzar.className = "comenzar"; //   solicitudPermiso();
+  comenzar.className = "comenzar";
 }
 
 var verMasMisGifosNoc = document.getElementById("vermasmisgifosnoc");
@@ -832,8 +832,7 @@ if (localStorageMisGifos.length == 0) {
 }
 
 function subirGifo() {
-  var template, containerCreacionGifos, formData, uploadGif, resUpload, resultadoUpload, res, _aLink;
-
+  var template, containerCreacionGifos, formData, uploadGif, resUpload, resultadoUpload, res, aLink, templateFinal;
   return regeneratorRuntime.async(function subirGifo$(_context11) {
     while (1) {
       switch (_context11.prev = _context11.next) {
@@ -841,7 +840,7 @@ function subirGifo() {
           segundoPaso.className = "number";
           tercerPaso.className = "pasosHover";
           counter.className = "dnone";
-          template = uploadingOverlay(aLink);
+          template = uploadingOverlay();
           containerCreacionGifos = document.getElementById("containerCreacionGifos");
           containerCreacionGifos.appendChild(template);
           console.log(template);
@@ -864,7 +863,7 @@ function subirGifo() {
           resUpload = _context11.sent;
 
           if (!(resUpload.meta.status === 200)) {
-            _context11.next = 30;
+            _context11.next = 32;
             break;
           }
 
@@ -882,7 +881,9 @@ function subirGifo() {
         case 25:
           res = _context11.sent;
           console.log(res);
-          _aLink = res.data.url;
+          aLink = res.data.url;
+          templateFinal = uploadedOverlay(template, aLink);
+          containerCreacionGifos.appendChild(templateFinal);
           localStorageMisGifos.push({
             id: res.data.id,
             title: res.data.title,
@@ -895,7 +896,7 @@ function subirGifo() {
           });
           localStorage.setItem("listMisGifos", JSON.stringify(localStorageMisGifos));
 
-        case 30:
+        case 32:
         case "end":
           return _context11.stop();
       }
@@ -937,25 +938,31 @@ misGifos();
 function uploadingOverlay(aLink) {
   var uploadOverlay = document.createElement("div");
   var subiendo = document.createElement("p");
-  var exito = document.createElement("p");
   var loader = document.createElement("img");
+  loader.src = "images/loader.svg";
+  loader.className = "loader";
+  uploadOverlay.className = "uploadViolet";
+  subiendo.textContent = "Estamos subiendo tu GIFO";
+  subiendo.className = "subiendoP";
+  uploadOverlay.appendChild(loader);
+  uploadOverlay.appendChild(subiendo);
+  return uploadOverlay;
+}
+
+function uploadedOverlay(uploadOverlay, aLink) {
+  var exito = document.createElement("p");
   var downloadMyGifo = document.createElement("img");
   var linkMyGifo = document.createElement("img");
   var check = document.createElement("img");
   var divBotonesSubido = document.createElement("div");
-  var Link = document.getElementById("a");
-  loader.src = "images/loader.svg";
+  var Link = document.createElement("a");
   check.src = "images/check.svg";
   downloadMyGifo.src = "images/icon-download-hover.svg";
   linkMyGifo.src = "images/icon-link-hover.svg";
   Link.href = aLink;
-  loader.className = "loader";
   check.className = "check";
-  uploadOverlay.className = "uploadViolet";
   downloadMyGifo.className = "downloadmygifo";
   linkMyGifo.className = "linkmygifo";
-  subiendo.textContent = "Estamos subiendo tu GIFO";
-  subiendo.className = "subiendoP";
   exito.textContent = "GIFO subido con éxito";
   exito.className = "exitoP";
   divBotonesSubido.className = "divbotonessubido";
@@ -963,15 +970,19 @@ function uploadingOverlay(aLink) {
   divBotonesSubido.appendChild(linkMyGifo);
   divBotonesSubido.appendChild(Link);
   uploadOverlay.appendChild(divBotonesSubido);
-  uploadOverlay.appendChild(loader);
-  uploadOverlay.appendChild(subiendo);
   uploadOverlay.appendChild(check);
   uploadOverlay.appendChild(exito);
   downloadMyGifo.addEventListener("click", function () {
     return downloadMyGifoFunction(previewImg.src, uploadOverlay);
   });
-  linkMyGifo.addEventListener("click", linkFunction);
+  linkMyGifo.addEventListener("click", function () {
+    return redirigir(Link);
+  });
   return uploadOverlay;
+}
+
+function redirigir(Link) {
+  return Link;
 }
 
 function eliminarMisGifos(item) {
