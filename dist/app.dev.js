@@ -140,11 +140,6 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
     divExpandedIcons.className = "expandeddiv";
     itemTitle.className = "captionexpanded titulo";
     itemUser.className = "captionexpanded user";
-    downloadExpand.addEventListener("click", function () {
-      return downloadIconMyGifo(img, gifContainer);
-    });
-    favExpand.addEventListener("click", agregarFavoritos);
-    favActiveExpand.addEventListener("click", eliminarFavoritos);
 
     var addToFavorites = function addToFavorites() {
       agregarFavoritos(item);
@@ -155,6 +150,12 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
       eliminarFavoritos(item);
       gifContainer.classList.remove("favorite");
     };
+
+    downloadExpand.addEventListener("click", function () {
+      return downloadIconMyGifo(img, gifContainer);
+    });
+    favExpand.addEventListener("click", addToFavorites);
+    favActiveExpand.addEventListener("click", removeFromFavorites);
 
     var removeMisGifos = function removeMisGifos() {
       eliminarMisGifos(item);
@@ -998,7 +999,7 @@ mode.addEventListener("click", cambiarModo);
 
 function cambiarModo() {
   if (link.innerHTML === "") {
-    link.innerHTML = "<link rel=\"stylesheet\" href=\"stylesdarkmode.css\">";
+    link.innerHTML = "<link rel=\"stylesheet\" href=\"styles/stylesdarkmode.css\">";
     head.appendChild(link);
   }
 
