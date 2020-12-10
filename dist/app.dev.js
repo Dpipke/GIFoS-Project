@@ -23,6 +23,7 @@ function activarFavoritos() {
   resultados.classList.toggle("dnone");
   favoritegallery.innerHTML = "";
   misFavoritos();
+  evaluarContainer();
 }
 
 function activarMisGifos() {
@@ -31,6 +32,7 @@ function activarMisGifos() {
   resultados.classList.toggle("dnone");
   misgifoslist.innerHTML = "";
   misGifos();
+  evaluarContainerMisGifos();
 }
 
 function activarCrearGifo() {
@@ -150,6 +152,7 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
       gifContainer.classList.add("favorite");
       favoritegallery.innerHTML = "";
       misFavoritos();
+      evaluarContainer();
     };
 
     var removeFromFavorites = function removeFromFavorites() {
@@ -157,6 +160,7 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
       gifContainer.classList.remove("favorite");
       favoritegallery.innerHTML = "";
       misFavoritos();
+      evaluarContainer();
     };
 
     downloadExpand.addEventListener("click", function () {
@@ -167,6 +171,8 @@ function renderResult(results, container, clasecontainer, claseitem, classItemCo
 
     var removeMisGifos = function removeMisGifos() {
       eliminarMisGifos(item);
+      misgifoslist.innerHTML = "";
+      misGifos();
     };
 
     var expand = function expand() {
@@ -282,18 +288,21 @@ var verMasFavoritos = document.getElementById("vermas");
 var verMasFavoritosUnhover = document.getElementById("vermasunhover");
 var verMasFavoritosNoc = document.getElementById("vermasfavnoc");
 var localStorageFavorites = JSON.parse(localStorage.getItem("listFavorites")) || [];
+console.log(localStorageFavorites.length);
 
-if (localStorageFavorites == 0) {
-  var favoritosVacio = document.createElement("img");
-  var favoritosVacioP = document.createElement("p");
-  favoritosVacio.src = "images/icon-fav-sin-contenido.svg";
-  favoritosVacioP.textContent = "¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!";
-  favoritosVacioP.className = "gifoVacioP";
-  favoritegallery.className = "misgifoslist";
-  verMasFavoritos.className = "dnone";
-  verMasFavoritosNoc.className = "dnone";
-  favoritegallery.appendChild(favoritosVacio);
-  favoritegallery.appendChild(favoritosVacioP);
+function evaluarContainer() {
+  if (localStorageFavorites.length === 0) {
+    var favoritosVacio = document.createElement("img");
+    var favoritosVacioP = document.createElement("p");
+    favoritosVacio.src = "images/icon-fav-sin-contenido.svg";
+    favoritosVacioP.textContent = "¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!";
+    favoritosVacioP.className = "gifoVacioP";
+    favoritegallery.className = "misgifoslist";
+    verMasFavoritos.className = "dnone";
+    verMasFavoritosNoc.className = "dnone";
+    favoritegallery.appendChild(favoritosVacio);
+    favoritegallery.appendChild(favoritosVacioP);
+  }
 }
 
 function existeFavorito(item) {
@@ -813,24 +822,27 @@ function repeatCapture() {
 }
 
 var verMasMisGifosNoc = document.getElementById("vermasmisgifosnoc");
-var localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
 
-if (localStorageMisGifos.length == 0) {
-  var gifoVacio = document.createElement("img");
-  var gifoVacioP = document.createElement("h2");
+function evaluarContainerMisGifos() {
+  var localStorageMisGifos = JSON.parse(localStorage.getItem("listMisGifos")) || [];
 
-  var _verMasMisGifos = document.getElementById("vermasmisgifos");
+  if (localStorageMisGifos.length === 0) {
+    var gifoVacio = document.createElement("img");
+    var gifoVacioP = document.createElement("h2");
 
-  gifoVacio.src = "images/icon-mis-gifos-sin-contenido.svg";
-  gifoVacioP.textContent = "¡Anímate a crear tu primer GIFO!";
-  gifoVacioP.className = "gifoVacioP";
-  _verMasMisGifos.style.display = "none";
-  verMasMisGifosNoc.style.display = "none";
-  misgifoslist.appendChild(gifoVacio);
-  misgifoslist.appendChild(gifoVacioP);
-  console.log("esta vacio, ves? no hay monstruos aqui");
-} else {
-  misgifoslist.className = "hayGifs";
+    var _verMasMisGifos = document.getElementById("vermasmisgifos");
+
+    gifoVacio.src = "images/icon-mis-gifos-sin-contenido.svg";
+    gifoVacioP.textContent = "¡Anímate a crear tu primer GIFO!";
+    gifoVacioP.className = "gifoVacioP";
+    _verMasMisGifos.style.display = "none";
+    verMasMisGifosNoc.style.display = "none";
+    misgifoslist.appendChild(gifoVacio);
+    misgifoslist.appendChild(gifoVacioP);
+    console.log("esta vacio, ves? no hay monstruos aqui");
+  } else {
+    misgifoslist.className = "hayGifs";
+  }
 }
 
 function subirGifo() {
@@ -937,6 +949,11 @@ function misGifos() {
   }
 
   ;
+
+  if (gifosPage.length < 12) {
+    verMasMisGifos.className = "dnone";
+    verMasMisGifosUnhover.className = "dnone";
+  }
 }
 
 function uploadingOverlay(aLink) {
