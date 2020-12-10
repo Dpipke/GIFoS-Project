@@ -21,12 +21,16 @@ function activarFavoritos() {
   favsec.classList.toggle("dnone");
   intro.classList.toggle("dnone");
   resultados.classList.toggle("dnone");
+  favoritegallery.innerHTML = ""
+  misFavoritos()
 }
 
 function activarMisGifos() {
   misgifossec.classList.toggle("dnone");
   intro.classList.toggle("dnone");
   resultados.classList.toggle("dnone");
+  misgifoslist.innerHTML = ""
+  misGifos();
 }
 
 function activarCrearGifo() {
@@ -137,10 +141,14 @@ function renderResult(
     const addToFavorites = () => {
       agregarFavoritos(item);
       gifContainer.classList.add("favorite");
+      favoritegallery.innerHTML = ""
+      misFavoritos()
     };
     const removeFromFavorites = () => {
       eliminarFavoritos(item);
       gifContainer.classList.remove("favorite");
+      favoritegallery.innerHTML = ""
+      misFavoritos()
     };
 
     downloadExpand.addEventListener("click", () =>
@@ -536,8 +544,9 @@ function misFavoritos() {
     "imgresultados",
     "searchresults"
   );
-
-  verMasFavoritos.addEventListener("click", function () {
+  verMasFavoritos.addEventListener("click", botonVerMas)
+  
+  function botonVerMas () {
     const localStorageFavorites =
       JSON.parse(localStorage.getItem("listFavorites")) || [];
 
@@ -558,15 +567,14 @@ function misFavoritos() {
       verMasFavoritos.className = "dnone";
       verMasFavoritosUnhover.className = "dnone";
     }
-  });
+  };
+      if (favoritesPage.length < 12) {
+        verMasFavoritos.className = "dnone";
+        verMasFavoritosUnhover.className = "dnone";
+      }
 }
-misFavoritos();
 
-// const busqueda = "cat";
-// const url = `http://api.giphy.com/v1/gifs/search?api_key=EjzvMRueNdiAkT3CvCjx0kOjl8qGzxLM&q=${busqueda}`
-// fetch(url)
-// .then(response => response.json())
-// .then(data => console.log(data));
+
 
 const acceso = document.getElementById("acceso");
 const pAcceso = document.getElementById("pAcceso");
@@ -579,15 +587,7 @@ const tercerPaso = document.getElementById("3erpaso");
 const video = document.getElementById("video");
 const grabar = document.getElementById("grabar");
 
-// function solicitudPermiso() {
-//   comenzar.className = "dnone";
-//   acceso.className = "titleCrear";
-//   pAcceso.className = "pCreacionGifos";
-//   titleCrear.className = "dnone";
-//   pCreacionGifos.className = "dnone";
-//   pCreacionAclaracion.className = "dnone";
-//   primerPaso.className = "pasosHover";
-// }
+
 
 let stream;
 let recorder;
@@ -596,7 +596,6 @@ let countdown;
 const comenzar = document.getElementById("comenzar");
 
 comenzar.addEventListener("click", async () => {
-  //   solicitudPermiso;
   comenzar.className = "dnone";
   acceso.className = "titleCrear";
   pAcceso.className = "pCreacionGifos";
@@ -792,7 +791,9 @@ function misGifos() {
     "searchresults agregadomisgifos"
   );
 
-  verMasMisGifos.addEventListener("click", function () {
+  verMasMisGifos.addEventListener("click", botonVerMasGifos)
+  
+  function botonVerMasGifos () {
     const localStorageMisGifos =
       JSON.parse(localStorage.getItem("listMisGifos")) || [];
 
@@ -813,9 +814,10 @@ function misGifos() {
       verMasMisGifos.className = "dnone";
       verMasMisGifosUnhover.className = "dnone";
     }
-  });
+  };
+  
 }
-misGifos();
+
 
 function uploadingOverlay(aLink) {
   const uploadOverlay = document.createElement("div");
