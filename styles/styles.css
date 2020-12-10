@@ -884,7 +884,9 @@ form{
         margin: 2%;
     }
 
-
+    .searchresults.searchresults.agregadomisgifos{
+        width: 20vw;
+    }
     .imgresultados{
         width: 20vw;
         height: 30vh;
